@@ -1,7 +1,8 @@
 from django.db import models
+from core import models as core_models
 
 
-class User(models.Model):
+class User(core_models.TimeStampedModel):
 
     """ Cutom User Model """
 
@@ -14,8 +15,6 @@ class User(models.Model):
     birthdate = models.DateField(auto_now=True)
     user_bio = models.TextField(blank=True)
     phone_num = models.CharField(default="010", max_length=15)
-    create_date = models.DateField(auto_now_add=True)
-    update_date = models.DateField(auto_now=True)
     user_addr = models.CharField(default="addr", max_length=15)
     post_num = models.IntegerField(default=00000)
     is_cert = models.BooleanField(default=False)

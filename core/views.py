@@ -1,5 +1,3 @@
 from django.shortcuts import render
 
-
-def all_boards(request):
-    pass
+# Create your views here.
