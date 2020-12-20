@@ -18,3 +18,6 @@ class User(core_models.TimeStampedModel):
     user_addr = models.CharField(default="addr", max_length=15)
     post_num = models.IntegerField(default=00000)
     is_cert = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.user_name}({self.user_id})"
