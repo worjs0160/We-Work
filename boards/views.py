@@ -1,5 +1,7 @@
 from django.shortcuts import render
+from . import models as board_models
 
 
-def all_boards(request):
-    pass
+def board_list(request):
+    boards = board_models.Board.objects.all()
+    return render(request, "boards/board_list.html", {"boards": boards})
