@@ -1,3 +1,20 @@
 from django.contrib import admin
+from . import models
 
-# Register your models here.
+
+@admin.register(models.Board)
+class CustomBoardAdmin(admin.ModelAdmin):
+
+    """ Custom User Admin """
+
+    readonly = ("postNo",)
+
+    list_display = (
+        "postNo",
+        "author",
+        "title",
+        "contents",
+        "viewCnts",
+        "created",
+        "updated",
+    )
