@@ -19,3 +19,12 @@ def readBoardList(request):
         "boards": boards,
     }
     return render(request, "boards/board_list.html", context)
+
+
+def readBoardDetail(request, pk):
+    board = board_models.Board.objects.get(pk=pk)
+
+    context = {
+        "board": board,
+    }
+    return render(request, "boards/board_contents.html", context)

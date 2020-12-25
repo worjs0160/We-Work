@@ -4,5 +4,6 @@ from . import views as boards_views
 app_name = "boards"
 
 urlpatterns = [
-    path("board_list/", boards_views.board_list, name="board_list"),
+    path("board_list/", boards_views.readBoardList, name="board_read"),
+    path("<int:pk>", boards_views.readBoardDetail, name="board_detail"),
 ]

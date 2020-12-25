@@ -10,10 +10,11 @@
 <body>
     <div>
         {% for board in boards%}
-        <a href="{% url 'boards:board_detail' board.pk %}"><h3>{{board.postNo}} {{board.title}} {{board.viewCnts}}회 {{board.author}}</h3></a>
+        <h3>{{board.postNo}} <a href="{% url 'boards:board_detail' board.pk %}">{{board.title}}</a> {{board.viewCnts}}회 {{board.author}}</h3>
         {% endfor %}
     </div>
 
+    <!--Pagination-->
     <div>
        {% if boards.has_previous %}
             <a href="?page={{ boards.previous_page_number}}">
@@ -28,6 +29,10 @@
                 Next
             </a>
         {% endif %}
+    </div>
+
+    <div>
+        <a href="boards/board_create.html">글쓰기</a>
     </div>
 
 </body>
