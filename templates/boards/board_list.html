@@ -10,9 +10,26 @@
 <body>
     <div>
         {% for board in boards%}
-        <h3>{{board.postNo}} {{board.title}} {{board.viewCnt}} {{board.author}}</h3>
+        <a href="{% url 'boards:board_detail' board.pk %}"><h3>{{board.postNo}} {{board.title}} {{board.viewCnts}}회 {{board.author}}</h3></a>
         {% endfor %}
     </div>
+
+    <div>
+       {% if boards.has_previous %}
+            <a href="?page={{ boards.previous_page_number}}">
+                Previous
+            </a>
+        {% endif %}
+
+        {{ boards.number}} of {{ boards.paginator.num_pages}}
+
+        {% if boards.has_next %}
+            <a href="?page={{ boards.next_page_number}}" >
+                Next
+            </a>
+        {% endif %}
+    </div>
+
 </body>
 
 </html>

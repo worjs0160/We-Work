@@ -3,6 +3,19 @@ from django.shortcuts import render
 from . import models as board_models
 
 
-def board_list(request):
-    boards = board_models.Board.objects.all()
-    return render(request, "boards/board_list.html", {"boards": boards})
+# Board Read
+def readBoardList(request):
+    # Board 모델에 대한 Objects : all_board
+    all_boards = board_models.Board.objects.all()
+
+    # 10개씩 queryset을 보여줌
+    paginator = Paginator(all_boards, 10)
+    page_num = request.GET.get("page")
+
+    # page_obj
+    boards = paginator.get_page(page_num)
+
+    context = {
+        "boards": boards,
+    }
+    return render(request, "boards/board_list.html", context)
