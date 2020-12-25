@@ -1,9 +1,9 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from . import models as board_models
 
 
-# Board Read
+# Board List Read
 def readBoardList(request):
     # Board 모델에 대한 Objects : all_board
     all_boards = board_models.Board.objects.all()
@@ -21,6 +21,7 @@ def readBoardList(request):
     return render(request, "boards/board_list.html", context)
 
 
+# Board Detail Read
 def readBoardDetail(request, pk):
     board = board_models.Board.objects.get(pk=pk)
 
@@ -28,3 +29,11 @@ def readBoardDetail(request, pk):
         "board": board,
     }
     return render(request, "boards/board_contents.html", context)
+
+
+# Board delete
+def deleteBoard(request, pk):
+    board = board_models.Board.objects.get(pk=pk)
+    board.delete()
+
+    return redirect(reverse("boards:board_read"))

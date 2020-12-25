@@ -5,5 +5,6 @@ app_name = "boards"
 
 urlpatterns = [
     path("board_list/", boards_views.readBoardList, name="board_read"),
-    path("<int:pk>", boards_views.readBoardDetail, name="board_detail"),
+    path("board_list/delete/<int:pk>/", boards_views.deleteBoard, name="board_delete"),
+    path("<int:pk>/", boards_views.readBoardDetail, name="board_detail"),
 ]
