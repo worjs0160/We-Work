@@ -1,0 +1,12 @@
+<!-- html을 쪼갠것 중 헤더 부분 정의 -->
+<!-- URL 표기 시 장고에서 제공하는 URL name사용 -->
+<a href="{% url "core:home" %}">We Work</a>
+<ul>
+    <!-- 로그인 되어있는지 검사(Context Processor사용) -->
+    {% if user.is_authenticated %}
+        <li><a href="{% url "users:logout" %}">Log out</a></li>
+    {% else %}
+        <li><a href="{% url "users:login" %}">Log in</a></li>
+        <li><a href="{% url "users:signup" %}">Sign up</a></li>
+    {% endif %}
+</ul>

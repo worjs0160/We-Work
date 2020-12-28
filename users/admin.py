@@ -1,24 +1,23 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from . import models
 
 
 @admin.register(models.User)
-class CustomUserAdmin(admin.ModelAdmin):
+class CustomUserAdmin(UserAdmin):
 
     """ Custom User Admin """
 
     list_display = (
         "avatar",
-        "user_id",
+        "username",
+        "password",
         "user_name",
-        "user_email",
         "user_position",
-        "birthdate",
-        "user_bio",
         "phone_num",
-        "created",
-        "updated",
+        "birthdate",
         "user_addr",
         "post_num",
+        "user_bio",
         "is_cert",
     )
