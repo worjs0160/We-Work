@@ -1,5 +1,9 @@
+from django.views.generic import FormView
 from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy
 from django.shortcuts import render, reverse, redirect
+from . import forms
 from . import models as board_models
 
 
@@ -24,11 +28,12 @@ def readBoardList(request):
 # Board Detail Read
 def readBoardDetail(request, pk):
     board = board_models.Board.objects.get(pk=pk)
-
+    board.viewCnts = board.viewCnts + 1
+    board.save()
     context = {
         "board": board,
     }
-    return render(request, "boards/board_contents.html", context)
+    return render(request, "boards/board_detail.html", context)
 
 
 # Board delete
@@ -36,4 +41,16 @@ def deleteBoard(request, pk):
     board = board_models.Board.objects.get(pk=pk)
     board.delete()
 
-    return redirect(reverse("boards:board_read"))
+    return redirect(reverse("boards:board_list"))
+
+
+# Board create
+class CreateBoardView(FormView):
+
+    template_name = "boards/board_create.html"
+    form_class = forms.BoardForm
+    success_url = reverse_lazy("boards:board_list")
+
+    def form_valid(self, form):
+        form.save()
+        return HttpResponseRedirect(self.get_success_url())
