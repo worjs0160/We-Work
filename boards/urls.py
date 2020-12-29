@@ -12,5 +12,5 @@ urlpatterns = [
         name="board_update",
     ),
     path("delete/<int:pk>/", boards_views.deleteBoard, name="board_delete"),
-    path("<int:pk>/", boards_views.readBoardDetail, name="board_detail"),
+    path("<int:pk>/", boards_views.BoardDetailView.as_view(), name="board_detail"),
 ]

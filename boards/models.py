@@ -34,3 +34,11 @@ class Board(core_models.TimeStampedModel):
     )
 
     viewCnts = models.PositiveIntegerField(default=0, verbose_name="조회수")
+
+    def get_absolute_url(self):
+        return reverse("boards:board_detail", kwargs={"pk": self.pk})
+
+    @property
+    def update_viewCnts(self):
+        self.viewCnts = self.viewCnts + 1
+        self.save()

@@ -1,4 +1,4 @@
-from django.views.generic import FormView, UpdateView
+from django.views.generic import FormView, UpdateView, DetailView
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -25,15 +25,11 @@ def readBoardList(request):
     return render(request, "boards/board_list.html", context)
 
 
-# Board Detail Read
-def readBoardDetail(request, pk):
-    board = board_models.Board.objects.get(pk=pk)
-    board.viewCnts = board.viewCnts + 1
-    board.save()
-    context = {
-        "board": board,
-    }
-    return render(request, "boards/board_detail.html", context)
+class BoardDetailView(DetailView):
+    """Board Detail 보여주기"""
+
+    model = board_models.Board
+    context_object_name = "board_obj"
 
 
 # Board delete
@@ -66,4 +62,7 @@ class UpdateBoardView(UpdateView):
         "title",
         "contents",
     )
-    success_url = reverse_lazy("boards:board_list")
+
+    def get_success_url(self):
+
+        return self.get_object().get_absolute_url()

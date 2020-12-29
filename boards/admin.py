@@ -8,11 +8,10 @@ class CustomBoardAdmin(admin.ModelAdmin):
     """ Custom User Admin """
 
     list_display = (
-        "postNo",
-        "author",
         "title",
-        "contents",
+        "author",
         "viewCnts",
+        "postNo",
         "created",
         "updated",
     )
