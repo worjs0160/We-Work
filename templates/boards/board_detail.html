@@ -10,7 +10,7 @@
 <body>
     <div>
         <h2> 게시물 번호: {{board.postNo}} | 제목: {{board.title}} | 조회수: {{board.viewCnts}}회 | 게시자: {{ board.author}}</h2>
-        <p>{{board.contents}}</p>
+        <p>{{board.contents | safe}}</p>
     </div>
 
     <div>

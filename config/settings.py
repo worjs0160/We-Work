@@ -44,6 +44,8 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     "django_seed",
+    "ckeditor",
+    "ckeditor_uploader",
 ]
 
 DJANGO_APPS = [
@@ -137,6 +139,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 MEDIA_URL = "/media/"
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+CKEDITOR_UPLOAD_PATH = "uploads/"

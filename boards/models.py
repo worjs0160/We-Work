@@ -1,6 +1,7 @@
 from django.db import models
 from django.shortcuts import reverse
 from django.core.validators import MinLengthValidator, MaxLengthValidator
+from ckeditor_uploader.fields import RichTextUploadingField
 from core import models as core_models
 
 title_MinLenValidator = MinLengthValidator(2, "2자 이상 입력해주세요.(2자 ~ 80자 이내)")
@@ -28,7 +29,7 @@ class Board(core_models.TimeStampedModel):
         validators=[title_MaxLenValidator, title_MinLenValidator],
         verbose_name="제목",
     )
-    contents = models.TextField(
+    contents = RichTextUploadingField(
         blank=True, validators=[contents_MinLenValidator], verbose_name="내용"
     )
 
