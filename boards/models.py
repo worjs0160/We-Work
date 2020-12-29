@@ -1,10 +1,11 @@
 from django.db import models
+from django.shortcuts import reverse
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from core import models as core_models
 
 title_MinLenValidator = MinLengthValidator(2, "2자 이상 입력해주세요.(2자 ~ 80자 이내)")
 title_MaxLenValidator = MaxLengthValidator(80, "80자 이내로 입력해주세요.(2자 ~ 80자 이내)")
-contents_MinLenValidator = MinLengthValidator(2, "글이 너무 짧습니다. 2자 이상 입력해주세요.")
+contents_MinLenValidator = MinLengthValidator(10, "글이 너무 짧습니다. 10자 이상 입력해주세요.")
 
 
 class Board(core_models.TimeStampedModel):

@@ -14,7 +14,8 @@
     </div>
 
     <div>
-        <a href>수정</a> | <a href="{% url 'boards:board_delete' board.pk %}">삭제</a>
+        <a href="{% url 'boards:board_update' board.pk %}">수정</a> | <a
+            href="{% url 'boards:board_delete' board.pk %}">삭제</a>
     </div>
 </body>
 

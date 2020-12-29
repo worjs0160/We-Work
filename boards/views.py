@@ -1,4 +1,4 @@
-from django.views.generic import FormView
+from django.views.generic import FormView, UpdateView
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect
 from django.urls import reverse_lazy
@@ -44,8 +44,9 @@ def deleteBoard(request, pk):
     return redirect(reverse("boards:board_list"))
 
 
-# Board create
 class CreateBoardView(FormView):
+
+    """Board create"""
 
     template_name = "boards/board_create.html"
     form_class = forms.BoardForm
@@ -54,3 +55,15 @@ class CreateBoardView(FormView):
     def form_valid(self, form):
         form.save()
         return HttpResponseRedirect(self.get_success_url())
+
+
+class UpdateBoardView(UpdateView):
+    """Board Update"""
+
+    model = board_models.Board
+    template_name = "boards/board_update.html"
+    fields = (
+        "title",
+        "contents",
+    )
+    success_url = reverse_lazy("boards:board_list")
