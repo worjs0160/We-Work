@@ -64,5 +64,4 @@ class UpdateBoardView(UpdateView):
     )
 
     def get_success_url(self):
-
         return self.get_object().get_absolute_url()

@@ -8,12 +8,11 @@
 </head>
 
 <body>
-    {{board_obj.update_viewCnts|safe}}
     <div>
         <h2>
             게시물 번호: {{board_obj.postNo}} |
             제목: {{board_obj.title}} |
-            조회수: {{board_obj.viewCnts}}회 |
+            조회수: {{board_obj.update_viewCnts}}회 |
             게시자: {{board_obj.author}}
         </h2>
         <p>{{board_obj.contents|safe}}</p>

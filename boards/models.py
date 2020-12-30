@@ -40,5 +40,6 @@ class Board(core_models.TimeStampedModel):
 
     @property
     def update_viewCnts(self):
-        self.viewCnts = self.viewCnts + 1
+        self.viewCnts += 1
         self.save()
+        return self.viewCnts
