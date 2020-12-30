@@ -30,7 +30,7 @@ class Board(core_models.TimeStampedModel):
         verbose_name="제목",
     )
     contents = RichTextUploadingField(
-        blank=True, validators=[contents_MinLenValidator], verbose_name="내용"
+        validators=[contents_MinLenValidator], verbose_name="내용"
     )
 
     viewCnts = models.PositiveIntegerField(default=0, verbose_name="조회수")
