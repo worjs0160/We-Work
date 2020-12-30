@@ -8,8 +8,7 @@ class CustomUserAdmin(UserAdmin):
 
     """ Custom User Admin """
 
-    list_display = (
-        "avatar",
+    list_display = [
         "username",
         "password",
         "user_name",
@@ -19,5 +18,7 @@ class CustomUserAdmin(UserAdmin):
         "user_addr",
         "post_num",
         "user_bio",
+        "avatar",
         "is_cert",
-    )
+        "is_superuser",
+    ]
