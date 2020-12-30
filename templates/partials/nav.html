@@ -4,6 +4,8 @@
 <ul>
     <!-- 로그인 되어있는지 검사(Context Processor사용) -->
     {% if user.is_authenticated %}
+        <h6>접속 유저: {{user.username}}</h6>
+        <h6>유저 이름: {{user.user_name}}</h6>
         <li><a href="{% url "users:logout" %}">Log out</a></li>
     {% else %}
         <li><a href="{% url "users:login" %}">Log in</a></li>
