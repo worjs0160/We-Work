@@ -1,6 +1,6 @@
 <!-- html을 쪼갠것 중 헤더 부분 정의 -->
 <!-- URL 표기 시 장고에서 제공하는 URL name사용 -->
-<a href="{% url "core:home" %}">We Work</a>
+<a href="{% url "core:home" %}"><b>We Work</b></a>
 <ul>
     <!-- 로그인 되어있는지 검사(Context Processor사용) -->
     {% if user.is_authenticated %}
