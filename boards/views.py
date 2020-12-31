@@ -49,7 +49,10 @@ class CreateBoardView(FormView):
     success_url = reverse_lazy("boards:board_list")
 
     def form_valid(self, form):
-        form.save()
+        user = self.request.user
+        title = form.data.get("title")
+        contents = form.data.get("contents")
+        board_models.Board.objects.create(title=title, contents=contents, author=user)
         return HttpResponseRedirect(self.get_success_url())
 
 

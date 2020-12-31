@@ -19,8 +19,10 @@
     </div>
 
     <div>
-        <a href="{% url 'boards:board_update' board_obj.pk %}">수정</a> |
-        <a href="{% url 'boards:board_delete' board_obj.pk %}">삭제</a>
+        {% if user == board_obj.author %}
+            <a href="{% url 'boards:board_update' board_obj.pk %}">수정</a> |
+            <a href="{% url 'boards:board_delete' board_obj.pk %}">삭제</a>
+        {% endif %}
     </div>
 </body>
 

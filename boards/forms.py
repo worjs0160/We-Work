@@ -10,12 +10,3 @@ class BoardForm(forms.ModelForm):
         fields = ("title", "contents")
 
         widgets = {"contents": forms.CharField(widget=CKEditorUploadingWidget())}
-
-    def save(self, *args, **kwargs):
-        # test용
-        user = User.objects.get(username="hsh")
-        board = super().save(commit=False)
-        board.author = user
-        board.save()
-
-    # board.save()
