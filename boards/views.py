@@ -7,6 +7,11 @@ from . import forms
 from . import models as board_models
 
 
+def test(request):
+    boards = board_models.Board.objects.all()
+    return render(request, "boards/test.html", {"boards": boards})
+
+
 # Board List Read
 def readBoardList(request):
     # Board 모델에 대한 Objects : all_board
