@@ -41,6 +41,12 @@ CUSTOM_APPS = [
     "messengers",
 ]
 
+THIRD_PARTY_APPS = [
+    "django_seed",
+    "ckeditor",
+    "ckeditor_uploader",
+]
+
 DJANGO_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -50,7 +56,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-INSTALLED_APPS = CUSTOM_APPS + DJANGO_APPS
+INSTALLED_APPS = CUSTOM_APPS + DJANGO_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -136,6 +142,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "users.User"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
