@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wework</title>
+</head>
+
+<body>
+    <div>
+        <h2>
+            게시물 번호: {{board_obj.postNo}} |
+            제목: {{board_obj.title}} |
+            조회수: {{board_obj.update_viewCnts}}회 |
+            게시자: {{board_obj.author}}
+        </h2>
+        <p>{{board_obj.contents|safe}}</p>
+    </div>
+
+    <div>
+        {% if user == board_obj.author %}
+            <a href="{% url 'boards:board_update' board_obj.pk %}">수정</a> |
+            <a href="{% url 'boards:board_delete' board_obj.pk %}">삭제</a>
+        {% endif %}
+    </div>
+</body>
+
+</html>

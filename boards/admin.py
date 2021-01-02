@@ -7,14 +7,11 @@ class CustomBoardAdmin(admin.ModelAdmin):
 
     """ Custom User Admin """
 
-    readonly = ("postNo",)
-
     list_display = (
-        "postNo",
-        "author",
         "title",
-        "contents",
+        "author",
         "viewCnts",
+        "postNo",
         "created",
         "updated",
     )

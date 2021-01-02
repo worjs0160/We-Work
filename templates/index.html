@@ -12,10 +12,11 @@
   <title>Simple Sidebar - Start Bootstrap Template</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{% static " bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "tables_1231/css/bootstrap4.min.css" %}" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="{% static " bootstrap_1229/css/simple-sidebar.css" %}" rel="stylesheet">
+  <link href="{% static "bootstrap_1229/css/simple-sidebar.css" %}" rel="stylesheet">
 
 </head>
 
@@ -27,7 +28,7 @@
     <div class="bg-light border-right" id="sidebar-wrapper">
       <div class="sidebar-heading">Start Bootstrap </div>
       <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item list-group-item-action bg-light">Dashboard</a>
+        <a href="{% url 'boards:board_list' %}" class="list-group-item list-group-item-action bg-light">공지사항</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Shortcuts</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Overview</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
@@ -91,8 +92,13 @@
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{% static " bootstrap_1229/vendor/jquery/jquery.min.js" %}"></script>
-  <script src="{% static " bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "tables_1231/js/jquery-3.5.1.slim.min.js" %}"></script>
+  <script src="{% static "bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <script src="{% static "tables_1231/js/jquery-3.5.1.slim.min.js" %}"></script>
+  <script src="{% static "tables_1231/js/scripts.js" %}"></script>
+  <script src="{% static "tables_1231/js/jquery.dataTables.min.js" %}"></script>
+  <script src="{% static "tables_1231/js/bootstrap4.min.js" %}"></script>
+  <script src="{% static "tables_1231/js/datatables-demo.js" %}"></script>
 
   <!-- Menu Toggle Script -->
   <script>

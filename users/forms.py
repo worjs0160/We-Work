@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserChangeForm
+from django.contrib.auth import get_user_model
 from . import models
 
 
@@ -26,7 +28,6 @@ class LoginForm(forms.Form):
 
 # 장고 Model Form이용하여 생성
 class SignUpForm(forms.ModelForm):
-
     user_id = forms.CharField(label="아이디")
     user_pw = forms.CharField(widget=forms.PasswordInput, label="비밀번호")
     re_user_pw = forms.CharField(widget=forms.PasswordInput, label="비밀번호 확인")
@@ -75,3 +76,10 @@ class SignUpForm(forms.ModelForm):
         user.user_addr = user_addr
         user.post_num = post_num
         user.save()  # DB에 유저 저장
+
+
+class grant_cert(UserChangeForm):
+
+    """ 유저 인증 할당 위한 클래스 """
+
+    pass
