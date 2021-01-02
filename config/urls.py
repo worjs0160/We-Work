@@ -24,6 +24,7 @@ urlpatterns = [
     path("boards/", include("boards.urls", namespace="boards")),
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
+    path('papers/', include('papers.urls', namespace='papers')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
