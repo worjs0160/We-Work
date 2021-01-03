@@ -3,10 +3,33 @@ from django.shortcuts import reverse
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from ckeditor_uploader.fields import RichTextUploadingField
 from core import models as core_models
+from users.models import User
 
 title_MinLenValidator = MinLengthValidator(2, "2자 이상 입력해주세요.(2자 ~ 80자 이내)")
 title_MaxLenValidator = MaxLengthValidator(80, "80자 이내로 입력해주세요.(2자 ~ 80자 이내)")
 contents_MinLenValidator = MinLengthValidator(10, "글이 너무 짧습니다. 10자 이상 입력해주세요.")
+
+
+class Comment(core_models.TimeStampedModel):
+    # 댓글 모델
+
+    class Meta:
+        verbose_name = "댓글"
+        verbose_name_plural = "댓글"
+
+    author = models.ForeignKey(
+        User,
+        related_name="comments",
+        on_delete=models.CASCADE,
+        verbose_name="작성자",
+    )
+
+    board = models.ForeignKey(
+        "Board", related_name="comments", on_delete=models.CASCADE, verbose_name="게시글"
+    )
+    contents = models.TextField(
+        validators=[contents_MinLenValidator], verbose_name="내용"
+    )
 
 
 class Board(core_models.TimeStampedModel):
@@ -34,6 +57,9 @@ class Board(core_models.TimeStampedModel):
     )
 
     viewCnts = models.PositiveIntegerField(default=0, verbose_name="조회수")
+
+    def __str__(self):
+        return f"{self.title}({self.postNo})"
 
     def get_absolute_url(self):
         return reverse("boards:board_detail", kwargs={"pk": self.pk})

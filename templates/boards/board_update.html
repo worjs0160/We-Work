@@ -1,20 +1,23 @@
-<!DOCTYPE html>
-<html lang="ko">
+{% extends 'boards/board_base.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wework</title>
-</head>
 
-<body>
+{% block boardName %}{% endblock boardName %}
+
+{% block boardContent %}
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.media}}
-        {{form.as_p}}
+        <div>제목: {{form.title}}</div>
+        <div>{{form.contents}}</div>
         <button>수정 완료</button>
     </form>
-    <a href="{% url 'boards:board_delete' board.pk %}">삭제</a>
-</body>
+    <div>
 
-</html>
+    </div>
+     <div>
+        <a href="{% url 'boards:board_detail' board.pk %}">취소</a>
+    </div>
+    <div>
+        <a href="{% url 'boards:board_delete' board.pk %}">삭제</a>
+    </div>
+{% endblock boardContent %}
