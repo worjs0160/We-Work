@@ -1,9 +1,12 @@
 from django.views import View
-from django.views.generic import FormView
+from django.views.generic import FormView, DetailView
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
+from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from . import forms
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.decorators import login_required
+from . import forms, models
 
 
 # 장고 Form View 이용하여 로그인, 로그아웃 만들기
@@ -49,3 +52,45 @@ class SignUpView(FormView):
             login(self.request, user)
         """
         return super().form_valid(form)
+
+
+class UserInfoView(DetailView):
+    template_name = "users/user_info.html"
+    model = models.User
+
+
+# 정보 업데이트 하는 함수
+@login_required
+def update_info(request):
+    if request.method == "POST":
+        form = forms.CustomUserChangeForm(request.POST, instance=request.user)
+
+        # form이 올바른 경우
+        if form.is_valid():
+            form.save()  # form 정보 DB에 업데이트
+            return redirect("core:home", request.user.username)  # 메인페이지로 이동
+
+        return render(request, "users/update_info.html", {"form": form})
+
+    # GET방식인 경우
+    else:
+        form = forms.CustomUserChangeForm(instance=request.user)
+        return render(request, "users/update_info.html", {"form": form})
+
+
+# 패스워드 변경 함수
+@login_required
+def update_password(request):
+
+    if request.method == "POST":
+        form = PasswordChangeForm(request.user, request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            return redirect(reverse("core:home"))
+
+        return render(request, "users/update_password.html", {"form": form})
+
+    else:
+        form = PasswordChangeForm(request.user)
+        return render(request, "users/update_password.html", {"form": form})
