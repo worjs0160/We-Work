@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
+<body>
+    <div>
+        <div style="margin-left: auto; margin-right: auto; width:10%; height:50%; margin-top:20%;">
+            {% block page_title %}
+            Log In
+            {% endblock page_title %}
+
+            <form method="POST" action="{% url "core:start" %}">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button>로그인</button>
+            </form>
+
+            <a href="{% url 'users:signup' %}">
+                <button>회원가입</button>
+            </a>
+
+        </div>
+    </div>
+</body>
+</html>

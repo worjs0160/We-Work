@@ -1,0 +1,40 @@
+{% extends 'boards/board_base.html' %}
+
+{% block boardName %}{{board.postNo}} | 제목: {{board.title}}{% endblock boardName %}
+    
+{% block boardContent %}
+    <div>
+        <hr>
+        <div>조회수: {{board.update_viewCnts}}회</div>
+        <div>게시자: {{board.author.username}}</div>
+        <div>{{board.contents|safe}}</div>
+    </div>
+    <div>
+        <a href="{% url 'boards:board_list' %}">목록으로</a>
+    </div>
+    <div>
+    {% if user == board.author %}
+        <a href="{% url 'boards:board_update' board.pk %}">수정</a> |
+        <a href="{% url 'boards:board_delete' board.pk %}">삭제</a>
+    {% endif %}
+    </div>
+    <hr>
+        <form action="{% url 'boards:comment_create' board.pk %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <textarea name="contents" rows="2" cols="80" placeholder="댓글을 남겨주세요"></textarea>
+            <div><input type="submit" value="등록"></div>
+        </form>
+    <hr>
+    
+    
+    
+    {% for comment in board.comments.all %}
+        <div>작성자:{{comment.author}} | {{comment.updated}}</div>
+        <div>{{comment.contents}}</div>
+        {% if comment.author == user %}
+            <a href="{% url 'boards:comment_delete' comment.pk %}">삭제</a>
+        {% endif %}
+        <hr>
+    {% endfor %}
+{% endblock boardContent %}
+

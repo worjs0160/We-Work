@@ -1,0 +1,13 @@
+{% block page_title %}
+    Sign Up
+{% endblock page_title %}
+
+<form method="POST" action="{% url "users:signup" %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>회원가입</button>
+</form>
+
+<a href="{% url 'core:start' %}">
+    <button>돌아가기</button>
+</a>
