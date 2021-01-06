@@ -7,3 +7,7 @@ def test_home(request):
 
 def sample(request):
     return render(request, "sample.html")
+
+
+def get_start(request):
+    return render(request, "start_login.html")

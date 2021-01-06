@@ -15,3 +15,14 @@ class CustomBoardAdmin(admin.ModelAdmin):
         "created",
         "updated",
     )
+
+
+@admin.register(models.Comment)
+class CustomCommentAdmin(admin.ModelAdmin):
+    """Custom Comment Admin"""
+
+    list_display = (
+        "author",
+        "contents",
+        "board",
+    )

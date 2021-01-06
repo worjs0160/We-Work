@@ -22,6 +22,7 @@ urlpatterns = [
     path("", include("core.urls", namespace="core")),
     path("users/", include("users.urls", namespace="users")),
     path("boards/", include("boards.urls", namespace="boards")),
+    path("calendar/", include("calendars.urls", namespace="calendars")),
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
 ]
