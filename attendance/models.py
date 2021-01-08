@@ -1,8 +1,9 @@
 from django.db import models
 from django.utils.timezone import now
+from core import models as core_models
 
 
-class Attendance(models.Model):
+class Attendance(core_models.TimeStampedModel):
 
     """ Attendance Model """
 
