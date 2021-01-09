@@ -1,0 +1,49 @@
+{% extends "index.html" %}
+
+{% block page_title %}
+    Messeage Room
+{% endblock page_title %}
+
+{% block search-bar %}
+{% endblock search-bar %}
+
+{% block content %}
+     
+    <div>
+
+        <div>
+            <span>Conversation between:</span>
+            <div>
+                {% for user in messenger.participants.all  %}
+                    <div>
+                        {% include "users/user_avatar.html" with user=user %}
+                    </div>
+                    {% if forloop.first %}
+                      <span>&</span>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div>
+            <div>
+                    {% if messenger.messages.count == 0 %}
+                        no messages
+                    {% else %}
+                        {% for message in messenger.messages.all  %}     
+                                <span>{{message.user.user_name}}</span>
+                                <div>
+                                    {{message.message}}
+                                </div>
+                        {% endfor %}
+                    {% endif %}
+                    
+            </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input name="message" placeholder="Write a Message" required />
+                    <button>Send Comment</button>
+                </form>
+        </div>
+
+    </div>
+{% endblock content %}
