@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% load i18n %}
 {% block title %}{% trans 'Paper' %} - {{ SITE_NAME }}{% endblock %}
 {% block extra_head_content %}
 {{ block.super }}
 {% endblock %}
-{% load user %}
 {% block content %}
 
 <div class="blog_header">
@@ -42,7 +41,7 @@
         <ul>
             <li class="proposer">
                 <span>{% trans 'Proposal' %}</span>
-                {{ request.user|realname:user.is_authenticated|safe }} / {{ request.user.email }}
+                {{ request.user }} / {{ request.user.email }}
             </li>
         </ul>
     </div>

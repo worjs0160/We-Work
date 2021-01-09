@@ -6,40 +6,40 @@
 {% block content %}
 
 <div class="blog_header">
-    {% trans 'Paper' %}
+    {% trans '결재' %}
     <span>
-        {% trans 'Summary' %}
+        {% trans '요약' %}
     </span>
     <span class="float-right">
         <a href="{% url 'papers:new_paper' %}">
-            <input type="button" value="{% trans '+ New paper' %}">
+            <input type="button" value="{% trans '+ 새 결재' %}">
         </a>
     </span>
 </div>
 
 <div class="summary">
     <div class="title">
-        {% trans 'My papers' %}
+        {% trans '결재 대기 중' %}
         <span class="float-right">
-            <a href="{% url 'papers:inbox' %}">
-                <input type="button" value="{% trans 'Inbox' %}">
+            <a href="{% url 'papers:inbox' page=1 %}">
+                <input type="button" value="{% trans '수신함' %}">
             </a>
         </span>
     </div>
     <table class="board">
     <thead>
     <tr>
-        <th class="subject">{% trans 'title' %}</th>
-        <th class="name">{% trans 'proposer' %}</th>
-        <th class="longname">{% trans 'status' %}</th>
-        <th class="datetime">{% trans 'date' %}</th>
+        <th class="subject">{% trans '제목' %}</th>
+        <th class="name">{% trans '작성자' %}</th>
+        <th class="longname">{% trans '상태' %}</th>
+        <th class="datetime">{% trans '날짜' %}</th>
     </tr>
     </thead>
     <tbody>
     {% for paper in mypapers %}
         <tr>
-            <td class="subject tdlink" data-href="{% url 'papers:show_paper'  %}">
-                <a href="{% url 'papers:show_paper' %}">
+            <td class="subject tdlink" data-href="{% url 'papers:show_paper' paper.id  %}">
+                <a href="{% url 'papers:show_paper' paper.id %}">
                     {{ paper.title }}
                 </a>
                 {% if paper.files.all %}
@@ -93,27 +93,27 @@
 
 <div class="summary">
     <div class="title">
-        {% trans 'My proposal' %}
+        {% trans '내가 올린 결재' %}
         <span class="float-right">
-            <a href="{% url 'papers:outbox' %}">
-                <input type="button" value="{% trans 'Outbox' %}">
+            <a href="{% url 'papers:outbox' page=1 %}">
+                <input type="button" value="{% trans '상신함' %}">
             </a>
         </span>
     </div>
     <table class="board">
     <thead>
     <tr>
-        <th class="subject">{% trans 'title' %}</th>
-        <th class="name">{% trans 'proposer' %}</th>
-        <th class="longname">{% trans 'status' %}</th>
-        <th class="datetime">{% trans 'date' %}</th>
+        <th class="subject">{% trans '제목' %}</th>
+        <th class="name">{% trans '작성자' %}</th>
+        <th class="longname">{% trans '상태' %}</th>
+        <th class="datetime">{% trans '날짜' %}</th>
     </tr>
     </thead>
     <tbody>
     {% for paper in proposals %}
         <tr>
-            <td class="subject tdlink" data-href="{% url 'papers:show_paper' %}">
-                <a href="{% url 'papers:show_paper' %}">
+            <td class="subject tdlink" data-href="{% url 'papers:show_paper' paper.id %}">
+                <a href="{% url 'papers:show_paper' paper.id %}">
                     {{ paper.title }}
                 </a>
                 {% if paper.files.all %}
@@ -167,27 +167,27 @@
 
 <div class="summary no-border">
     <div class="title">
-        {% trans 'Recent papers' %}
+        {% trans '최근 결재' %}
         <span class="float-right">
-            <a href="{% url 'papers:archive' %}">
-                <input type="button" value="{% trans 'Archive' %}">
+            <a href="{% url 'papers:archive' page=1 %}">
+                <input type="button" value="{% trans '보관함' %}">
             </a>
         </span>
     </div>
     <table class="board">
     <thead>
     <tr>
-        <th class="subject">{% trans 'title' %}</th>
-        <th class="name">{% trans 'proposer' %}</th>
-        <th class="longname">{% trans 'status' %}</th>
-        <th class="datetime">{% trans 'date' %}</th>
+        <th class="subject">{% trans '제목' %}</th>
+        <th class="name">{% trans '작성자' %}</th>
+        <th class="longname">{% trans '상태' %}</th>
+        <th class="datetime">{% trans '날짜' %}</th>
     </tr>
     </thead>
     <tbody>
     {% for paper in papers %}
         <tr>
-            <td class="subject tdlink" data-href="{% url 'papers:show_paper'  %}">
-                <a href="{% url 'papers:show_paper' %}">
+            <td class="subject tdlink" data-href="{% url 'papers:show_paper' paper.id %}">
+                <a href="{% url 'papers:show_paper' paper.id %}">
                     {{ paper.title }}
                 </a>
                 {% if paper.files.all %}

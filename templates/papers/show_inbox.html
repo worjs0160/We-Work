@@ -1,22 +1,18 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% load i18n %}
 {% block title %}{% trans 'Paper' %} - {{ SITE_NAME }}{% endblock %}
-{% load tz datetime %}
-{% load status %}
-{% load user %}
-{% load navigator %}
 {% block content %}
 
 <h1>
     {% if box == 'inbox' %}
-        {% trans 'Inbox' %}
+        {% trans '수신함' %}
     {% elif box == 'inbox_nc' %}
         {% trans 'Inbox pending' %}
     {% elif box == 'outbox' %}
-        {% trans 'Outbox' %}
+        {% trans '상신함' %}
     {% else %}
-        {% trans 'Archive' %}
+        {% trans '보관함' %}
     {% endif %}
 </h1>
 <div class="annotation">
@@ -69,10 +65,10 @@
             {% endif %}
         </td>
         <td class="article_info">
-            {{ paper.user|realname:user.is_authenticated|safe }}
+            {{ paper.user }}
         </td>
         <td class="article_info">
-            {{ paper.status|status_to_text|safe }}
+            {{ paper.status|safe }}
             {% if paper.status == '2progress' %}
                 <span class="paper_step">
                     ({{ paper.cc.last.order|add:-2 }}/{{ paper.supporters.all.count|add:1 }})
@@ -80,7 +76,7 @@
             {% endif %}
         </td>
         <td class="article_info">
-            {% if paper.updated_at|localtime|is_today %}
+            {% if paper.updated_at %}
                 {{ paper.updated_at|time:"H:i" }}
             {% else %}
                 {{ paper.updated_at|date:"m-d" }}
@@ -90,17 +86,17 @@
     <tr class="article_info_mobile">
         <td>
             <span>
-                {{ paper.user|nickname:user.is_authenticated|safe }} |
+                {{ paper.user|safe }} |
             </span>
             <span>
-                {{ paper.status|status_to_text|safe }}
+                {{ paper.status|safe }}
                 {% if paper.status == '2progress' %}
                     ({{ paper.cc.last.order|add:-2 }}/{{ paper.supporters.all.count|add:1 }})
                 {% endif %}
                 |
             </span>
             <span>
-                {% if paper.updated_at|localtime|is_today %}
+                {% if paper.updated_at %}
                     {{ paper.updated_at|time:"H:i" }}
                 {% else %}
                     {{ paper.updated_at|date:"m-d" }}
@@ -112,7 +108,6 @@
 </tbody>
 </table>
 
-{% show_navigator %}
 
 <div class="dbsearch">
     <select id="search_type">

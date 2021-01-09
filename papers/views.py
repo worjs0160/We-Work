@@ -10,8 +10,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, redirect, render, reverse
 from django.template.loader import render_to_string
+from django.http import Http404
 
 from .forms import PaperEditForm
 from .models import Attachment, Paper, Person, Support
@@ -53,9 +54,8 @@ def show_paper(request, id):
         cc = []
         for person in paper.cc.all():
             cc.append(person.user)
-
         if request.user not in cc:
-            return error_page(request)
+            return 1
 
     return render(
         request,
@@ -137,7 +137,6 @@ def inbox(request, search_type='', search_word='', page=0, box=''):
     current_page = int(page) - 1
     start_at = current_page * list_count
     end_at = start_at + list_count
-
     if box == 'inbox':
         sq = (~Q(user=request.user) & Q(cc__user=request.user))
     elif box == 'inbox_nc':
@@ -151,7 +150,7 @@ def inbox(request, search_type='', search_word='', page=0, box=''):
         else:
             sq = Q(completed=True)
     else:
-        return error_page(request)
+        return redirect(reverse("core:home"))
 
     if search_type == 'title':
         q = sq & Q(title__icontains=search_word)

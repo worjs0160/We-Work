@@ -1,21 +1,19 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load static %}
 {% load i18n %}
 {% block title %}{% trans 'Paper' %} - {{ SITE_NAME }}{% endblock %}
 {% block extra_head_content %}
 {{ block.super }}
 {% endblock %}
-{% load status %}
-{% load user %}
-{% load link %}
 {% block content %}
 
 <div class="blog_header">
     <span>
-        {{ paper.status|status_to_text_vanilla }}
+        {{ paper.status }}
     </span>
     {{ paper.title }}
 </div>
+
 
 <div class="line_names">
     <ul>
@@ -23,14 +21,14 @@
             {% if paper.status == '4canceled' %}
                 <span class="rejector">{% trans 'Withdraw' %}</span>
             {% else %}
-                <span>{% trans 'Proposal' %}</span>
+                <span>{% trans '기안' %}</span>
             {% endif %}
             {% if request.user == paper.user %}
                 <span class="self">
             {% else %}
                 <span class="other">
             {% endif %}
-                {{ paper.user|realname:user.is_authenticated|safe }} / {{ paper.user.email }}
+                {{ paper.user|safe }} / {{ paper.user.email }}
             </span>
             {% if paper.status == '4canceled' %}
                 <span class="paper_time rejected">
@@ -49,16 +47,16 @@
         </li>
         <li class="approver">
             {% if paper.rejected %}
-                <span class="rejector">{% trans 'Reject' %}</span>
+                <span class="rejector">{% trans '통보' %}</span>
             {% else %}
-                <span>{% trans 'Approval' %}</span>
+                <span>{% trans '승인' %}</span>
             {% endif %}
             {% if request.user == paper.approver %}
                 <span class="self">
             {% else %}
                 <span class="other">
             {% endif %}
-                    {{ paper.approver|realname:user.is_authenticated|safe }} / {{ paper.approver.email }}
+                    {{ paper.approver|safe }} / {{ paper.approver.email }}
                 </span>
             {% if paper.approved or paper.rejected %}
                 {% if paper.rejected %}
@@ -88,7 +86,7 @@
                 {% else %}
                     <span class="other">
                 {% endif %}
-                    {{ supporter.user|realname:user.is_authenticated|safe }} / {{ supporter.user.email }}
+                    {{ supporter.user|safe }} / {{ supporter.user.email }}
                 </span>
                 {% if supporter.approved or supporter.rejected %}
                     {% if supporter.rejected %}
@@ -114,7 +112,7 @@
                 {% else %}
                     <span class="other">
                 {% endif %}
-                    {{ notifier.user|realname:user.is_authenticated|safe }} / {{ notifier.user.email }}
+                    {{ notifier.user|safe }} / {{ notifier.user.email }}
                 </span>
                 {% if paper.status == '5completed' %}
                     <span class="paper_time">
@@ -142,7 +140,7 @@
                         <td class="post_title">
                             <img src="{% static 'icons/attachment18.png' %}">
                             <a href="{{ f.file.url }}">
-                                {{ f.file.path|filenamepath }}
+                                {{ f.file.path }}
                             </a>
                             ({{ f.file.size|filesizeformat }})
                         </td>
