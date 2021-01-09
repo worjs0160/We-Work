@@ -18,12 +18,17 @@ class PaperEditForm(forms.ModelForm):
         """Meta for ModelForm"""
 
         model = Paper
-        fields = ('title', 'content', 'files', 'approver', 'support_names', 'notify_names',)
+        fields = (
+            "title",
+            "content",
+            "files",
+            "approver",
+            "support_names",
+            "notify_names",
+        )
         widgets = {
-            'title': forms.TextInput(
-                attrs={'placeholder': _('Enter title here.')}
-            ),
-            'content': SummernoteWidget(),
-            'files': forms.ClearableFileInput(attrs={'multiple': True}),
-            'approver': forms.TextInput(),
+            "title": forms.TextInput(attrs={"placeholder": _("Enter title here.")}),
+            "content": SummernoteWidget(),
+            "files": forms.ClearableFileInput(attrs={"multiple": True}),
+            "approver": forms.TextInput(),
         }
