@@ -1,21 +1,17 @@
-from django.forms import ModelForm, DateInput
+from django.forms import DateInput
+from bootstrap_modal_forms.forms import BSModalForm
 from calendars.models import Calendar
 from django import forms
 
 
-class EventForm(ModelForm):
+class EventForm(BSModalForm):
     class Meta:
         model = Calendar
-        # datetime-local is a HTML5 input type, format to make date time show on fields
-        widgets = {
-            "start_time": DateInput(
-                attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
-            ),
-            "end_time": DateInput(
-                attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
-            ),
-        }
-        exclude = ["user"]
+        fields = [
+            "title",
+            "place",
+            "schedule",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)

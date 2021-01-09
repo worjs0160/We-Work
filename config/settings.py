@@ -45,6 +45,7 @@ THIRD_PARTY_APPS = [
     "django_seed",
     "ckeditor",
     "ckeditor_uploader",
+    "bootstrap_modal_forms",
 ]
 
 DJANGO_APPS = [

@@ -9,6 +9,11 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+from bootstrap_modal_forms.generic import (
+    BSModalCreateView,
+    BSModalUpdateView,
+    BSModalDeleteView,
+)
 
 from .models import Calendar
 from .utils import Calendar_u
@@ -53,22 +58,11 @@ class CalendarView(generic.ListView):
         return context
 
 
-def create_event(request):
-    form = EventForm(request.POST or None)
-    if request.POST and form.is_valid():
-        title = form.cleaned_data["title"]
-        schedule = form.cleaned_data["schedule"]
-        start_time = form.cleaned_data["start_time"]
-        end_time = form.cleaned_data["end_time"]
-        Calendar.objects.get_or_create(
-            user=request.user,
-            title=title,
-            schedule=schedule,
-            start_time=start_time,
-            end_time=end_time,
-        )
-        return HttpResponseRedirect(reverse("calendars:calendar"))
-    return render(request, "calendars/event.html", {"form": form})
+class create_event(BSModalCreateView):
+    template_name = "calendars/event.html"
+    form_class = EventForm
+    success_message = "Sucess: Event was created"
+    success_url = reverse_lazy("calendar")
 
 
 class EventEdit(generic.UpdateView):

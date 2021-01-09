@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
   <title>Django Calendar App</title>
   <style>
 
@@ -19,12 +20,18 @@
 </head>
 
 <body>
+  <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
+  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        </div>
+      </div>
+    </div>
 
-  {% block content %}
-
-  {% endblock %}
-
-  <!-- Optional JavaScript -->
+  {% comment %} <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -35,9 +42,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+  <!-- You can alternatively load the minified version --> {% endcomment %}
+  {% block content %}
+
+  {% endblock %}
 
   {% block script %}
   {% endblock %}
+
 </body>
 
 </html>
