@@ -36,6 +36,7 @@ class BoardDetailView(DetailView):
 
     model = board_models.Board
     context_object_name = "board"
+    template_name = "boards/board_detail.html"
 
 
 # Board delete
@@ -52,14 +53,12 @@ class CreateBoardView(FormView):
 
     template_name = "boards/board_create.html"
     form_class = forms.BoardForm
-    success_url = reverse_lazy("boards:board_list")
 
     def form_valid(self, form):
-        user = self.request.user
-        title = form.data.get("title")
-        contents = form.data.get("contents")
-        board_models.Board.objects.create(title=title, contents=contents, author=user)
-        return HttpResponseRedirect(self.get_success_url())
+        board = form.save()
+        board.author = self.request.user
+        board.save()
+        return redirect(reverse("boards:detail", kwargs={"pk": board.pk}))
 
 
 class UpdateBoardView(UpdateView):
@@ -85,13 +84,12 @@ def createComment(request, pk):
         board_models.Comment.objects.create(
             author=author, contents=contents, board=board
         )
-        return HttpResponseRedirect(
-            reverse_lazy("boards:board_detail", kwargs={"pk": pk})
-        )
+        return HttpResponseRedirect(reverse_lazy("boards:detail", kwargs={"pk": pk}))
 
 
 def deleteComment(request, pk):
     comment = board_models.Comment.objects.get(pk=pk)
     board = comment.board
     comment.delete()
-    return redirect(reverse("boards:board_detail", kwargs={"pk": board.pk}))
+    return redirect(reverse("boards:detail", kwargs={"pk": board.pk}))
+    # render로 수정필요

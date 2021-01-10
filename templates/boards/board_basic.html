@@ -10,7 +10,7 @@
 <body>
     <div>
         {% for board in boards%}
-        <li>{{board.postNo}} <a href="{% url 'boards:board_detail' board.pk %}">{{board.title}}</a> {{board.viewCnts}}회 {{board.author}}</li>
+        <li>{{board.postNo}} <a href="{% url 'boards:detail' board.pk %}">{{board.title}}</a> {{board.viewCnts}}회 {{board.author}}</li>
         {% endfor %}
     </div>
 

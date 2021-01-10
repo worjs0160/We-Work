@@ -62,7 +62,7 @@ class Board(core_models.TimeStampedModel):
         return f"{self.title}({self.postNo})"
 
     def get_absolute_url(self):
-        return reverse("boards:board_detail", kwargs={"pk": self.pk})
+        return reverse("boards:detail", kwargs={"pk": self.pk})
 
     @property
     def update_viewCnts(self):

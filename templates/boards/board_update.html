@@ -15,9 +15,9 @@
 
     </div>
      <div>
-        <a href="{% url 'boards:board_detail' board.pk %}">취소</a>
+        <a href="{% url 'boards:detail' board.pk %}">취소</a>
     </div>
     <div>
-        <a href="{% url 'boards:board_delete' board.pk %}">삭제</a>
+        <a href="{% url 'boards:delete' board.pk %}">삭제</a>
     </div>
 {% endblock boardContent %}
