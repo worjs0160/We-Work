@@ -4,8 +4,7 @@
     <div class="clearfix">
         <span class="left m-2" style="font-size: 20px;">Wellcome {{request.user.user_name}}</span>
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %}?{{ next_month }} "> Next Month >> </a>
-        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %}?{{ prev_month }}">
-            << Previous Month </a>
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %}?{{ prev_month }}"> << Previous Month </a>
         <button id="create-event" class="btn btn-info right mr-2" type = "button"> + New Event </button>
     </div>
     <div style="color: rgb(24, 36, 204);">

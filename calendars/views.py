@@ -18,6 +18,7 @@ from bootstrap_modal_forms.generic import (
 from .models import Calendar
 from .utils import Calendar_u
 from .forms import EventForm
+from django.http import Http404
 
 
 def get_date(req_day):
@@ -45,6 +46,7 @@ def next_month(d):
 class CalendarView(generic.ListView):
 
     model = Calendar
+    context_object_name = "users"
     template_name = "calendar.html"
 
     def get_context_data(self, **kwargs):
@@ -59,10 +61,11 @@ class CalendarView(generic.ListView):
 
 
 class create_event(BSModalCreateView):
+
     template_name = "calendars/event.html"
     form_class = EventForm
     success_message = "Sucess: Event was created"
-    success_url = reverse_lazy("calendar")
+    success_url = reverse_lazy("calendars:calendar")
 
 
 class EventEdit(generic.UpdateView):
@@ -82,3 +85,7 @@ class EventDeleteView(generic.DeleteView):
     model = Calendar
     template_name = "calendars/event_delete.html"
     success_url = reverse_lazy("calendars:calendar")
+
+
+def go_create_event(request, i_pk):
+    user = Calendar.objects.get(i_pk=pk)

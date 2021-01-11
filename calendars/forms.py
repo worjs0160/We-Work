@@ -1,17 +1,22 @@
 from django.forms import DateInput
-from bootstrap_modal_forms.forms import BSModalForm
+from bootstrap_modal_forms.forms import BSModalForm, BSModalModelForm
 from calendars.models import Calendar
 from django import forms
+from . import models
 
 
-class EventForm(BSModalForm):
+class EventForm(BSModalModelForm):
     class Meta:
         model = Calendar
-        fields = [
-            "title",
-            "place",
-            "schedule",
-        ]
+        widgets = {
+            "start_time": DateInput(
+                attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
+            ),
+            "end_time": DateInput(
+                attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
+            ),
+        }
+        exclude = [""]
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)

@@ -20,14 +20,23 @@
 </head>
 
 <body>
-  <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
-  <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
-  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
-  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+  {% block scripts %}
+    <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'calendar/js/popper.min.js' %}"></script>
+    <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
+    <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+  {% endblock scripts %}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
         </div>
+      </div>
+    </div>
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal">
+      <div class="modal-dialog mt-5" role="document">
+        <div class="modal-content"></div>
       </div>
     </div>
 
