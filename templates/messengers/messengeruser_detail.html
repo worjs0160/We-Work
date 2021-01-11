@@ -1,7 +1,7 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 
 {% block page_title %}
-    Messeage Room
+    Conversation
 {% endblock page_title %}
 
 {% block search-bar %}
@@ -9,14 +9,15 @@
 
 {% block content %}
      
-    <div>
+    <div class="container mx-auto my-10 mt-32 flex justify-between min-h-50vh">
 
-        <div>
-            <span>Conversation between:</span>
-            <div>
+        <div class="border w-1/4 p-10">
+            <span class="text-center w-full block text-lg font-medium">Conversation between:</span>
+            <div class="flex justify-between mt-10 items-center">
                 {% for user in messenger.participants.all  %}
-                    <div>
+                    <div class="flex flex-col items-center">
                         {% include "users/user_avatar.html" with user=user %}
+                        <span class="mt-2 text-gray-500">{{user.user_name}}</span>
                     </div>
                     {% if forloop.first %}
                       <span>&</span>
@@ -24,25 +25,27 @@
                 {% endfor %}
             </div>
         </div>
-        <div>
-            <div>
-                    {% if messenger.messages.count == 0 %}
-                        no messages
-                    {% else %}
-                        {% for message in messenger.messages.all  %}     
-                                <span>{{message.user.user_name}}</span>
-                                <div>
-                                    {{message.message}}
-                                </div>
-                        {% endfor %}
-                    {% endif %}
-                    
+        <div class="flex-grow">
+        <div class="border  ml-10 p-10 flex flex-col">
+                {% if messenger.messages.count == 0 %}
+                    no messages
+                {% else %}
+                    {% for message in messenger.messages.all  %}
+                        <div>
+                            <span>{{message.user.user_name}}</span>
+                            <div>
+                                {{message.message}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                
             </div>
-                <form method="POST">
-                    {% csrf_token %}
-                    <input name="message" placeholder="Write a Message" required />
-                    <button>Send Comment</button>
-                </form>
+            <form class="mt-10 w-1/2 mx-auto" method="POST">
+                {% csrf_token %}
+                <input class="border-box mb-5" name="message" placeholder="Write a Message" required />
+                <button class="btn-link">Send Comment</button>
+            </form>
         </div>
 
     </div>
