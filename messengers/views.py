@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import redirect, reverse, render
-from django.views.generic import View, ListView, DetailView
+from django.views.generic import View, ListView
 from users import models as user_models
-from . import models, forms
+from . import models
 
 # Create your views here.
 
@@ -11,9 +11,6 @@ from . import models, forms
 class UserView(ListView):
 
     model = user_models.User
-    paginate_by = 12
-    paginate_orphans = 5
-    # ordering = "created"
     context_object_name = "users"
     template_name = "messengers/msg_list.html"
 
@@ -24,12 +21,12 @@ def go_msg_room(request, my_pk, your_pk):
     if user_one is not None and user_two is not None:
         try:
             messenger = models.MessengerUser.objects.get(
-                Q(participants=user_one) & Q(participants=user_two)
+                Q(participants=user_one) and Q(participants=user_two)
             )
         except models.MessengerUser.DoesNotExist:
             messenger = models.MessengerUser.objects.create()
             messenger.participants.add(user_one, user_two)
-    return redirect(reverse("messengers:detail", kwargs={"pk": messenger.pk}))
+        return redirect(reverse("messengers:detail", kwargs={"pk": messenger.pk}))
 
 
 class MessengerRoomView(View):
