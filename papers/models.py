@@ -5,6 +5,7 @@ from django.conf import settings
 # from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext as _
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
 class Attachment(models.Model):
@@ -61,11 +62,12 @@ class Paper(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     title = models.CharField(max_length=41)
-    content = models.TextField()
+    content = RichTextUploadingField()
     files = models.ManyToManyField(Attachment, blank=True)
     cc = models.ManyToManyField(
         Person, related_name='paper_cc', default='', blank=True)
-    approver = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="paper_approver")
+    approver = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="paper_approver")
     comment = models.CharField(
         max_length=settings.APPROVE_COMMENT_MAX, default='', blank=True)
     approved = models.BooleanField(default=False)
