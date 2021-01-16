@@ -1,0 +1,9 @@
+{% extends 'index.html' %} {% block content %}
+<div>
+  {% for msg_user in users %} {% if user.user_name != msg_user.user_name %}
+  <a href="{% url 'messengers:go' user.pk msg_user.pk %}">
+    {% include "users/user_avatar.html" with user=msg_user %}
+  </a>
+  {% endif %} {% endfor %}
+</div>
+{% endblock content %}

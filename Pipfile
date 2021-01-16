@@ -9,6 +9,7 @@ pillow = "*"
 django-seed = "*"
 django-ckeditor = "*"
 django-bootstrap-modal-forms = "*"
+django-summernote = "*"
 
 [dev-packages]
 pylint = "*"

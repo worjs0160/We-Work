@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
@@ -39,12 +38,15 @@ CUSTOM_APPS = [
     "contacts",
     "mails",
     "messengers",
+    "papers",
 ]
 
 THIRD_PARTY_APPS = [
     "django_seed",
     "ckeditor",
     "ckeditor_uploader",
+    "bootstrap_modal_forms",
+    "widget_tweaks",
 ]
 
 DJANGO_APPS = [
@@ -147,3 +149,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = "users.User"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+
+# SEtting for Paper
+SUMMARY_LIST_COUNT = 5
+INBOX_LIST_COUNT = 20
+APPROVE_COMMENT_MAX = 1024

@@ -24,8 +24,10 @@ urlpatterns = [
     path("attendance/", include("attendance.urls", namespace="attendance")),
     path("boards/", include("boards.urls", namespace="boards")),
     path("calendar/", include("calendars.urls", namespace="calendars")),
-    path("admin/", admin.site.urls),
+    path("messengers/", include("messengers.urls", namespace="messengers")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
+    path('papers/', include('papers.urls', namespace='papers')),
+    path("admin/", admin.site.urls),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
