@@ -16,7 +16,14 @@ class EventForm(BSModalModelForm):
                 attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
             ),
         }
-        exclude = [""]
+        fields = [
+            "title",
+            "place",
+            "schedule",
+            "start_time",
+            "end_time",
+            "attached_file",
+        ]
 
     def __init__(self, *args, **kwargs):
         super(EventForm, self).__init__(*args, **kwargs)

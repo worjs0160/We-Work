@@ -46,6 +46,7 @@ THIRD_PARTY_APPS = [
     "ckeditor",
     "ckeditor_uploader",
     "bootstrap_modal_forms",
+    "widget_tweaks",
 ]
 
 DJANGO_APPS = [

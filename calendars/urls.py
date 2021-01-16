@@ -17,6 +17,6 @@ urlpatterns = [
     path(
         "event/<int:pk>/remove/",
         calendars_views.EventDeleteView.as_view(),
-        name="remove_event",
+        name="delete_event",
     ),
 ]
