@@ -94,3 +94,19 @@ def update_password(request):
     else:
         form = PasswordChangeForm(request.user)
         return render(request, "users/update_password.html", {"form": form})
+
+
+def find_password(request):
+
+    if request.method == "POST":
+        form = PasswordChangeForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            return redirect(reverse("core:start"))
+
+        return render(request, "users/find_password_2.html", {"form": form})
+
+    else:
+        form = forms.FindPasswordForm()
+        return render(request, "users/find_password.html", {"form": form})

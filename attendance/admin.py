@@ -9,6 +9,7 @@ class CustomAttendanceAdmin(admin.ModelAdmin):
 
     list_display = (
         "user",
-        "time_go_work",
-        "time_leave_work",
+        "date",
+        "time_start_work",
+        "time_finish_work",
     )

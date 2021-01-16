@@ -1,0 +1,48 @@
+{% extends 'index.html' %} 
+
+{% block title %}
+  근태관리 페이지
+{% endblock title %} 
+
+{% block content %}
+  <table>
+    <tr>
+      <th>유저이름</th>
+      <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+      <th>상태</th>
+        {% if attendance %} 
+          <td>출근</td>
+          </tr> 
+          <tr>
+            <th>출근시간</th>
+            <td>{{ attendance.time_start_work|date:"A h:i" }}</td>
+          </tr>
+          {% if attendance.time_finish_work != null %}
+            <tr>
+              <th>퇴근시간</th>
+              <td>{{ attendance.time_finish_work|date:"A h:i" }}</td>
+            </tr>
+          {% else %}
+            <tr>
+              <th>퇴근시간</th>
+              <td>퇴근전</td>
+            </tr>
+            <tr> 
+              <td>
+                <a href="{% url 'attendance:finish_work' %}"><button>퇴근하기</button></a>
+              </td>
+            </tr>
+          {% endif %}
+        {% else %}
+          <td>출근 전</td>
+          </tr>
+          <tr>
+            <td>
+              <a href="{% url 'attendance:start_work' %}"><button>출근하기</button></a>
+            </td>
+          </tr> 
+        {% endif %}
+  </table>
+{% endblock content %}
