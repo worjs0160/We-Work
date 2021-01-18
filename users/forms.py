@@ -78,21 +78,6 @@ class SignUpForm(forms.ModelForm):
         user.save()  # DB에 유저 저장
 
 
-class CustomUserChangeForm(UserChangeForm):
-
-    """ 유저 정보 수정 폼 """
-
-    class Meta:
-        # settings.py 에서 설정된 User모델 가져오기
-        model = get_user_model()
-        fields = [
-            "phone_num",
-            "user_addr",
-            "post_num",
-            "user_bio",
-        ]
-
-
 class FindPasswordForm(forms.Form):
     user_id = forms.CharField(label="이메일ID")
     phone_num = forms.CharField(label="전화번호")

@@ -8,8 +8,8 @@
         {{ form.as_p }}
         <button type='submit'>확인</button>
     </form>
-
-    <a href="{% url 'core:home' %}">
+    
+    <a href="{% url 'users:info' users.pk %}">
         <button>취소</button>
     </a>
 

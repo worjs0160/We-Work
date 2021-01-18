@@ -4,6 +4,10 @@
     <h2><b>회원정보</b></h2>
     <table>
         <tr>
+            <th width='20%'>사진</th>
+            <td>{{ user.avatar }}</td>
+        </tr>
+        <tr>
             <th width='20%'>아이디</th>
             <td>{{ user.username }}</td>
         </tr>
@@ -14,6 +18,10 @@
         <tr>
             <th>생년월일</th>
             <td>{{ user.birthdate }}</td>
+        </tr>
+        <tr>
+            <th>부서</th>
+            <td>{{ user.user_department }}</td>
         </tr>
         <tr>
             <th>직책</th>
@@ -32,7 +40,7 @@
             <td>{{ user.post_num }}</td>
         </tr>
         <tr>
-            <td><a href="{% url 'users:update_info' %}">유저정보 변경</a></td>
+            <td><a href="{% url 'users:update_profile' %}">유저정보 변경</a></td>
         </tr>
         <tr>
             <td><a href="{% url 'users:update_password' %}">비밀번호 변경</a></td>
