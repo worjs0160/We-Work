@@ -27,10 +27,10 @@ class Calendar(core_models.TimeStampedModel):
     def __str__(self):
         return self.title
 
-    def get_absolute_url(self):
-        return reverse("calendars:event-detail", args=(self.id,))
-
     @property
     def get_html_url(self):
         url = reverse("calendars:event-detail", args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
+
+    def get_id(self):
+        return self.user
