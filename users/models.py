@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from core import managers as core_managers
 
 
 class User(AbstractUser):
@@ -20,8 +19,6 @@ class User(AbstractUser):
     birthdate = models.DateField(blank=True, null=True, verbose_name="생년월일")
     user_bio = models.TextField(blank=True, verbose_name="유저정보")
     is_cert = models.BooleanField(default=False, verbose_name="유저인증")
-
-    objects = core_managers.CustomUserManager()
 
     def __str__(self):
         return f"{self.user_name}({self.username})"

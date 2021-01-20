@@ -24,9 +24,8 @@ urlpatterns = [
     path("attendance/", include("attendance.urls", namespace="attendance")),
     path("boards/", include("boards.urls", namespace="boards")),
     path("calendar/", include("calendars.urls", namespace="calendars")),
-    path("messengers/", include("messengers.urls", namespace="messengers")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
-    path('papers/', include('papers.urls', namespace='papers')),
+    path("papers/", include("papers.urls", namespace="papers")),
     path("admin/", admin.site.urls),
 ]
 
