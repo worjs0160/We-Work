@@ -42,7 +42,7 @@ def WriteFinishTime(request):
     now = timezone.now()
     today = dateformat.format(now, "Y-m-d")
     finish_time = dateformat.format(now, "Y-m-d H:i:s")
-    print(finish_time)
+
     try:
         attendance = models.Attendance.objects.filter(user=request.user).filter(
             date=today

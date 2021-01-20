@@ -1,5 +1,6 @@
 from django.views import View
 from django.views.generic import FormView, DetailView
+from django.views.generic.edit import UpdateView
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -29,6 +30,7 @@ class LoginView(FormView):
         return super().form_valid(form)
 
 
+# 로그아웃 FBV
 def log_out(request):
     logout(request)
     return redirect(reverse("core:start"))
@@ -59,23 +61,21 @@ class UserInfoView(DetailView):
     model = models.User
 
 
-# 정보 업데이트 하는 함수
-@login_required
-def update_info(request):
-    if request.method == "POST":
-        form = forms.CustomUserChangeForm(request.POST, instance=request.user)
+class UpdateProfile(UpdateView):
+    model = models.User
+    template_name = "users/update_profile.html"
+    fields = [
+        "phone_num",
+        "user_addr",
+        "post_num",
+        "user_bio",
+        "avatar",
+    ]
+    success_url = reverse_lazy("core:home")
 
-        # form이 올바른 경우
-        if form.is_valid():
-            form.save()  # form 정보 DB에 업데이트
-            return redirect("core:home")  # 메인페이지로 이동
-
-        return render(request, "users/update_info.html", {"form": form})
-
-    # GET방식인 경우
-    else:
-        form = forms.CustomUserChangeForm(instance=request.user)
-        return render(request, "users/update_info.html", {"form": form})
+    # form에서 로드할 객체(현재 로그인 중인) 불러오는 함수
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 # 패스워드 변경 함수
