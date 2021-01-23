@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.views import generic
 from django.utils.safestring import mark_safe
 from datetime import timedelta
@@ -54,7 +54,7 @@ class CalendarView(generic.ListView):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get("month", None))
         cal = Calendar_u(d.year, d.month)
-        html_cal = cal.formatmonth(withyear=True)
+        html_cal = cal.formatmonth(self.request.user, withyear=True)
         context["calendar"] = mark_safe(html_cal)
         context["prev_month"] = prev_month(d)
         context["next_month"] = next_month(d)
