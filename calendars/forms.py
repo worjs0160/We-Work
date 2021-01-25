@@ -1,8 +1,6 @@
 from django.forms import DateInput
-from bootstrap_modal_forms.forms import BSModalForm, BSModalModelForm
+from bootstrap_modal_forms.forms import BSModalModelForm
 from calendars.models import Calendar
-from django import forms
-from . import models
 
 
 class EventForm(BSModalModelForm):

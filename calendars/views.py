@@ -1,5 +1,5 @@
 from datetime import datetime, date
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render
 from django.views import generic
 from django.utils.safestring import mark_safe
 from datetime import timedelta
