@@ -27,16 +27,13 @@ urlpatterns = [
     path("boards/", include("boards.urls", namespace="boards")),
     path("calendar/", include("calendars.urls", namespace="calendars")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
-<<<<<<< HEAD
     url(
         r"^download/(?P<path>.*)$",
         boards_views.download,
         {"document_root": settings.MEDIA_ROOT},
     ),
-=======
     path("papers/", include("papers.urls", namespace="papers")),
     path("admin/", admin.site.urls),
->>>>>>> c157f5a73a9d9fa7e3084f365441b3718c059b09
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
