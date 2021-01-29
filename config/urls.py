@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
+from django.views.static import serve
+from boards import views as boards_views
 
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
@@ -25,6 +28,11 @@ urlpatterns = [
     path("calendar/", include("calendars.urls", namespace="calendars")),
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
+    url(
+        r"^download/(?P<path>.*)$",
+        boards_views.download,
+        {"document_root": settings.MEDIA_ROOT},
+    ),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

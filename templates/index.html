@@ -9,14 +9,16 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Simple Sidebar - Start Bootstrap Template</title>
+  <title>WeWork</title>
 
   <!-- Bootstrap core CSS -->
-  <link href="{% static "bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "tables_1231/css/bootstrap4.min.css" %}" rel="stylesheet">
+  <link href="{% static 'bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  
+  {% block link-area %}{% endblock link-area %}
+    
 
   <!-- Custom styles for this template -->
-  <link href="{% static "bootstrap_1229/css/simple-sidebar.css" %}" rel="stylesheet">
+  <link href="{% static 'bootstrap_1229/css/simple-sidebar.css' %}" rel="stylesheet">
 
 </head>
 
@@ -84,7 +86,7 @@
         {% block content %}{% endblock %}
 
         {% include "partials/footer.html" %}
-      </div>
+
     </div>
     <!-- /#page-content-wrapper -->
 
@@ -92,13 +94,9 @@
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{% static "tables_1231/js/jquery-3.5.1.slim.min.js" %}"></script>
-  <script src="{% static "bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/jquery-3.5.1.slim.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/scripts.js" %}"></script>
-  <script src="{% static "tables_1231/js/jquery.dataTables.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/bootstrap4.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/datatables-demo.js" %}"></script>
+  <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  {% block script-area %}{% endblock script-area %}
 
   <!-- Menu Toggle Script -->
   <script>

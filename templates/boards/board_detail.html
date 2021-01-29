@@ -7,15 +7,25 @@
         <hr>
         <div>조회수: {{board.update_viewCnts}}회</div>
         <div>게시자: {{board.author.username}}</div>
-        <div>{{board.contents|safe}}</div>
+        <div class="m-2">{{board.contents|safe}}</div>
     </div>
+    
+    {% if board.attachments.get.file %}
+        <div class="card-header border">    
+            <div>첨부파일</div>
+            <hr>
+            <a href="{{ board.attachments.get.file.url }}" download="{{board.attachments.get.file.adminupload.url}}"> {{board.attachments.get.file.name}}</a> 
+        </div>
+    {% endif %}
+        
+    <hr>
     <div>
         <a href="{% url 'boards:board_list' %}">목록으로</a>
     </div>
     <div>
     {% if user == board.author %}
-        <a href="{% url 'boards:update' board.pk %}">수정</a> |
-        <a href="{% url 'boards:delete' board.pk %}">삭제</a>
+        <button onclick="location.href='{% url 'boards:update' board.pk %}'">수정</button>
+        <button onclick="location.href='{% url 'boards:delete' board.pk %}'">삭제</button> 
     {% endif %}
     </div>
     <hr>
@@ -25,8 +35,6 @@
             <div><input type="submit" value="등록"></div>
         </form>
     <hr>
-    
-    
     
     {% for comment in board.comments.all %}
         <div>작성자:{{comment.author}} | {{comment.updated}}</div>

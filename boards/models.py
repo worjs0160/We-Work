@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
 from django.core.validators import MinLengthValidator, MaxLengthValidator
@@ -8,6 +10,18 @@ from users.models import User
 title_MinLenValidator = MinLengthValidator(2, "2자 이상 입력해주세요.(2자 ~ 80자 이내)")
 title_MaxLenValidator = MaxLengthValidator(80, "80자 이내로 입력해주세요.(2자 ~ 80자 이내)")
 contents_MinLenValidator = MinLengthValidator(10, "글이 너무 짧습니다. 10자 이상 입력해주세요.")
+
+
+class Attachment(core_models.TimeStampedModel):
+
+    board = models.ForeignKey(
+        "Board", related_name="attachments", on_delete=models.CASCADE
+    )
+
+    file = models.FileField(upload_to="board-files/%Y-%m-%d/", blank=True, null=True)
+
+    def filename(self):
+        return os.path.basename(self.file.name)
 
 
 class Comment(core_models.TimeStampedModel):
@@ -60,6 +74,13 @@ class Board(core_models.TimeStampedModel):
 
     def __str__(self):
         return f"{self.title}({self.postNo})"
+
+    def delete(self, *args, **kwargs):
+        a = self.attachments.get(board=self)
+        print(a.file)
+        if a.file:
+            os.remove(os.path.join(settings.MEDIA_ROOT, a.file.name))
+        super().delete(*args, **kwargs)
 
     def get_absolute_url(self):
         return reverse("boards:detail", kwargs={"pk": self.pk})

@@ -1,23 +1,22 @@
 {% extends 'boards/board_base.html' %}
 
-
-{% block boardName %}{% endblock boardName %}
+{% block boardName %}
+    <form method="POST">
+        {% csrf_token %}
+        {{form.title}}
+{% endblock boardName %}
 
 {% block boardContent %}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div>
         {{form.media}}
-        <div>제목: {{form.title}}</div>
-        <div>{{form.contents}}</div>
+        {{form.contents}}
+    </div>
+    <div>{{form.attachments}}</div>
         <button>수정 완료</button>
     </form>
     <div>
 
     </div>
-     <div>
-        <a href="{% url 'boards:detail' board.pk %}">취소</a>
-    </div>
-    <div>
-        <a href="{% url 'boards:delete' board.pk %}">삭제</a>
-    </div>
+    <button onclick="location.href='{% url 'boards:detail' board_pk %}'">취소</button>
+    <button onclick="location.href='{% url 'boards:delete' board_pk %}'">삭제</button> 
 {% endblock boardContent %}

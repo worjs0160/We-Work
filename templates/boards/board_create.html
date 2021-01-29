@@ -1,13 +1,18 @@
 {% extends 'boards/board_base.html' %}
 
-{% block boardName %}{% endblock boardName %}
+
+        {% block boardName %}
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.title}}
+        {% endblock boardName %}
     
-{% block boardContent %}
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.media}}
-        {{form.as_p}}
-        <button>등록</button>
+        {% block boardContent %}
+                {{form.media}}
+                {{form.contents}}
+                <div>{{form.attachments}}</div>
+                
+        <div><input type="submit" value="등록"></div>
     </form>
     <div>
         <a href="{% url 'boards:board_list' %}">취소</a>

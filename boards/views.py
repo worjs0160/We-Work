@@ -1,95 +1,130 @@
-from django.views.generic import FormView, UpdateView, DetailView
-from django.http import HttpResponseRedirect
+import os
+from django.conf import settings
+from django.http import HttpResponseRedirect, HttpResponse, Http404
 from django.urls import reverse_lazy
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from . import forms
-from . import models as board_models
+from . import models
 
 
 def readBoardList(request):
-    boards = board_models.Board.objects.all().order_by("-updated")
+    boards = models.Board.objects.all()
     return render(request, "boards/board_list.html", {"boards": boards})
 
 
-# Board List Read using paginator
-"""
-def readBoardList(request):
-    # Board 모델에 대한 Objects : all_board
-    all_boards = board_models.Board.objects.all()
+def detailBoardView(request, pk):
 
-    # 10개씩 queryset을 보여줌
-    paginator = Paginator(all_boards, 10)
-    page_num = request.GET.get("page")
-
-    # page_obj
-    boards = paginator.get_page(page_num)
-
-    context = {
-        "boards": boards,
-    }
-    return render(request, "boards/board_list.html", context)
-"""
-
-
-class BoardDetailView(DetailView):
-    """Board Detail 보여주기"""
-
-    model = board_models.Board
-    context_object_name = "board"
-    template_name = "boards/board_detail.html"
+    board = models.Board.objects.get(postNo=pk)
+    return render(request, "boards/board_detail.html", {"board": board})
 
 
 # Board delete
-def deleteBoard(request, pk):
-    board = board_models.Board.objects.get(pk=pk)
+def deleteBoardView(request, pk):
+    board = models.Board.objects.get(pk=pk)
     board.delete()
-
     return redirect(reverse("boards:board_list"))
 
 
-class CreateBoardView(FormView):
+def createBoardView(request):
 
-    """Board create"""
+    # 게시글 form POST 처리
+    if request.method == "POST":
+        form = forms.BoardForm(request.POST or None)
 
-    template_name = "boards/board_create.html"
-    form_class = forms.BoardForm
+        if form.is_valid():
+            board = form.save()
+            board.author = request.user
+            board.save()
+            file = request.FILES.get("attachments")
+            print(file)
+            if file:
+                models.Attachment.objects.create(file=file, board=board)
+            else:
+                models.Attachment.objects.create(board=board)
+        return HttpResponseRedirect(reverse("boards:detail", kwargs={"pk": board.pk}))
 
-    def form_valid(self, form):
-        board = form.save()
-        board.author = self.request.user
-        board.save()
-        return redirect(reverse("boards:detail", kwargs={"pk": board.pk}))
+    # 게시글 생성 GET 메소드 처리
+    else:
+        form = forms.BoardForm()
+        return render(request, "boards/board_create.html", {"form": form})
 
 
-class UpdateBoardView(UpdateView):
+def updateBoardView(request, pk):
     """Board Update"""
 
-    model = board_models.Board
-    template_name = "boards/board_update.html"
-    fields = (
-        "title",
-        "contents",
-    )
+    board = get_object_or_404(models.Board, pk=pk)
 
-    def get_success_url(self):
-        return self.get_object().get_absolute_url()
+    if request.method == "POST":
+        form = forms.BoardForm(request.POST, instance=board)
+
+        if form.is_valid():
+            board = form.save(commit=False)
+            board.save()
+            # 수정 시 파일 변경 및 삭제 처리 필요
+            # file = request.FILES.get("attachments")
+            # models.Attachment.objects.create(file=file, board=board)
+        return HttpResponseRedirect(reverse("boards:detail", kwargs={"pk": board.pk}))
+
+    else:
+        title = board.title
+        contents = board.contents
+
+        if board.attachments.get(board=board).file.name:
+            attachments = models.Attachment.objects.get(board=board)
+            print("asdasda")
+
+            form = forms.BoardForm(
+                initial={
+                    "title": title,
+                    "contents": contents,
+                    "attachments": attachments,
+                }
+            )
+        else:
+            form = forms.BoardForm(initial={"title": title, "contents": contents})
+
+        return render(
+            request,
+            "boards/board_update.html",
+            {"form": form, "board_pk": board.pk},
+        )
+
+
+"""-----------------댓글----------------"""
 
 
 def createComment(request, pk):
+    """댓글 생성"""
+
     if request.method == "POST":
-        board = get_object_or_404(board_models.Board, pk=pk)
+        board = get_object_or_404(models.Board, pk=pk)
         contents = request.POST.get("contents")
         author = request.user
 
-        board_models.Comment.objects.create(
-            author=author, contents=contents, board=board
-        )
+        models.Comment.objects.create(author=author, contents=contents, board=board)
         return HttpResponseRedirect(reverse_lazy("boards:detail", kwargs={"pk": pk}))
 
 
 def deleteComment(request, pk):
-    comment = board_models.Comment.objects.get(pk=pk)
+    """댓글 삭제"""
+
+    comment = models.Comment.objects.get(pk=pk)
     board = comment.board
     comment.delete()
     return redirect(reverse("boards:detail", kwargs={"pk": board.pk}))
     # render로 수정필요
+
+
+"""--------다운로드 함수---------"""
+
+
+def download(request, path):
+    file_path = os.path.join(settings.MEDIA_ROOT, path)
+    if os.path.exists(file_path):
+        with open(file_path, "rb") as fh:
+            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
+            response["Content-Disposition"] = "inline; filename=" + os.path.basename(
+                file_path
+            )
+            return response
+    raise Http404()
