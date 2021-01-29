@@ -102,17 +102,15 @@ def createComment(request, pk):
         author = request.user
 
         models.Comment.objects.create(author=author, contents=contents, board=board)
-        return HttpResponseRedirect(reverse_lazy("boards:detail", kwargs={"pk": pk}))
+        return render(request, "boards/board_detail.html", {"board": board})
 
 
 def deleteComment(request, pk):
     """댓글 삭제"""
-
     comment = models.Comment.objects.get(pk=pk)
     board = comment.board
     comment.delete()
-    return redirect(reverse("boards:detail", kwargs={"pk": board.pk}))
-    # render로 수정필요
+    return render(request, "boards/board_detail.html", {"board": board})
 
 
 """--------다운로드 함수---------"""
