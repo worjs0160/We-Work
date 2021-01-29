@@ -1,17 +1,13 @@
-{% extends 'index.html' %}
-
 {% block page_title %}
     Sign Up
 {% endblock page_title %}
 
-{% block search-bar %}
-{% endblock search-bar %}
+<form method="POST" action="{% url "users:signup" %}">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>회원가입</button>
+</form>
 
-
-{% block content %}
-    <form method="POST" action="{% url "users:signup" %}">
-        {% csrf_token %}
-        {{form.as_p}}
-        <button>Sign Up</button>
-    </form>
-{% endblock content %}
+<a href="{% url 'core:start' %}">
+    <button>돌아가기</button>
+</a>

@@ -1,18 +1,21 @@
 from datetime import datetime, date
-from django.shortcuts import render, redirect, reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render
 from django.views import generic
 from django.utils.safestring import mark_safe
 from datetime import timedelta
 import calendar
-from django.shortcuts import get_object_or_404
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
-
+from bootstrap_modal_forms.generic import (
+    BSModalCreateView,
+    BSModalUpdateView,
+    BSModalDeleteView,
+)
+from django.contrib.auth import get_user_model
 from .models import Calendar
 from .utils import Calendar_u
 from .forms import EventForm
+
+UserModel = get_user_model()
 
 
 def get_date(req_day):
@@ -37,45 +40,40 @@ def next_month(d):
     return month
 
 
+def get_context_data(self, **kwargs):
+    context = super().get_context_data(**kwargs)
+    return context
+
+
 class CalendarView(generic.ListView):
 
     model = Calendar
-    template_name = "calendar.html"
+    template_name = "calendar_list.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get("month", None))
         cal = Calendar_u(d.year, d.month)
-        html_cal = cal.formatmonth(withyear=True)
+        html_cal = cal.formatmonth(self.request.user, withyear=True)
         context["calendar"] = mark_safe(html_cal)
         context["prev_month"] = prev_month(d)
         context["next_month"] = next_month(d)
         return context
 
 
-def create_event(request):
-    form = EventForm(request.POST or None)
-    if request.POST and form.is_valid():
-        title = form.cleaned_data["title"]
-        schedule = form.cleaned_data["schedule"]
-        start_time = form.cleaned_data["start_time"]
-        end_time = form.cleaned_data["end_time"]
-        Calendar.objects.get_or_create(
-            user=request.user,
-            title=title,
-            schedule=schedule,
-            start_time=start_time,
-            end_time=end_time,
-        )
-        return HttpResponseRedirect(reverse("calendars:calendar"))
-    return render(request, "calendars/event.html", {"form": form})
-
-
-class EventEdit(generic.UpdateView):
-    model = Calendar
-
-    fields = ["title", "schedule", "start_time", "end_time"]
+class create_event(BSModalCreateView):
     template_name = "calendars/event.html"
+    form_class = EventForm
+    success_message = "Sucess: Event was created"
+    success_url = reverse_lazy("calendars:calendar")
+
+
+class EventEdit(BSModalUpdateView):
+    model = Calendar
+    template_name = "calendars/event_edit.html"
+    form_class = EventForm
+    success_message = "Success: Event was updated."
+    success_url = reverse_lazy("calendars:calendar")
 
 
 def event_details(request, event_id):
@@ -84,7 +82,8 @@ def event_details(request, event_id):
     return render(request, "calendars/event-details.html", context)
 
 
-class EventDeleteView(generic.DeleteView):
+class EventDeleteView(BSModalDeleteView):
     model = Calendar
     template_name = "calendars/event_delete.html"
+    success_message = "Success: Event was deleted."
     success_url = reverse_lazy("calendars:calendar")

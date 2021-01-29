@@ -78,8 +78,20 @@ class SignUpForm(forms.ModelForm):
         user.save()  # DB에 유저 저장
 
 
-class grant_cert(UserChangeForm):
+class FindPasswordForm(forms.Form):
+    user_id = forms.CharField(label="이메일ID")
+    phone_num = forms.CharField(label="전화번호")
 
-    """ 유저 인증 할당 위한 클래스 """
+    # 필드 내용 검증하는 함수(반드시 접두사 clean_ 사용), 데이터 맞지않으면 지움
+    def clean(self):
+        # 정리된 데이터에서 키 값을 이용하여 값 찾기
+        user_id = self.cleaned_data.get("user_id")
+        phone_num = self.cleaned_data.get("phone_num")
 
-    pass
+        # 입력데이터 DB의 정보와 일치여부 검증
+        try:
+            user = models.User.objects.get(username=user_id)
+            phone_num = models.User.objects.get(phone_num=phone_num)
+
+        except models.User.DoesNotExist:
+            self.add_error("user_id", forms.ValidationError("User does not exist"))
