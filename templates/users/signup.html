@@ -2,7 +2,7 @@
     Sign Up
 {% endblock page_title %}
 
-<form method="POST" action="{% url "users:signup" %}">
+<form method="POST" action="{% url 'users:signup' %}">
     {% csrf_token %}
     {{form.as_p}}
     <button>회원가입</button>
