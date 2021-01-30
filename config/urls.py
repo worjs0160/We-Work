@@ -15,8 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.conf import settings
+from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
+from boards import views as boards_views
 
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
@@ -24,9 +26,13 @@ urlpatterns = [
     path("attendance/", include("attendance.urls", namespace="attendance")),
     path("boards/", include("boards.urls", namespace="boards")),
     path("calendar/", include("calendars.urls", namespace="calendars")),
-    path("messengers/", include("messengers.urls", namespace="messengers")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
-    path('papers/', include('papers.urls', namespace='papers')),
+    url(
+        r"^download/(?P<path>.*)$",
+        boards_views.download,
+        {"document_root": settings.MEDIA_ROOT},
+    ),
+    path("papers/", include("papers.urls", namespace="papers")),
     path("admin/", admin.site.urls),
 ]
 

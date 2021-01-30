@@ -9,16 +9,20 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Simple Sidebar - Start Bootstrap Template</title>
+  <title>WeWork</title>
+
+  
+  
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
-  <link href="{% static "bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-  <link href="{% static "tables_1231/css/bootstrap4.min.css" %}" rel="stylesheet">
+  <link href="{% static 'bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  
   <!-- Custom styles for this template -->
   <link href="{% static 'bootstrap_1229/css/simple-sidebar.css' %}" rel="stylesheet">
+  {% block link-area %}{% endblock link-area %}
 
 </head>
 
@@ -40,8 +44,8 @@
       <div class="list-group list-group-flush">
         <a href="{% url 'boards:board_list' %}" class="list-group-item list-group-item-action bg-light">공지사항</a>
         <a href="{% url 'calendars:calendar' %}" class="list-group-item list-group-item-action bg-light">캘린더</a>
-        <a href="{% url 'messengers:messenger' %}" class="list-group-item list-group-item-action bg-light">메신저</a>
         <a href="{% url 'attendance:attendance_home' %}" class="list-group-item list-group-item-action bg-light">근태관리</a>
+        <a href="#" class="list-group-item list-group-item-action bg-light">Chat</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Events</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
@@ -94,13 +98,10 @@
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
-  <script src="{% static "tables_1231/js/jquery-3.5.1.slim.min.js" %}"></script>
-  <script src="{% static "bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/jquery-3.5.1.slim.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/scripts.js" %}"></script>
-  <script src="{% static "tables_1231/js/jquery.dataTables.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/bootstrap4.min.js" %}"></script>
-  <script src="{% static "tables_1231/js/datatables-demo.js" %}"></script>
+  <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  {% block script-area %}{% endblock script-area %}
+
   {% block scripts %} {% endblock %}
   {% block calendar_div%} {% endblock %}
 

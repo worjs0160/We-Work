@@ -1,23 +1,23 @@
 {% extends 'index.html' %}
+
+
+{% block link-area %}
+    <link rel="stylesheet" type="text/css"
+            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.semanticui.min.css">
+{% endblock link-area %}
+
 {% block content %}
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid">
-            <div class="mb-4">
-            </div>
                 <div class="card mb-4">
                     <div class="card-header">
-                        <i class="fas fa-table mr-1"></i>
                         {% block boardName %}{% endblock boardName %}
                     </div>
                     <div class="card-body">
-                        <div class="table-responsive">
-                            
-                            {% block boardContent %}    
-                            {% endblock boardContent %}
-              
-                        </div>
+                        {% block boardContent %}{% endblock boardContent %}   
                     </div>
                 </div>
             </div>
@@ -25,3 +25,5 @@
     </div>
 </div>
 {% endblock content %}
+
+

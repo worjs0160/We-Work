@@ -1,8 +1,6 @@
 from django.forms import DateInput
-from bootstrap_modal_forms.forms import BSModalForm, BSModalModelForm
+from bootstrap_modal_forms.forms import BSModalModelForm
 from calendars.models import Calendar
-from django import forms
-from . import models
 
 
 class EventForm(BSModalModelForm):
@@ -30,3 +28,7 @@ class EventForm(BSModalModelForm):
         # input_formats to parse HTML5 datetime-local input to datetime field
         self.fields["start_time"].input_formats = ("%Y-%m-%dT%H:%M",)
         self.fields["end_time"].input_formats = ("%Y-%m-%dT%H:%M",)
+
+    def save(self, *args, **kwargs):
+        calendar = super().save(commit=False)
+        return calendar
