@@ -16,7 +16,7 @@
                     <td><a href="{% url 'boards:detail' board.pk %}">{{board.title|truncatechars:20}}</a></td>
                     <td>{{board.author}}</td>
                     <td>{{board.viewCnts}}</td>
-                    <td>{{board.updated}}</td>
+                    <td>{{board.created}}</td>
                 </tr>    
             {% endfor %}
         </tbody>
