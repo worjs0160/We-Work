@@ -22,4 +22,5 @@ urlpatterns = [
          name='search_outbox'),
     path('search_archive/<str:search_type>/<str:search_word>/<int:page>/', views.inbox,
          name='search_archive'),
+    path('gg/', views.gg, name='gg'),
 ]

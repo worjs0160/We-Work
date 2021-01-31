@@ -1,0 +1,247 @@
+<style>
+.tab_box ul.fixed.w_160 li a {
+    width: 160px;
+}
+.tab_box ul {
+    padding: 0px;
+    margin: 0px;
+    border-bottom: 1px solid #dbdee1;
+    list-style: none;
+}
+.tab_box ul li {
+    display: inline-block;
+    height: 42px;
+    line-height: 42px;
+    border-top: 1px solid #dbdee1;
+    border-right: 1px solid #dbdee1;
+    background: #f6f6f6;
+    text-align: center;
+}
+.tab_box ul li a {
+    padding: 0 15px;
+    color: #7e7e7e;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+}
+.tab_box ul li.active a {
+    color: #1A1A1B;
+    height: 43px;
+    position: relative;
+    font-weight: 500;
+    background: #fff;
+}
+.tab_box ul li.active {
+    height: 41px;
+    line-height: 41px;
+    border-top: 2px solid #313d47;
+}
+.tab_box ul li:first-child {
+    margin-left: 15px;
+    border-left: 1px solid #dbdee1;
+}
+.m_left0 {
+    margin-left: 0px !important;
+}
+
+/*
+* 양식 바디
+*/
+.view_title_box {
+    padding: 30px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.lwsp-container .basic_table.type_e {
+    width: 98%;
+    margin: 0 auto;
+}
+.basic_table.type_e {
+    background: #fff;
+    border-right: 1px solid #D8D9DA;
+}
+.a4_size {
+    max-width: 750px !important;
+    margin: 0 auto;
+}
+.basic_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Noto Sans KR',sans-serif;
+    table-layout: fixed;
+}
+.m_bottom15 {
+    margin-bottom: 15px !important;
+}
+.basic_table.type_e th {
+    padding: 9px 10px 8px 10px;
+    text-align: left;
+    border: 1px solid #dce0e1;
+    background: #F1F2F3;
+}
+.basic_table th:first-child {
+    min-width: 0;
+}
+.basic_table th, .basic_table td {
+    color: #1A1B1B;
+}
+.basic_table.type_e td {
+    border-top: 1px solid #D8D9DA;
+    padding-right: 15px !important;
+    border-left: 1px solid #D8D9DA;
+    height: 50px;
+    box-sizing: border-box;
+}
+.basic_table td, .basic_table.gray td {
+    border-bottom: 1px solid #D8D9DA;
+    word-break: break-all;
+    background-color: #fff;
+    padding: 12px 0 12px 15px;
+    font-size: 14px;
+    line-height: 24px;
+    color: #1A1B1B;
+}
+#content {
+    font-size: 14px;
+    min-width: 840px;
+    height: 100%;
+    /* overflow: hidden; */
+}
+.calender_box.write {
+    width: calc(50% - 120px);
+    height: 32px;
+    float: left;
+    position: relative;
+}
+.input_box:not(.popup) {
+    background: white;
+}
+.input_box:disabled {
+    color: transparent;
+}
+body, input[type="text"], select, textarea, button, span {
+    font-family: 'Noto Sans KR',sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+}
+.input_box {
+    width: 100%;
+    height: 32px;
+    line-height: 24px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #1A1B1B;
+    border: 1px solid #D8D9DA;
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR',sans-serif;
+}
+.input_box.half {
+    width: 80px;
+}
+.basic_table.type_e td {
+    border-top: 1px solid #D8D9DA;
+    padding-right: 15px !important;
+    border-left: 1px solid #D8D9DA;
+    height: 50px;
+    box-sizing: border-box;
+}
+.basic_table .in_button {
+    padding: 14px 0 14px 16px !important;
+    line-height: 24px;
+}
+.form_textarea.preview {
+    width: 100%;
+    padding: 0px 10px;
+    border: 1px solid #dce0e1;
+    resize: none;
+    outline: none;
+    vertical-align: top;
+    min-height: 100px;
+    box-sizing: border-box;
+    background: white;
+    overflow: auto;
+    word-break: normal;
+}
+.input_wrap.write {
+    width: 100%;
+    float: left;
+}
+.total_day {
+    min-width: 100px;
+    float: left;
+}
+.input_wrap {
+    width: 498px;
+    float: right;
+}
+.basic_table .in_button {
+    padding: 14px 0 14px 16px !important;
+    line-height: 24px;
+}
+
+.basic_table th, .basic_table td {
+    color: #1A1B1B;
+}
+.calender_box.write {
+    width: calc(50% - 120px);
+    height: 32px;
+    float: left;
+    position: relative;
+}
+.calender_box {
+    width: 35%;
+    height: 32px;
+    float: left;
+    position: relative;
+}
+.calender_tilde.write {
+    float: left;
+    line-height: 32px;
+}
+
+.calender_tilde {
+    float: left;
+    line-height: 32px;
+    margin: 0 2px;
+}
+.between_wrap.form {
+    background: #fff;
+    border-left: 1px solid #dddee1;
+    border-right: 1px solid #dddee1;
+}
+
+.between_wrap {
+    height: 32px;
+    line-height: 32px;
+    padding: 15px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.f_left {
+    float: left;
+}
+.btn.basic {
+    padding: 0 10px;
+    border: 1px solid #D8D9DA;
+    border-radius: 2px;
+    background: #fff;
+    vertical-align: top;
+    font-family: 'Noto Sans KR',sans-serif;
+    color: #1A1B1B;
+    font-weight: 500;
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer !important;
+    font-size: 14px;
+    outline: none;
+}
+.btn.basic span {
+    line-height: 28px;
+    font-size: 14px;
+    color: #1A1A1B;
+}
+</style>

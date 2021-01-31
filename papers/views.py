@@ -18,6 +18,15 @@ from .forms import PaperEditForm
 from .models import Attachment, Paper, Person, Support
 
 
+def gg(request):
+    """ 전자결재 테스트 """
+
+    return render(
+        request,
+        "papers/gg.html"
+    )
+
+
 @login_required
 def summary(request):
     """Summary"""
@@ -105,13 +114,13 @@ def new_paper(request):
                     notifier = Person.objects.create(order=order, user=user)
                     paper.notifiers.add(notifier)
 
-            if paper.approver.profile.alarm_paper:
-                if paper.approver.profile.alarm_list != '':
-                    paper.approver.profile.alarm_list += ','
-                alarm_text = 'pa:%d' % paper.id
-                paper.approver.profile.alarm_list += alarm_text
-                paper.approver.profile.alarm = True
-                paper.approver.profile.save()
+            # if paper.approver.profile.alarm_paper:
+            #     if paper.approver.profile.alarm_list != '':
+            #         paper.approver.profile.alarm_list += ','
+            #     alarm_text = 'pa:%d' % paper.id
+            #     paper.approver.profile.alarm_list += alarm_text
+            #     paper.approver.profile.alarm = True
+            #     paper.approver.profile.save()
 
             return redirect('papers:summary')
 
