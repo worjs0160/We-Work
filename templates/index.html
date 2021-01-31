@@ -28,6 +28,9 @@
 </head>
 
 <body>
+
+
+
   <div class="d-flex" id="wrapper">
 
     <!-- Sidebar -->
@@ -86,8 +89,9 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  
-  {% block calendar_div%} {% endblock %}
+  {% block calendar-script-body %}{% endblock%}
+
+  {% block calendar_div%}{% endblock %}
 
   {% block script-body %}{% endblock script-body %}
   <!-- Menu Toggle Script -->
@@ -97,7 +101,8 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
-
+  
+  {% block calendar-script-function%}{% endblock %}
 </body>
 
 </html>

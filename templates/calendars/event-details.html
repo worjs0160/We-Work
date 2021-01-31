@@ -19,18 +19,4 @@ Event Details
         <p>{{ event.schedule }}</p>
     </div>
 </div>
-<script type="text/javascript">
-    $(function () {
-    $("#event-delete").each(function () {
-      $(this).modalForm({
-          formURL: $(this).data('form-url')});
-        });
-    });
-    $(function () {
-    $("#event-edit").each(function () {
-      $(this).modalForm({
-          formURL: $(this).data('form-url')});
-        });
-    });
-</script>
 {% endblock %}
