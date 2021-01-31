@@ -4,7 +4,7 @@ from boards import models
 
 # 홈페이지 로딩
 def test_home(request):
-    boards = models.Board.objects.all()
+    boards = models.Board.objects.order_by("-updated")[:5]
     return render(request, "dashboard.html", {"boards": boards})
 
 
