@@ -7,6 +7,5 @@ app_name = "core"
 # as_view() 이용하여 클래스를 뷰로 변환
 urlpatterns = [
     path("home", views.test_home, name="home"),
-    path("sample", views.sample, name="sample"),
     path("", user_views.LoginView.as_view(), name="start"),
 ]

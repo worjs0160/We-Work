@@ -1,13 +1,13 @@
 from django.shortcuts import render
+from boards import models
 
 
+# 홈페이지 로딩
 def test_home(request):
-    return render(request, "dashboard.html")
+    boards = models.Board.objects.all()
+    return render(request, "dashboard.html", {"boards": boards})
 
 
-def sample(request):
-    return render(request, "sample.html")
-
-
+# 처음 로그인 페이지
 def get_start(request):
     return render(request, "start_login.html")

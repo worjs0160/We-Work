@@ -34,7 +34,7 @@
 
                         <div class="card-header">
                             <i class="fas fa-chart-pie mr-1"></i>
-                            근무비율
+                            근무유형
                         </div>
 
                         <div class="card-body">
@@ -50,7 +50,7 @@
                                 */
 
                                 var myPieChart = new Chart(ctx, {
-                                    type: 'pie',
+                                    type: 'doughnut',
                                     data: {
                                         labels: ["Blue", "Red", "Yellow", "Green"],
                                         datasets: [{
@@ -78,32 +78,32 @@
                                 var myLineChart = new Chart(ctx, {
                                   type: 'bar',
                                   data: {
-                                    labels: ["January", "February", "March", "April", "May", "June"],
+                                    labels: ["월", "화", "수", "목", "금", "토", "일"],
                                     datasets: [{
-                                      label: "Revenue",
+                                      label: "근무시간",
                                       backgroundColor: "rgba(2,117,216,1)",
                                       borderColor: "rgba(2,117,216,1)",
-                                      data: [4215, 5312, 6251, 7841, 9821, 14984],
+                                      data: [4215, 5312, 6251, 7841, 9821, 14984, 5000],
                                     }],
                                   },
                                   options: {
                                     scales: {
                                       xAxes: [{
                                         time: {
-                                          unit: 'month'
+                                          unit: 'day'
                                         },
                                         gridLines: {
                                           display: false
                                         },
                                         ticks: {
-                                          maxTicksLimit: 6
+                                          maxTicksLimit: 7
                                         }
                                       }],
                                       yAxes: [{
                                         ticks: {
                                           min: 0,
                                           max: 15000,
-                                          maxTicksLimit: 5
+                                          maxTicksLimit: 7
                                         },
                                         gridLines: {
                                           display: true
@@ -129,6 +129,7 @@
                 </div>
 
                 <div class="card-body">
+                    
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
