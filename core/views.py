@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 def test_home(request):
-    return render(request, "index.html")
+    return render(request, "dashboard.html")
 
 
 def sample(request):
