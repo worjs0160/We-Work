@@ -5,7 +5,7 @@
     
 
 {% block boardContent %}
-    <table class="ui celled table" id="dataTable" width="100%">
+    <table id="dataTable" width="100%">
         <thead>
             <tr>
                 <th>게시글 번호</th>
@@ -33,7 +33,11 @@
     </div>
 {% endblock boardContent %}
 
-{% block script-area %}
+{% block script-body %}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+<!--
+<script type="text/javascript" src="https://cdn.datatables.net/v/se/dt-1.10.23/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/ju/dt-1.10.23/datatables.min.js"></script>
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" charset="utf8"
     src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
@@ -41,6 +45,7 @@
     src="https://cdn.datatables.net/1.10.23/js/dataTables.semanticui.min.js"></script>
 <script type="text/javascript" charset="utf8"
     src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
+    -->
 <script type="text/javascript" charset="utf8" src="{% static 'tables/js/config.js' %}"></script>
 <script>
 window.onpageshow = function (event){
@@ -49,7 +54,7 @@ window.onpageshow = function (event){
     }
 }
 </script>
-{% endblock script-area %}
+{% endblock script-body %}
     
 
                         
