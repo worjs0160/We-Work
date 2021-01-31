@@ -14,6 +14,26 @@ class BoardForm(forms.ModelForm):
         super(BoardForm, self).__init__(*args, **kwargs)
         self.fields["title"].widget.attrs["placeholder"] = "제목을 입력해주세요"
         self.fields["title"].widget.attrs["style"] = "width: 50%"
+        self.fields["contents"].error_messages = {"required": "글이 너무 짧습니다. 10자 이상 입력해주세요."}
+
+    def clean_title(self):
+        title = self.cleaned_data.get('title')
+        if len(title) < 2:
+            raise forms.ValidationError("2자 이상 입력해주세요.(2자 ~ 80자 이내)")
+
+        if len(title) > 80:
+            raise forms.ValidationError("80자 이내로 입력해주세요.(2자 ~ 80자 이내)")
+            
+        return title
+
+    def clean_contents(self):
+        contents = self.cleaned_data.get('contents')
+        print(contents)
+        if not len(contents):
+            raise forms.ValidationError("글이 너무 짧습니다. 10자 이상 입력해주세요.")
+
+        return contents
+
 
     def save(self, *args, **kwargs):
         board = super().save(commit=False)
@@ -34,18 +54,3 @@ class UpdateBoardForm(forms.ModelForm):
         board = super().save(commit=False)
         return board
 
-
-class CommentForm(forms.ModelForm):
-    
-    class Meta:
-        model = models.Comment
-        fields = ["contents"]
-        widgets = {
-            "contents": forms.widgets.Textarea(attrs={
-                'rows': 2,
-                'cols': 80}),
-        }
-
-    def __init__(self, *args, **kwargs):
-        super(CommentForm, self).__init__(*args, **kwargs)
-        self.fields["contents"].widget.attrs["placeholder"] = "댓글을 입력해주세요"

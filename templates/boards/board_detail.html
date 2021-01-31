@@ -31,7 +31,7 @@
     <hr>
         <form action="{% url 'boards:comment_create' board.pk %}" method="POST">
             {% csrf_token %}
-            {{c_form.contents}}
+            <textarea name="contents" rows="2" cols="80" placeholder="댓글을 남겨주세요" required></textarea>
             <div><input type="submit" value="등록"></div>
         </form>
     <hr>
