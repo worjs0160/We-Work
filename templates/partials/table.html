@@ -1,0 +1,24 @@
+<div class="table-responsive">
+    <table class="table table-bordered" id="dataTable" width="100%">
+        <thead>
+            <tr>
+                <th>게시글 번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>조회수</th>
+                <th>작성날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for board in boards%}
+                <tr>
+                    <td>{{board.postNo}}</td>
+                    <td><a href="{% url 'boards:detail' board.pk %}">{{board.title|truncatechars:20}}</a></td>
+                    <td>{{board.author}}</td>
+                    <td>{{board.viewCnts}}</td>
+                    <td>{{board.updated}}</td>
+                </tr>    
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

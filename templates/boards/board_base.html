@@ -1,36 +1,48 @@
 {% extends 'index.html' %}
-
+{% load static %}
 
     
     
 {% block link-area %}
 <!-- 게시판 css -->
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.css"/>
- <!--
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/ju/dt-1.10.23/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/se/dt-1.10.23/datatables.min.css"/>
-    <link rel="stylesheet" type="text/css"
-            href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/dataTables.semanticui.min.css">
-    -->
+<link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
 {% endblock link-area %}
+
+
+{% block script-head %}
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+<script src="assets/demo/datatables-demo.js"></script>    
+{% endblock script-head %}
+    
     
 {% block content %}
 <div id="layoutSidenav">
     <div id="layoutSidenav_content">
-        <main>
-            <div class="container-fluid">
-                <div class="card mb-4">
-                    <div class="card-header">
-                        {% block boardName %}{% endblock boardName %}
-                    </div>
-                    <div class="card-body">
-                        {% block boardContent %}{% endblock boardContent %}   
-                    </div>
+        <div class="container-fluid mt-4">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <i class="fas fa-table mr-1"></i>
+                    {% block boardName %}{% endblock boardName %}
+                </div>
+                <div class="card-body">
+                    {% block boardContent %}{% endblock boardContent %}   
                 </div>
             </div>
-        </main>
+        </div>
     </div>
 </div>
 {% endblock content %}
 
+{% block script-body %}
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
+
+<script type="text/javascript" charset="utf8" src="{% static 'tables/js/config.js' %}"></script>
+<script>
+window.onpageshow = function (event){
+    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) { 
+        window.location.reload();
+    }
+}
+</script>
+{% endblock script-body %}
