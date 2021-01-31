@@ -11,8 +11,7 @@
 
 {% block script-head %}
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-<script src="assets/demo/datatables-demo.js"></script>    
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>   
 {% endblock script-head %}
     
     
@@ -22,7 +21,6 @@
         <div class="container-fluid mt-4">
             <div class="card mb-4">
                 <div class="card-header">
-                    <i class="fas fa-table mr-1"></i>
                     {% block boardName %}{% endblock boardName %}
                 </div>
                 <div class="card-body">
@@ -36,7 +34,6 @@
 
 {% block script-body %}
 <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.23/datatables.min.js"></script>
-
 <script type="text/javascript" charset="utf8" src="{% static 'tables/js/config.js' %}"></script>
 <script>
 window.onpageshow = function (event){

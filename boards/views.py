@@ -16,7 +16,8 @@ def readBoardList(request):
 def detailBoardView(request, pk):
 
     board = models.Board.objects.get(postNo=pk)
-    return render(request, "boards/board_detail.html", {"board": board})
+    c_form = forms.CommentForm()
+    return render(request, "boards/board_detail.html", {"board": board, "c_form": c_form})
 
 
 # Board delete
@@ -105,6 +106,7 @@ def createComment(request, pk):
 
         models.Comment.objects.create(author=author, contents=contents, board=board)
         return render(request, "boards/board_detail.html", {"board": board})
+
 
 @login_required
 def deleteComment(request, pk):

@@ -29,9 +29,9 @@
     {% endif %}
     </div>
     <hr>
-        <form action="{% url 'boards:comment_create' board.pk %}" method="POST" enctype="multipart/form-data">
+        <form action="{% url 'boards:comment_create' board.pk %}" method="POST">
             {% csrf_token %}
-            <textarea name="contents" rows="2" cols="80" placeholder="댓글을 남겨주세요"></textarea>
+            {{c_form.contents}}
             <div><input type="submit" value="등록"></div>
         </form>
     <hr>
