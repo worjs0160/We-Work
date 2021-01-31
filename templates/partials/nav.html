@@ -2,13 +2,8 @@
 <!-- URL 표기 시 장고에서 제공하는 URL name사용 -->
 <ul>
     <!-- 로그인 되어있는지 검사(Context Processor사용) -->
-    {% if user.is_authenticated %}
-        <h6>접속 유저: {{user.username}} &nbsp; 유저 이름: {{user.user_name}} &nbsp;
-        <a href="{% url 'users:logout' %}">로그아웃</a> &nbsp;
-        <a href="{% url 'users:info' user.pk %}">회원정보</a>
-        </h6>
-    {% else %}
-        <a href="{% url 'users:login' %}">로그인</a>
-        <a href="{% url 'users:signup' %}">회원가입</a>
-    {% endif %}
+    <h6>접속 유저: {{user.username}} &nbsp; 유저 이름: {{user.user_name}} &nbsp;
+    <a href="{% url 'users:logout' %}">로그아웃</a> &nbsp;
+    <a href="{% url 'users:info' user.pk %}">회원정보</a>
+    </h6>
 </ul>

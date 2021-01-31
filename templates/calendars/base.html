@@ -3,9 +3,6 @@
 
 {% block link-area %}
 <!-- 캘린더 css -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
 {% endblock link-area %}
 
@@ -22,18 +19,8 @@
 {% block content %}{% endblock %}
 
 {% block calendar_div%}
-  <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" tabindex="-1" role="dialog" id="modal">
-    <div class="modal-dialog mt-5" role="document">
-      <div class="modal-content"></div>
-    </div>
-  </div>
-{% endblock %}
+  {% include 'calendars/modal.html' %}
+{% endblock calendar_div %}
 
 {% block calendar-script-function%}
   <script type="text/javascript">
