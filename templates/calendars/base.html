@@ -7,19 +7,20 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
-
 {% endblock link-area %}
 
 
-{% block script-body %}
+{% block calendar-script-body %}
   <!-- 캘린더 -->
   <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
   <script src="{% static 'calendar/js/popper.min.js' %}"></script>
   <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
   <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endblock%}
 
-{% endblock script-body %}
+{% block content %}{% endblock %}
+
 {% block calendar_div%}
   <div class="modal fade" tabindex="-1" role="dialog" id="modal">
     <div class="modal-dialog" role="document">
@@ -34,5 +35,25 @@
   </div>
 {% endblock %}
 
-{% block content %}
+{% block calendar-script-function%}
+  <script type="text/javascript">
+    $(function () {
+      // 생성버튼 연결
+      $("#create-event").modalForm({
+          formURL: "{% url 'calendars:event_new' %}"
+        });
+    });
+    $(function () {
+    $("#event-delete").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')});
+        });
+    });
+    $(function () {
+    $("#event-edit").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')});
+        });
+    });
+  </script>
 {% endblock %}

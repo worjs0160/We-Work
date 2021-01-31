@@ -9,12 +9,4 @@
     <div style="color: rgb(24, 36, 204);">
         {{ calendar }}
     </div>
-    <script type="text/javascript">
-        $(function () {
-          // 생성버튼 연결
-          $("#create-event").modalForm({
-              formURL: "{% url 'calendars:event_new' %}"
-            });
-        });
-    </script>
 {% endblock %}
