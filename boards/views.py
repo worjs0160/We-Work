@@ -1,8 +1,5 @@
-import os
-from django.conf import settings
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponse, Http404
-from django.urls import reverse_lazy
+from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from . import forms
@@ -42,7 +39,6 @@ def createBoardView(request):
             board.author = request.user
             board.save()
             file = request.FILES.get("attachments")
-            print(file)
 
             if file:
                 models.Attachment.objects.create(file=file, board=board)
@@ -56,7 +52,8 @@ def createBoardView(request):
     # 게시글 생성 GET 메소드 처리
     else:
         form = forms.BoardForm()
-        return render(request, "boards/board_create.html", {"form": form})
+    
+    return render(request, "boards/board_create.html", {"form": form})
 
 
 @login_required
@@ -127,17 +124,3 @@ def deleteComment(request, pk):
     return render(request, "boards/board_detail.html", {"board": board})
 
 
-"""--------다운로드 함수---------"""
-
-
-@login_required
-def download(request, path):
-    file_path = os.path.join(settings.MEDIA_ROOT, path)
-    if os.path.exists(file_path):
-        with open(file_path, "rb") as fh:
-            response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")
-            response["Content-Disposition"] = "inline; filename=" + os.path.basename(
-                file_path
-            )
-            return response
-    raise Http404()
