@@ -4,52 +4,16 @@
 {% block boardName %}공지사항{% endblock boardName %}
     
 
+
 {% block boardContent %}
-    <table class="ui celled table" id="dataTable" width="100%">
-        <thead>
-            <tr>
-                <th>게시글 번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>조회수</th>
-                <th>작성날짜</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for board in boards%}
-                <tr>
-                    <td>{{board.postNo}}</td>
-                    <td><a href="{% url 'boards:detail' board.pk %}">{{board.title|truncatechars:20}}</a></td>
-                    <td>{{board.author}}</td>
-                    <td>{{board.viewCnts}}</td>
-                    <td>{{board.updated}}</td>
-                </tr>    
-            {% endfor %}
-        </tbody>
-    </table>
+    {% include 'partials/table.html' %}
 
     <div>
         <button onclick="location.href='{% url 'boards:create' %}'">글쓰기</button>
     </div>
 {% endblock boardContent %}
 
-{% block script-area %}
-<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" charset="utf8"
-    src="https://cdn.datatables.net/1.10.23/js/dataTables.semanticui.min.js"></script>
-<script type="text/javascript" charset="utf8"
-    src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.js"></script>
-<script type="text/javascript" charset="utf8" src="{% static 'tables/js/config.js' %}"></script>
-<script>
-window.onpageshow = function (event){
-    if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) { 
-        window.location.reload();
-    }
-}
-</script>
-{% endblock script-area %}
+
     
 
                         

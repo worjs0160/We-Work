@@ -10,14 +10,13 @@
   <meta name="author" content=""/>
 
   <title>WeWork</title>
-
-  
   
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
+
   <link href="{% static 'bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   
   <!-- Custom styles for this template -->
@@ -85,25 +84,21 @@
         </div>
       </nav>
 
-      <div class="container-fluid">
+      <div class="container-fluid"> 
 
         <!-- block이용하여 자식 템플릿이 부모 템플릿에 원하는 내용 출력할 공간 생성 -->
         {% block content %}{% endblock %}
 
-        {% comment %} {% include "partials/footer.html" %} {% endcomment %}
-      </div>  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
-  </div>
+      </div>  
+      
+    </div>
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  {% block script-area %}{% endblock script-area %}
+  {% block script-body %}{% endblock script-body %}
 
-  {% block scripts %} {% endblock %}
   {% block calendar_div%} {% endblock %}
 
   <!-- Menu Toggle Script -->

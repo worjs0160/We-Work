@@ -47,6 +47,7 @@ THIRD_PARTY_APPS = [
     "ckeditor_uploader",
     "bootstrap_modal_forms",
     "widget_tweaks",
+    #'django_summernote',
 ]
 
 DJANGO_APPS = [
