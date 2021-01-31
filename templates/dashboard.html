@@ -4,35 +4,44 @@
   메인 페이지
 {% endblock title %} 
 
-{% block content %}
-    <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=chrome" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>We-Work Mainpage</title>
+    {% block link-area %}
+        <!-- 대시보드 CSS -->
         <link href="css/styles_dash.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
-    </head>
+    {% endblock link-area %}
 
-    <body class="sb-nav-fixed">
+    {% block script-head %}
+        <!-- 대시보드 스크립트 -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-area-demo.js"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/datatables-demo.js"></script>
+        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous"/>
+    {% endblock script-head %}
+
+{% block content %}
+    <div class="sb-nav-fixed">
         <div class="container-fluid">
             <h1 class="mt-4">메인페이지</h1>
+
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card mb-4">
+
                         <div class="card-header">
                             <i class="fas fa-chart-pie mr-1"></i>
                             근무비율
                         </div>
+
                         <div class="card-body">
                             <canvas id="myPieChart" width="100%" height="50"></canvas>
                             <script>
                                 // 그릴 캔버스의 컨텍스트 가져오기
-                                var ctx = document.getElementById("myPieChart").getContext('2d');
+                                var ctx = document.getElementById("myPieChart");
                             
                                 /*
                                 - Chart를 생성하면서, 
@@ -41,17 +50,15 @@
                                 */
 
                                 var myPieChart = new Chart(ctx, {
-                                    type: 'pie'
+                                    type: 'pie',
                                     data: {
+                                        labels: ["Blue", "Red", "Yellow", "Green"],
                                         datasets: [{
-                                            data: [3, 4, 5]
+                                            data: [12.21, 15.58, 11.25, 8.32],
+                                            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
                                         }],
-                                        labels: ["a", "b", "c"]
-                                    };
-
-                                    options: 
-
-                                })
+                                    },
+                                });
                             </script>
                         </div>
                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
@@ -66,7 +73,48 @@
                         <div class="card-body">
                             <canvas id="myBarChart" width="100%" height="50"></canvas>
                             <script>
-
+                                // Bar Chart Example
+                                var ctx = document.getElementById("myBarChart");
+                                var myLineChart = new Chart(ctx, {
+                                  type: 'bar',
+                                  data: {
+                                    labels: ["January", "February", "March", "April", "May", "June"],
+                                    datasets: [{
+                                      label: "Revenue",
+                                      backgroundColor: "rgba(2,117,216,1)",
+                                      borderColor: "rgba(2,117,216,1)",
+                                      data: [4215, 5312, 6251, 7841, 9821, 14984],
+                                    }],
+                                  },
+                                  options: {
+                                    scales: {
+                                      xAxes: [{
+                                        time: {
+                                          unit: 'month'
+                                        },
+                                        gridLines: {
+                                          display: false
+                                        },
+                                        ticks: {
+                                          maxTicksLimit: 6
+                                        }
+                                      }],
+                                      yAxes: [{
+                                        ticks: {
+                                          min: 0,
+                                          max: 15000,
+                                          maxTicksLimit: 5
+                                        },
+                                        gridLines: {
+                                          display: true
+                                        }
+                                      }],
+                                    },
+                                    legend: {
+                                      display: false
+                                    }
+                                  }
+                                });
                             </script>
                         </div>
                         <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
@@ -126,18 +174,6 @@
                 </div>
             </div>
         </div>
-
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/datatables-demo.js"></script>
-
-    </body>
-</html>
+    </div>
 
 {% endblock content %}
