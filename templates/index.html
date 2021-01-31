@@ -74,25 +74,21 @@
       </nav>
 
       <div class="container-fluid"> 
-
         <!-- block이용하여 자식 템플릿이 부모 템플릿에 원하는 내용 출력할 공간 생성 -->
         {% block content %}{% endblock %}
-
       </div>  
-      
     </div>
   <!-- /#wrapper -->
 
   <!-- Bootstrap core JavaScript -->
   <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-  {% block script-body %}{% endblock script-body %}
-
+  
   {% block calendar_div%} {% endblock %}
 
+  {% block script-body %}{% endblock script-body %}
   <!-- Menu Toggle Script -->
   <script>
-
     $("#menu-toggle").click(function (e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
@@ -100,5 +96,4 @@
   </script>
 
 </body>
-
 </html>
