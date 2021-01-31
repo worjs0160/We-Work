@@ -18,7 +18,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 from django.urls import path, include
-from boards import views as boards_views
+from core import views as core_views
 
 urlpatterns = [
     path("", include("core.urls", namespace="core")),
@@ -30,7 +30,7 @@ urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
     url(
         r"^download/(?P<path>.*)$",
-        boards_views.download,
+        core_views.download,
         {"document_root": settings.MEDIA_ROOT},
     ),
     path("papers/", include("papers.urls", namespace="papers")),
