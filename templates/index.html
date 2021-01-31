@@ -15,9 +15,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
-  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link href="{% static 'bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   
   <!-- Custom styles for this template -->
@@ -87,9 +84,10 @@
   <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'bootstrap_1229/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
   
-  {% block calendar_div%} {% endblock %}
-
+  {% block calendar_div %}{% endblock calendar_div %}
+  
   {% block script-body %}{% endblock script-body %}
+
   <!-- Menu Toggle Script -->
   <script>
     $("#menu-toggle").click(function (e) {
@@ -99,6 +97,5 @@
   </script>
 
 </body>
-
 </html>
 
