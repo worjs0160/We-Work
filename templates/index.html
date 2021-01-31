@@ -16,7 +16,9 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
   <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'calendar/css/bootstrap.min.css' %}">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
   <link href="{% static 'bootstrap_1229/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
   
   <!-- Custom styles for this template -->
@@ -27,14 +29,6 @@
 </head>
 
 <body>
-
-  <div>
-    <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
-    <script src="{% static 'calendar/js/popper.min.js' %}"></script>
-    <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
-    <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
-  </div>
 
   <div class="d-flex" id="wrapper">
 
@@ -103,7 +97,6 @@
 
   <!-- Menu Toggle Script -->
   <script>
-
     $("#menu-toggle").click(function (e) {
       e.preventDefault();
       $("#wrapper").toggleClass("toggled");
@@ -113,3 +106,4 @@
 </body>
 
 </html>
+

@@ -37,7 +37,7 @@
     <hr>
     
     {% for comment in board.comments.all %}
-        <div>작성자:{{comment.author}} | {{comment.updated}}</div>
+        <div>작성자:{{comment.author}} | {{comment.created}}</div>
         <div>{{comment.contents}}</div>
         {% if comment.author == user %}
             <a href="{% url 'boards:comment_delete' comment.pk %}">삭제</a>
