@@ -25,7 +25,7 @@ urlpatterns = [
     path("users/", include("users.urls", namespace="users")),
     path("attendance/", include("attendance.urls", namespace="attendance")),
     path("boards/", include("boards.urls", namespace="boards")),
-    #url(r'^summernote/', include('django_summernote.urls')),
+    path('summernote/', include('django_summernote.urls')),
     path("calendar/", include("calendars.urls", namespace="calendars")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
     url(

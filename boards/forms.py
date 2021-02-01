@@ -1,5 +1,6 @@
 from django import forms
 from boards import models
+from django_summernote.widgets import SummernoteWidget
 
 
 class BoardForm(forms.ModelForm):
@@ -9,6 +10,9 @@ class BoardForm(forms.ModelForm):
     class Meta:
         model = models.Board
         fields = ["title", "contents", "attachments"]
+        widgets={
+            "contents": SummernoteWidget(), 
+        }
 
     def __init__(self, *args, **kwargs):
         super(BoardForm, self).__init__(*args, **kwargs)
