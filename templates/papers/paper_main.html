@@ -1,19 +1,18 @@
+{% extends 'index.html' %}
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-    <meta charset="UTF-8">
-    <title>결재관리</title>
-
+{% block link-area %}
     <!-- 결재관리 css  -->
     <link rel="stylesheet" type="text/css" href="{% static 'paper/DataTables/datatables.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'paper/css/popup_layer.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'paper/css/content.css' %}">
+{% endblock link-area %}
 
+{% block script-head %}
     <!-- 결재관리 스크립트 -->
-    <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'paper/DataTables/datatables.js' %}"></script>
     <script type="text/javascript" src="{% static 'paper/js/popup_layer.js' %}"></script>
 
@@ -25,9 +24,9 @@
             $('.paper_sertor_1').prepend(p_filter);
         };
     </script>
-</head>
+{% endblock script-head %}
 
-<body>
+{% block content %}
     <!-- Pop-up layer Start -->
     <!-- 
     <div style=""></div>
@@ -239,7 +238,9 @@
         </div>
     </div>
 </div>
+{% endblock content %}
 
+{% block app-script-body %}
     <script>
         var example_tbl = null
         $(document).ready( function () {
@@ -264,5 +265,5 @@
         });
     </script>
     <script type="text/javascript" src="{% static 'paper/js/content.js' %}"></script>
-</body>
-</html>
+{% endblock app-script-body %}
+

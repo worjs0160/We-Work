@@ -148,16 +148,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 AUTH_USER_MODEL = "users.User"
 
 # Summernote 설정
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = "SAMEORIGIN"
 SUMMERNOTE_CONFIG = {
-    'summernote': {
-
+    "summernote": {
         # Or, set editor language/locale forcely
-        'lang': 'ko-KR',
-        }
+        "lang": "ko-KR",
+    }
 }
-
-# SEtting for Paper
-SUMMARY_LIST_COUNT = 5
-INBOX_LIST_COUNT = 20
-APPROVE_COMMENT_MAX = 1024
