@@ -64,6 +64,7 @@ class CalendarView(generic.ListView):
 class create_event(BSModalCreateView):
     template_name = "calendars/event.html"
     form_class = EventForm
+    print("홀리쮓")
     success_message = "Sucess: Event was created"
     success_url = reverse_lazy("calendars:calendar")
 
