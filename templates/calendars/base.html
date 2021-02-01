@@ -8,17 +8,6 @@
 {% endblock link-area %}
 
 
-{% block app-script-body %}
-  <!-- 캘린더 
-  겹치는 스크립트
-  <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
-  <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
-  -->
-  
-  <!--<script src="{% static 'calendar/js/popper.min.js' %}"></script>-->
-  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
-{% endblock%}
-
 {% block content %}{% endblock %}
 
 
@@ -26,7 +15,17 @@
   {% include 'calendars/modal.html' %}
 {% endblock calendar_div %}
 
-{% block calendar-script-function%}
+
+{% block script-body %}
+  <!-- 캘린더 
+  겹치는 스크립트
+  <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
+  <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'calendar/js/popper.min.js' %}"></script>
+  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
+  -->
+  <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+  
   <script type="text/javascript">
     $(function () {
       // 생성버튼 연결
@@ -34,12 +33,14 @@
           formURL: "{% url 'calendars:event_new' %}"
         });
     });
+
     $(function () {
     $("#event-delete").each(function () {
       $(this).modalForm({
           formURL: $(this).data('form-url')});
         });
     });
+
     $(function () {
     $("#event-edit").each(function () {
       $(this).modalForm({
