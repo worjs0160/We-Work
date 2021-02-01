@@ -31,97 +31,95 @@
             <h1 class="mt-4">메인페이지</h1>
 
             <div class="row">
-                <div class="col-lg-6">
-                    <div class="card mb-4">
-
-                        <div class="card-header">
-                            <i class="fas fa-chart-pie mr-1"></i>
-                            근무유형
-                        </div>
-
-                        <div class="card-body">
-                            <canvas id="myPieChart" width="100%" height="50"></canvas>
-                            <script>
-                                // 그릴 캔버스의 컨텍스트 가져오기
-                                var ctx = document.getElementById("myPieChart");
-                            
-                                /*
-                                - Chart를 생성하면서, 
-                                - ctx를 첫번째 argument로 넘겨주고, 
-                                - 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
-                                */
-
-                                var myPieChart = new Chart(ctx, {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: ["Blue", "Red", "Yellow", "Green"],
-                                        datasets: [{
-                                            data: [12.21, 15.58, 11.25, 8.32],
-                                            backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
-                                        }],
-                                    },
-                                });
-                            </script>
-                        </div>
-                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                    </div>
-                </div>
-                <div class="col-xl-6">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <i class="fas fa-chart-bar mr-1"></i>
-                            근무시간
-                        </div>
-                        <div class="card-body">
-                            <canvas id="myBarChart" width="100%" height="50"></canvas>
-                            <script>
-                                // Bar Chart Example
-                                var ctx = document.getElementById("myBarChart");
-                                var myLineChart = new Chart(ctx, {
-                                  type: 'bar',
+              <div class="col-xl-6">
+                  <div class="card mb-4">
+                      <div class="card-header">
+                          <i class="fas fa-chart-pie mr-1"></i>
+                          근무유형
+                      </div>
+                      <div class="card-body">
+                          <canvas id="myPieChart" width="100%" height="50"></canvas>
+                          <script>
+                              // 그릴 캔버스의 컨텍스트 가져오기
+                              var ctx = document.getElementById("myPieChart");
+                          
+                              /*
+                              - Chart를 생성하면서, 
+                              - ctx를 첫번째 argument로 넘겨주고, 
+                              - 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
+                              */
+                              var myPieChart = new Chart(ctx, {
+                                  type: 'doughnut',
                                   data: {
-                                    labels: ["월", "화", "수", "목", "금", "토", "일"],
-                                    datasets: [{
-                                      label: "근무시간",
-                                      backgroundColor: "rgba(2,117,216,1)",
-                                      borderColor: "rgba(2,117,216,1)",
-                                      data: [4215, 5312, 6251, 7841, 9821, 14004, 5000],
+                                      labels: ["Blue", "Red", "Yellow", "Green"],
+                                      datasets: [{
+                                          data: [12.21, 15.58, 11.25, 8.32],
+                                          backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+                                      }],
+                                  },
+                              });
+                          </script>
+                      </div>
+                      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                  </div>
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="card mb-4">
+                      <div class="card-header">
+                          <i class="fas fa-chart-bar mr-1"></i>
+                          근무시간
+                      </div>
+                      <div class="card-body">
+                          <canvas id="myBarChart" width="100%" height="50"></canvas>
+                          <script>
+                              // Bar Chart Example
+                              var ctx = document.getElementById("myBarChart");
+                              var myLineChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                  labels: ["월", "화", "수", "목", "금", "토", "일"],
+                                  datasets: [{
+                                    label: "근무시간",
+                                    backgroundColor: "rgba(2,117,216,1)",
+                                    borderColor: "rgba(2,117,216,1)",
+                                    data: [5, 14, 7, 6, 4, 24, 20],
+                                  }],
+                                },
+                                options: {
+                                  scales: {
+                                    xAxes: [{
+                                      time: {
+                                        unit: 'day'
+                                      },
+                                      gridLines: {
+                                        display: false
+                                      },
+                                      ticks: {
+                                        maxTicksLimit: 7
+                                      }
+                                    }],
+                                    yAxes: [{
+                                      ticks: {
+                                        min: 0,
+                                        max: 24,
+                                        maxTicksLimit: 7
+                                      },
+                                      gridLines: {
+                                        display: true
+                                      }
                                     }],
                                   },
-                                  options: {
-                                    scales: {
-                                      xAxes: [{
-                                        time: {
-                                          unit: 'day'
-                                        },
-                                        gridLines: {
-                                          display: false
-                                        },
-                                        ticks: {
-                                          maxTicksLimit: 7
-                                        }
-                                      }],
-                                      yAxes: [{
-                                        ticks: {
-                                          min: 0,
-                                          max: 15000,
-                                          maxTicksLimit: 7
-                                        },
-                                        gridLines: {
-                                          display: true
-                                        }
-                                      }],
-                                    },
-                                    legend: {
-                                      display: false
-                                    }
+                                  legend: {
+                                    display: false
                                   }
-                                });
-                            </script>
-                        </div>
-                        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
-                    </div>
-                </div>
+                                }
+                              });
+                          </script>
+                      </div>
+                      <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+                  </div>
+              </div>
             </div>
 
             <div class="card mb-4">

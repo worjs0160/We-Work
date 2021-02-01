@@ -1,17 +1,5 @@
 {% extends 'calendars/base.html' %}
 
-{% block script-body %}
-  <script type="text/javascript">
-      $(function () {
-        // 생성버튼 연결
-        $("#create-event").modalForm({
-            formURL: "{% url 'calendars:event_new' %}"
-          });
-      });
-  </script>
-{% endblock script-body %}
-
-
 {% block content %}
     <div class="clearfix">
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %}?{{ next_month }} "> 다 음 >> </a>

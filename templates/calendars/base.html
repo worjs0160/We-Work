@@ -8,10 +8,12 @@
 
 
 {% block calendar-script-body %}
-  <!-- 캘린더 -->
+  <!-- 캘린더 
+  겹치는 스크립트
   <script src="{% static 'calendar/js/jquery-3.2.1.min.js' %}"></script>
-  <script src="{% static 'calendar/js/popper.min.js' %}"></script>
   <script src="{% static 'calendar/js/bootstrap.min.js' %}"></script>
+  -->
+  <script src="{% static 'calendar/js/popper.min.js' %}"></script>
   <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.js' %}"></script>
   <script src="{% static 'calendar/js/jquery.bootstrap.modal.forms.min.js' %}"></script>
 {% endblock%}
