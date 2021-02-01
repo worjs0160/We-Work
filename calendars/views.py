@@ -11,7 +11,7 @@ from bootstrap_modal_forms.generic import (
     BSModalDeleteView,
 )
 from django.contrib.auth import get_user_model
-from .models import Calendar
+from .models import Calendar, File
 from .utils import Calendar_u
 from .forms import EventForm
 
@@ -66,6 +66,25 @@ class create_event(BSModalCreateView):
     form_class = EventForm
     success_message = "Sucess: Event was created"
     success_url = reverse_lazy("calendars:calendar")
+    
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            calendar= form.save()
+            calendar.user = request.user
+            calendar.save()
+            
+            file = request.FILES.get("attached_file")
+
+            if file:
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                File.objects.create(calendar=calendar)
+
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+    
 
 
 class EventEdit(BSModalUpdateView):
