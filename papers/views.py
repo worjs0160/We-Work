@@ -18,31 +18,42 @@ from .forms import PaperEditForm
 from .models import Attachment, Paper, Person, Support
 
 
+def paper_main(request):
+    """ 전자결재 테스트 """
+    return render(request, "papers/paper_main.html")
+
+
 @login_required
 def summary(request):
     """Summary"""
-    ids = [paper.id for paper in Paper.objects.filter(completed=False).filter(
-        cc__user=request.user) if paper.cc.last().user == request.user]
-    mypapers = Paper.objects.filter(id__in=ids).order_by(
-        '-updated_at')[:settings.SUMMARY_LIST_COUNT]
+    ids = [
+        paper.id
+        for paper in Paper.objects.filter(completed=False).filter(cc__user=request.user)
+        if paper.cc.last().user == request.user
+    ]
+    mypapers = Paper.objects.filter(id__in=ids).order_by("-updated_at")[
+        : settings.SUMMARY_LIST_COUNT
+    ]
 
-    proposals = Paper.objects.filter(user=request.user).order_by(
-        '-updated_at')[:settings.SUMMARY_LIST_COUNT]
+    proposals = Paper.objects.filter(user=request.user).order_by("-updated_at")[
+        : settings.SUMMARY_LIST_COUNT
+    ]
 
     if request.user.is_staff:
         q = Q()
     else:
         q = Q(completed=True)
-    papers = Paper.objects.filter(q).order_by(
-        '-updated_at')[:settings.SUMMARY_LIST_COUNT]
+    papers = Paper.objects.filter(q).order_by("-updated_at")[
+        : settings.SUMMARY_LIST_COUNT
+    ]
     return render(
         request,
         "papers/summary.html",
         {
-            'mypapers': mypapers,
-            'proposals': proposals,
-            'papers': papers,
-        }
+            "mypapers": mypapers,
+            "proposals": proposals,
+            "papers": papers,
+        },
     )
 
 
@@ -61,8 +72,8 @@ def show_paper(request, id):
         request,
         "papers/show_paper.html",
         {
-            'paper': paper,
-        }
+            "paper": paper,
+        },
     )
 
 
@@ -76,10 +87,11 @@ def new_paper(request):
             paper.user = request.user
             paper.save()
 
-            files = request.FILES.getlist('files')
+            files = request.FILES.getlist("files")
             for f in files:
                 attachment = Attachment.objects.create(
-                    file=f, content_type=f.content_type)
+                    file=f, content_type=f.content_type
+                )
                 paper.files.add(attachment)
 
             order = 1
@@ -89,31 +101,31 @@ def new_paper(request):
             approver = Person.objects.create(order=order, user=paper.approver)
             paper.cc.add(approver)
 
-            if editform.cleaned_data['support_names'] != '':
-                names = editform.cleaned_data['support_names'].split(',')
+            if editform.cleaned_data["support_names"] != "":
+                names = editform.cleaned_data["support_names"].split(",")
                 for name in names:
                     user = User.objects.filter(username__iexact=name).get()
                     order += 1
                     support = Support.objects.create(order=order, user=user)
                     paper.supporters.add(support)
 
-            if editform.cleaned_data['notify_names'] != '':
-                names = editform.cleaned_data['notify_names'].split(',')
+            if editform.cleaned_data["notify_names"] != "":
+                names = editform.cleaned_data["notify_names"].split(",")
                 for name in names:
                     user = User.objects.filter(username__iexact=name).get()
                     order += 1
                     notifier = Person.objects.create(order=order, user=user)
                     paper.notifiers.add(notifier)
 
-            if paper.approver.profile.alarm_paper:
-                if paper.approver.profile.alarm_list != '':
-                    paper.approver.profile.alarm_list += ','
-                alarm_text = 'pa:%d' % paper.id
-                paper.approver.profile.alarm_list += alarm_text
-                paper.approver.profile.alarm = True
-                paper.approver.profile.save()
+            # if paper.approver.profile.alarm_paper:
+            #     if paper.approver.profile.alarm_list != '':
+            #         paper.approver.profile.alarm_list += ','
+            #     alarm_text = 'pa:%d' % paper.id
+            #     paper.approver.profile.alarm_list += alarm_text
+            #     paper.approver.profile.alarm = True
+            #     paper.approver.profile.save()
 
-            return redirect('papers:summary')
+            return redirect("papers:summary")
 
     elif request.method == "GET":
         editform = PaperEditForm()
@@ -122,13 +134,13 @@ def new_paper(request):
         request,
         "papers/edit_paper.html",
         {
-            'form': editform,
-        }
+            "form": editform,
+        },
     )
 
 
 @login_required
-def inbox(request, search_type='', search_word='', page=0, box=''):
+def inbox(request, search_type="", search_word="", page=0, box=""):
     """Inbox"""
     if int(page) < 1:
         page = 1
@@ -137,14 +149,13 @@ def inbox(request, search_type='', search_word='', page=0, box=''):
     current_page = int(page) - 1
     start_at = current_page * list_count
     end_at = start_at + list_count
-    if box == 'inbox':
-        sq = (~Q(user=request.user) & Q(cc__user=request.user))
-    elif box == 'inbox_nc':
-        sq = (~Q(user=request.user) & Q(cc__user=request.user) & Q(
-            completed=False))
-    elif box == 'outbox':
+    if box == "inbox":
+        sq = ~Q(user=request.user) & Q(cc__user=request.user)
+    elif box == "inbox_nc":
+        sq = ~Q(user=request.user) & Q(cc__user=request.user) & Q(completed=False)
+    elif box == "outbox":
         sq = Q(user=request.user)
-    elif box == 'archive':
+    elif box == "archive":
         if request.user.is_staff:
             sq = Q()
         else:
@@ -152,29 +163,25 @@ def inbox(request, search_type='', search_word='', page=0, box=''):
     else:
         return redirect(reverse("core:home"))
 
-    if search_type == 'title':
+    if search_type == "title":
         q = sq & Q(title__icontains=search_word)
-    elif search_type == 'subjectcontent':
+    elif search_type == "subjectcontent":
+        q = sq & (Q(title__icontains=search_word) | Q(content__icontains=search_word))
+    elif search_type == "proposer":
         q = sq & (
-            Q(title__icontains=search_word) |
-            Q(content__icontains=search_word)
+            Q(user__username__icontains=search_word)
+            | Q(user__last_name__icontains=search_word)
         )
-    elif search_type == 'proposer':
+    elif search_type == "approver":
         q = sq & (
-            Q(user__username__icontains=search_word) |
-            Q(user__last_name__icontains=search_word)
-        )
-    elif search_type == 'approver':
-        q = sq & (
-            Q(approver__username__icontains=search_word) |
-            Q(approver__last_name__icontains=search_word)
+            Q(approver__username__icontains=search_word)
+            | Q(approver__last_name__icontains=search_word)
         )
     else:
         q = sq
 
     total = Paper.objects.filter(q).distinct().count()
-    lists = Paper.objects.filter(q).distinct().order_by(
-        '-updated_at')[start_at:end_at]
+    lists = Paper.objects.filter(q).distinct().order_by("-updated_at")[start_at:end_at]
 
     index_total = int(ceil(float(total) / list_count))
     index_begin = int(current_page / 10) * 10 + 1
@@ -189,18 +196,18 @@ def inbox(request, search_type='', search_word='', page=0, box=''):
         request,
         "papers/show_inbox.html",
         {
-            'lists': lists,
-            'total': total,
-            'page': current_page + 1,
-            'index_begin': index_begin,
-            'index_end': index_end + 1,
-            'mindex_begin': mindex_begin,
-            'mindex_end': mindex_end + 1,
-            'index_total': index_total,
-            'search_type': search_type,
-            'search_word': search_word,
-            'box': box,
-        }
+            "lists": lists,
+            "total": total,
+            "page": current_page + 1,
+            "index_begin": index_begin,
+            "index_end": index_end + 1,
+            "mindex_begin": mindex_begin,
+            "mindex_end": mindex_end + 1,
+            "index_total": index_total,
+            "search_type": search_type,
+            "search_word": search_word,
+            "box": box,
+        },
     )
 
 
@@ -208,18 +215,18 @@ def inbox(request, search_type='', search_word='', page=0, box=''):
 def send_email_with_paper(request, id):
     """Send email for completed papers"""
     paper = get_object_or_404(Paper, pk=id)
-    if paper.status == '5completed' or paper.status == '3rejected':
+    if paper.status == "5completed" or paper.status == "3rejected":
         id_email = paper.user.email
         subject = paper.title
         body = render_to_string(
-            'papers/paper_file.html',
-            {
-                'request': request,
-                'paper': paper
-            }
+            "papers/paper_file.html", {"request": request, "paper": paper}
         )
 
         send_mail(
-            subject, body, settings.EMAIL_HOST_USER, [id_email],
-            html_message=body, fail_silently=False
+            subject,
+            body,
+            settings.EMAIL_HOST_USER,
+            [id_email],
+            html_message=body,
+            fail_silently=False,
         )

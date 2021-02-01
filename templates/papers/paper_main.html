@@ -1,0 +1,268 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <title>결재관리</title>
+
+    <!-- 결재관리 css  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'paper/DataTables/datatables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'paper/css/popup_layer.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'paper/css/content.css' %}">
+
+    <!-- 결재관리 스크립트 -->
+    <script src="{% static 'bootstrap_1229/vendor/jquery/jquery.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'paper/DataTables/datatables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'paper/js/popup_layer.js' %}"></script>
+
+    <script>
+        function paper_filter(){
+            var p_filter = '<div id="table_id_filter" class="dataTables_filter" style="width:100%;height:80px;"><input style="width:100%;padding:10px;" id="custom_filter" type="search" class="" placeholder="양식명을 검색해주세요." aria-controls="table_id"></div>';
+            //console.log(p_filter);
+            $('#table_id_filter').remove();
+            $('.paper_sertor_1').prepend(p_filter);
+        };
+    </script>
+</head>
+
+<body>
+    <!-- Pop-up layer Start -->
+    <!-- 
+    <div style=""></div>
+    <a href="#layer1" class="btn-example">일반 팝업레이어</a>
+
+    <div id="layer1" class="pop-layer">
+        <div class="pop-container">
+            <div class="pop-conts"> -->
+
+
+                <!--content //-->
+
+
+                <!-- 
+                <p class="ctxt mb20">Thank you.<br>
+                    Your registration was submitted successfully.<br>
+                    Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
+                    Hope to see you soon!
+                </p>
+
+                <div class="btn-r">
+                    <a href="#" class="btn-layerClose">Close</a>
+                </div> 
+                -->
+
+                <!--// content-->
+            <!-- 
+            </div>
+        </div>
+    </div> 
+    -->
+
+
+    <!-- 
+    <br/><br/>
+    <a href="#layer2" class="btn-example">딤처리 팝업레이어 1</a>
+    <div class="dim-layer">
+        <div class="dimBg"></div>
+        <div id="layer2" class="pop-layer">
+            <div class="pop-container">
+                <div class="pop-conts"> -->
+                    <!--content //-->
+                    <!-- <p class="ctxt mb20">Thank you.<br>
+                        Your registration was submitted successfully.<br>
+                        Selected invitees will be notified by e-mail on JANUARY 24th.<br><br>
+                        Hope to see you soon!
+                    </p>
+
+                    <div class="btn-r">
+                        <a href="#" class="btn-layerClose">Close</a>
+                    </div> -->
+                    <!--// content-->
+                <!-- </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Pop-up layer End -->
+
+    <div class="paper_main">
+        <div class="paper_sertor_1" style="width: 45%; height: 600px; float:left;">
+            <div class="paper_container" style="overflow-y: scroll;height: 600px;">
+                <div class="paper_scroll" style="overflow:hidden;">
+                    <table id="table_id" class="display" style="width: 100%">
+                    <thead>
+                        <tr>
+                            <th style="display:none">Column 1</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody style="cursor: pointer;">
+                        <tr class="table_item">
+                            <td>기안서</td>
+                        </tr>
+                        <tr class="table_item">
+                            <td>지출결의서</td>
+                        </tr>
+                        <tr class="table_item">
+                            <td>결과보고서</td>
+                        </tr>
+                        <tr class="table_item">
+                            <td>회의보고서</td>
+                        </tr>
+                        <tr class="table_item">
+                            <td>주간업무보고</td>
+                        </tr>
+                        <tr class="table_item">
+                            <td>업무보고서</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="paper_sertor_2" style="width: 55%; height: 600px; float:left;">
+        <div class="tab_box m_top0">
+            <ul class="fixed w_160">
+                <li class="active m_left0"><a href="javascript:get_tab_form_list('all')" title="양식">양식</a></li><li><a href="javascript:get_tab_form_list('my', null, 42);" title="내 문서">내 문서</a></li><li><a href="javascript:get_tab_form_list('dept')" title="부서 문서">부서 문서</a></li>
+            </ul>
+        </div>
+
+        <!-- 신규작성 -->
+        <div class="between_wrap form">
+            <div class="f_left" id="btn_write_all_box" style="visibility: visible;">
+                <button class="btn basic" id="btn_write_all" data-form-id=""><span>신규 작성</span></button>
+            </div>
+        </div>
+
+        <!-- 양식미리보기 -->
+        <div style="box-sizing: border-box; height: 100%;">
+            <div class="form_view_box p_none lwsp-host" id="form_all_list_scroll" data-outer-height="200" style="height: 100%;"><div class="lwsp-viewport" style="padding-right: 6px; height: 100%; overflow: hidden; overflow-y: scroll;"><div class="lwsp-container" style="overflow: hidden;">
+                <div id="empty_box" class="notData" style="display: none;">
+                    <i class="blank_icon eas"></i>
+                    <span>관련 문서가 없습니다.</span>
+                </div>
+                <div id="form_preview"><div class="fx_container document_view_bg p_none">
+        
+        <!-- s: document_view -->
+        <!-- 전자결제 양식 작성 -->
+        <div class="view_box border_none fx_item fx_sec1" id="view_left" data-outer-height="30" style="height:auto;">
+                <div>선택된 양식이 없습니다.</div>
+        </div>
+        <!-- e: document_view -->
+        <!-- e: document_option_view -->
+    </div>
+    
+    <form name="dummy_form"></form>
+    
+    <!-- 
+    <script>
+    var d = new Date();
+    $(function(){
+        setTimeout(function () {
+            if($('#do_editor').length > 0) {
+                if($(window).height() < 900) {
+                    TrexConfig.get('canvas').initHeight = 500;
+                }else{
+                    TrexConfig.get('canvas').initHeight = $(window).height() - ($('#do_editor').position().top + 290);
+                }
+                $('#do_editor').keditor({
+                    eas: true,
+                    eas_preview: true, //에디터 비활성화
+                    defaultFont: 'dotum',
+                    defaultFontSize: '10'
+                });
+            }
+        }, 0);
+    
+        // list row change , jquery selectbox
+        $(".select_box").select2({
+            theme: 'lw-classic',
+            width: '100%'
+        }).on('change', function () {
+            var val = $(this).val();
+    
+            // window.pub.formExtendsSubmitter("doc_search_form", "total_search_form", base_url);
+        });
+    
+        $.each($("input[data-plugin='datepicker']"), function(){
+            var $picker_input = $(this),
+                date_format = "yy.mm.dd",
+                custom_format = $picker_input.data('format'),
+                is_disabled = ($picker_input.data('disabled') == "disabled") ? true : false,
+                date = $picker_input.data('date'),
+                picker_skin = "skin_calendar";
+                picker_skin_num = $picker_input.data('skin');
+    
+            if (picker_skin_num) {
+                picker_skin = picker_skin + "1" + picker_skin_num;
+            }
+    
+            if (custom_format !== undefined){
+                date_format = custom_format;
+            }
+    
+            $picker_input.datepicker({
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: date_format,
+                beforeShow:function(input, inst) {
+                    $(input).css({
+                        "position": "relative",
+                        "z-index": 99
+                    });
+    
+                    $('#ui-datepicker-div').addClass(picker_skin);
+                },
+                showOn: "both",
+                buttonText: $("<i ></i>", {
+                    'class' : "mdi mdi-calendar-month-outline mdi-20 mdi-500",
+                    'css' : {
+                        "position": "relative",
+                        'z-index' : 99,
+                    }
+                }),
+                disabled: is_disabled,
+            });
+        });
+    });
+    </script> 
+    -->
+    </div>
+    </div>
+    </div>
+    <div class="lwsp-scrollbar" style="position: absolute; top: 0px; right: 0px; overflow: hidden; display: none;">
+        <div class="lwsp-thumb" style="position: absolute; left: 0px; width: 100%;"></div>
+    </div>
+</div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        var example_tbl = null
+        $(document).ready( function () {
+            example_tbl = $('#table_id').DataTable({
+                // 표시 건수기능 숨기기
+                lengthChange: false,
+                // 검색 기능 숨기기
+                searching: true,
+                // 정렬 기능 숨기기
+                ordering: true,
+                // 정보 표시 숨기기
+                info: false,
+                // 페이징 기능 숨기기
+                paging: false
+            });
+            
+            paper_filter();
+            
+            $('#custom_filter').keyup(function(){
+                example_tbl.search($(this).val()).draw();
+            });
+        });
+    </script>
+    <script type="text/javascript" src="{% static 'paper/js/content.js' %}"></script>
+</body>
+</html>

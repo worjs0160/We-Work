@@ -8,9 +8,9 @@
 {% block content %}
 
 <div class="blog_header">
-    {% trans 'Paper' %}
+    {% trans '결제' %}
     <span>
-        {% trans '+ New paper' %}
+        {% trans '+ 새 결제' %}
     </span>
 </div>
 
@@ -26,39 +26,41 @@
         {{ form.title }}
     </div>
     <div class="input_paper">
-        <input type="text" id="line_name" placeholder="{% trans 'Enter name to search' %}" onkeypress="onKeyPress(event)">
-        <input type="button" value="{% trans 'Search' %}" onClick="javascript:search_person()">
+        <input type="text" id="line_name" placeholder="{% trans '이메일을 검색하세요' %}" onkeypress="onKeyPress(event)">
+        <input type="button" value="{% trans '검색' %}" >
     </div>
     <div class="line_type">
         <input id="approver_button" type="radio" value="approver" name="line_type" checked>
-        <label for "approver">{% trans 'Approver' %}</label>
+        <label for "approver">{% trans '승인자' %}</label>
         <input id="supporter_button" type="radio" value="supporter" name="line_type">
-        <label for "supporter">{% trans 'Supporter' %}</label>
+        <label for "supporter">{% trans '지지자' %}</label>
         <input type="radio" value="notifier" name="line_type">
-        <label for "notifier">{% trans 'Notifier' %}</label>
+        <label for "notifier">{% trans '알림' %}</label>
     </div>
     <div class="line_names">
         <ul>
             <li class="proposer">
-                <span>{% trans 'Proposal' %}</span>
+                <span>{% trans '신청' %}</span>
                 {{ request.user }} / {{ request.user.email }}
             </li>
         </ul>
     </div>
-    <div class="hidden">
+    <!-- <div class="hidden"> -->
+    <div class=''>
         <input type="text" name="approver" id="id_approver">
         {{ form.support_names }}
         {{ form.notify_names }}
     </div>
     <div class="input_content">
+        {{ form.media }}
         {{ form.content }}
     </div>
     <div class="input_files">
         {{ form.files }}
     </div>
     <div class="input_submit">
-        <input type="submit" value="{% trans 'submit' %}">
-        <input type="button" value="{% trans 'cancel' %}" onClick="javascript:history.back(1);">
+        <input type="submit" value="{% trans '전송' %}">
+        <input type="button" value="{% trans '취소' %}" onClick="javascript:history.back(1);">
     </div>
 </form>
 
