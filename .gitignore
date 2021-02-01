@@ -142,3 +142,6 @@ cython_debug/
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+
+#미디어 폴더 무시
+media/
