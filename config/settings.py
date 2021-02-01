@@ -43,11 +43,9 @@ CUSTOM_APPS = [
 
 THIRD_PARTY_APPS = [
     "django_seed",
-    "ckeditor",
-    "ckeditor_uploader",
     "bootstrap_modal_forms",
     "widget_tweaks",
-    #'django_summernote',
+    "django_summernote",
 ]
 
 DJANGO_APPS = [
@@ -149,7 +147,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 AUTH_USER_MODEL = "users.User"
 
-CKEDITOR_UPLOAD_PATH = "uploads/"
+# Summernote 설정
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+SUMMERNOTE_CONFIG = {
+    'summernote': {
+
+        # Or, set editor language/locale forcely
+        'lang': 'ko-KR',
+        }
+}
 
 # SEtting for Paper
 SUMMARY_LIST_COUNT = 5
