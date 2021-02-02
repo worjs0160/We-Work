@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 from django.utils.safestring import mark_safe
@@ -67,23 +68,21 @@ class create_event(BSModalCreateView):
     success_message = "Sucess: Event was created"
     success_url = reverse_lazy("calendars:calendar")
     
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        if not self.request.is_ajax():
             calendar= form.save()
-            calendar.user = request.user
+            calendar.user = self.request.user
             calendar.save()
             
-            file = request.FILES.get("attached_file")
+            file = self.request.FILES.get("attached_file")
 
             if file:
                 File.objects.create(file=file, calendar=calendar)
             else:
                 File.objects.create(calendar=calendar)
 
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar"))
     
 
 
