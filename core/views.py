@@ -1,22 +1,21 @@
-
 import os
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, Http404
-from boards import models
+from boards.models import Board as board_models
+from attendance.models import Attendance as attendance_models
 
 
 # 홈페이지 로딩
-def test_home(request):
-    boards = models.Board.objects.order_by("-updated")[:5]
+def homepage(request):
+    boards = board_models.objects.order_by("-updated")[:5]
     return render(request, "dashboard.html", {"boards": boards})
 
 
 # 처음 로그인 페이지
 def get_start(request):
     return render(request, "start_login.html")
-
 
 
 # 다운로드
