@@ -8,14 +8,15 @@ from boards import models
 
 
 # 홈페이지 로딩
-def test_home(request):
+@login_required
+def home(request):
     boards = models.Board.objects.order_by("-updated")[:5]
     return render(request, "dashboard.html", {"boards": boards})
 
 
 # 처음 로그인 페이지
-def get_start(request):
-    return render(request, "start_login.html")
+def login(request):
+    return render(request, "login.html")
 
 
 

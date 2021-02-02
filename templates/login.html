@@ -13,7 +13,7 @@
                 Log In
             {% endblock page_title %}
 
-            <form method="POST" action="{% url 'core:start' %}">
+            <form method="POST" action="{% url 'core:login' %}">
                 {% csrf_token %}
                 {{form.as_p}}
                 <button>로그인</button>
