@@ -14,7 +14,11 @@
         <div class="card-header border">    
             <div>첨부파일</div>
             <hr>
-            <a href="{{ board.attachments.get.file.url }}" download="{{board.attachments.get.file.adminupload.url}}"> {{board.attachments.get.file.name}}</a> 
+            <ul>
+                <li>
+                    <a href="{{ board.attachments.get.file.url }}" download="{{board.attachments.get.file.adminupload.url}}"> {{board.attachments.get.filename}}</a> 
+                </li>
+            </ul>
         </div>
     {% endif %}
         
