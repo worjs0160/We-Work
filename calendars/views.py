@@ -70,13 +70,12 @@ class create_event(BSModalCreateView):
     
     def form_valid(self, form):
         """If the form is valid, redirect to the supplied URL."""
-        if not self.request.is_ajax():
+        if self.request.is_ajax():
             calendar= form.save()
             calendar.user = self.request.user
             calendar.save()
-            
+                
             file = self.request.FILES.get("attached_file")
-
             if file:
                 File.objects.create(file=file, calendar=calendar)
             else:
@@ -84,7 +83,6 @@ class create_event(BSModalCreateView):
 
         return HttpResponseRedirect(reverse_lazy("calendars:calendar"))
     
-
 
 class EventEdit(BSModalUpdateView):
     model = Calendar
