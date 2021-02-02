@@ -1,6 +1,10 @@
 from django.contrib import admin
 from . import models
 
+class FileInline(admin.TabularInline):
+
+    model = models.File
+
 
 class FileInline(admin.TabularInline):
 

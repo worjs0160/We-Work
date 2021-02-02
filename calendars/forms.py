@@ -2,7 +2,6 @@ from django.forms import DateInput, FileField
 from bootstrap_modal_forms.forms import BSModalModelForm
 from calendars.models import Calendar
 
-
 class EventForm(BSModalModelForm):
 
     attached_file = FileField(required=False)
@@ -32,8 +31,4 @@ class EventForm(BSModalModelForm):
         self.fields["start_time"].input_formats = ("%Y-%m-%dT%H:%M",)
         self.fields["end_time"].input_formats = ("%Y-%m-%dT%H:%M",)
 
-    """
-    def save(self, *args, **kwargs):
-        calendar = super().save(commit=False)
-        return calendar
-    """
+    
