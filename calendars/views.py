@@ -1,4 +1,5 @@
 from datetime import datetime, date
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 from django.utils.safestring import mark_safe
@@ -11,7 +12,7 @@ from bootstrap_modal_forms.generic import (
     BSModalDeleteView,
 )
 from django.contrib.auth import get_user_model
-from .models import Calendar
+from .models import Calendar, File
 from .utils import Calendar_u
 from .forms import EventForm
 
@@ -66,6 +67,23 @@ class create_event(BSModalCreateView):
     form_class = EventForm
     success_message = "Sucess: Event was created"
     success_url = reverse_lazy("calendars:calendar")
+    
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        if not self.request.is_ajax():
+            calendar= form.save()
+            calendar.user = self.request.user
+            calendar.save()
+            
+            file = self.request.FILES.get("attached_file")
+
+            if file:
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                File.objects.create(calendar=calendar)
+
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar"))
+    
 
 
 class EventEdit(BSModalUpdateView):
