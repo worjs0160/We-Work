@@ -12,7 +12,7 @@ from . import forms, models
 # 장고 Form View 이용하여 로그인, 로그아웃 만들기
 class LoginView(FormView):
 
-    template_name = "start_login.html"
+    template_name = "login.html"
     form_class = forms.LoginForm
     success_url = reverse_lazy("core:home")
 
@@ -32,7 +32,7 @@ class LoginView(FormView):
 # 로그아웃 FBV
 def log_out(request):
     logout(request)
-    return redirect(reverse("core:start"))
+    return redirect(reverse("core:login"))
 
 
 class SignUpView(FormView):
