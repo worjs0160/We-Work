@@ -17,6 +17,12 @@ Event Details
         <p>일 시: <span style="color: gray;">{{ event.start_time }}</span> ~ <span style="color: gray;">{{ event.end_time}}</span></p>
         <hr>
         <p>{{ event.schedule }}</p>
+        <br>
+        <hr>
+        {% if event.attached_file.get.file %} 
+                <div>첨부파일</div>
+                <a href="{{ event.attached_file.get.file.url }}" download="{{event.attached_file.get.file.adminupload.url}}"> {{event.attached_file.get.file.name}}</a> 
+        {% endif %}
     </div>
 </div>
 {% endblock %}
