@@ -42,6 +42,7 @@ class SignUpForm(forms.ModelForm):
             "phone_num",
             "user_addr",
             "post_num",
+            "avatar",
         )
 
     def clean_re_user_pw(self):
