@@ -67,23 +67,45 @@ class create_event(BSModalCreateView):
     form_class = EventForm
     success_message = "Sucess: Event was created"
     success_url = reverse_lazy("calendars:calendar")
-    
+
+    """
     def form_valid(self, form):
-        """If the form is valid, redirect to the supplied URL."""
+
         if not self.request.is_ajax():
-            calendar= form.save()
+            calendar = form.save()
             calendar.user = self.request.user
             calendar.save()
-            
+
             file = self.request.FILES.get("attached_file")
+
+            if file:
+                print("파일존재")
+                print(file)
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                print("파일없음")
+                File.objects.create(calendar=calendar)
+        """
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            calendar = form.save()
+            calendar.user = request.user
+            calendar.save()
+
+            file = request.FILES.get("attached_file")
 
             if file:
                 File.objects.create(file=file, calendar=calendar)
             else:
                 File.objects.create(calendar=calendar)
 
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
         return HttpResponseRedirect(reverse_lazy("calendars:calendar"))
-    
 
 
 class EventEdit(BSModalUpdateView):
