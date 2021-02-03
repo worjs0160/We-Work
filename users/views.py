@@ -1,4 +1,5 @@
-from django.views.generic import FormView, DetailView, View
+from django.views import View
+from django.views.generic import FormView, DetailView
 from django.views.generic.edit import UpdateView
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
@@ -39,7 +40,7 @@ class SignUpView(FormView):
 
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("core:login")
+    success_url = reverse_lazy("core:start")
 
     # form의 데이터 검증 후 맞으면 DB에 저장 실행
     def form_valid(self, form):
@@ -73,7 +74,6 @@ class UpdateProfile(UpdateView):
     success_url = reverse_lazy("core:home")
 
     # form에서 로드할 객체(현재 로그인 중인) 불러오는 함수
-    # form에 수정할 유저정보 넘김
     def get_object(self, queryset=None):
         return self.request.user
 
@@ -87,7 +87,7 @@ def update_password(request):
 
         if form.is_valid():
             user = form.save()
-            return redirect(reverse("core:login"))
+            return redirect(reverse("core:start"))
 
         return render(request, "users/update_password.html", {"form": form})
 
@@ -103,7 +103,7 @@ def find_password(request):
 
         if form.is_valid():
             user = form.save()
-            return redirect(reverse("core:login"))
+            return redirect(reverse("core:start"))
 
         return render(request, "users/find_password_2.html", {"form": form})
 

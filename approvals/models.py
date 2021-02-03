@@ -24,30 +24,50 @@ class Draft(DocBase):
     """
     기안서 클래스
     """
-    #meet_date = models.DateField() #회의일시
+    
+    class Meta:
+        verbose_name = "기안서"
+        verbose_name_plural = "기안서"
+
     pass
     
 class Meeting(DocBase):
     """
     회의보고서
     """
+
+    class Meta:
+        verbose_name = "회의보고서"
+        verbose_name_plural = "회의보고서"
     pass
 
 class Business(DocBase):
     """
     업무보고서
     """
+    class Meta:
+        verbose_name = "업무보고서"
+        verbose_name_plural = "업무보고서"
+
     pass
 
 class Result(DocBase):
     """
     결과보고서
     """
+    class Meta:
+        verbose_name = "결과보고서"
+        verbose_name_plural = "결과보고서"
+
     pass
 
 class Voucher(DocBase):
     """
     지출결의서
     """
+    class Meta:
+        verbose_name = "지출결의서"
+        verbose_name_plural = "지출결의서"
+        
     pass
 

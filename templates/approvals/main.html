@@ -1,114 +1,57 @@
 {% extends 'index.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="ko">
-
 {% block link-area %}
     <!-- 결재관리 css  -->
     <link rel="stylesheet" type="text/css" href="{% static 'approvals/css/content.css' %}">
 {% endblock link-area %}
 
 {% block script-head %}
-    <!-- 결재관리 스크립트 -->
-
 {% endblock script-head %}
 
 {% block content %}
+
     <div class="paper_main">
-        <div class="paper_sector_1" style="width: 20%; height: 600px; float:left;">
+        <div class="paper_sector_1" style="width: 45%; height: 600px; float:left;">
             <div class="paper_container" style="overflow-y: scroll;height: 600px;">
                 <div class="paper_scroll" style="overflow:hidden;">
                     <table id="table_id" class="display" style="width: 100%">
-                    <thead>
-                        <tr>
-                            <th style="display:none">Column 1</th>
-                        </tr>
-                    </thead>
-                    
-                    <tbody style="cursor: pointer;">
-                        <tr class="table_item">
-                            <td>기안서</td>
-                        </tr>
-                        <tr class="table_item">
-                            <td>지출결의서</td>
-                        </tr>
-                        <tr class="table_item">
-                            <td>결과보고서</td>
-                        </tr>
-                        <tr class="table_item">
-                            <td>회의보고서</td>
-                        </tr>
-                        <tr class="table_item">
-                            <td>주간업무보고</td>
-                        </tr>
-                        <tr class="table_item">
-                            <td>업무보고서</td>
-                        </tr>
-                    </tbody>
+                        <tbody style="cursor: pointer;">
+                            <tr class="table_item">
+                                <td>기안서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td>지출결의서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td>결과보고서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td>회의보고서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td>주간업무보고</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td>업무보고서</td>
+                            </tr>
+                        </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-    <div class="paper_sector_2" style="width: 80%; height: 600px; float:left;">
-        <div class="tab_box m_top0">
-            <ul class="fixed w_160">
-                <li class="active m_left0"><a href="javascript:get_tab_form_list('all')" title="양식">양식</a></li><li><a href="javascript:get_tab_form_list('my', null, 42);" title="내 문서">내 문서</a></li><li><a href="javascript:get_tab_form_list('dept')" title="부서 문서">부서 문서</a></li>
-            </ul>
-        </div>
-
-        <!-- 신규작성 -->
-        <div class="between_wrap form">
-            <div class="f_left" id="btn_write_all_box" style="visibility: visible;">
-                <button class="btn basic" id="btn_write_all" data-form-id=""><span>신규 작성</span></button>
-            </div>
-        </div>
-
-        <!-- 양식미리보기 -->
-        <div style="box-sizing: border-box; height: 100%;">
-            <div class="form_view_box p_none lwsp-host" id="form_all_list_scroll" data-outer-height="200" style="height: 100%;"><div class="lwsp-viewport" style="padding-right: 6px; height: 100%; overflow: hidden; overflow-y: scroll;"><div class="lwsp-container" style="overflow: hidden;">
-                <div id="empty_box" class="notData" style="display: none;">
-                    <i class="blank_icon eas"></i>
-                    <span>관련 문서가 없습니다.</span>
-                </div>
-                <div id="form_preview"><div class="fx_container document_view_bg p_none">
+    <div class="paper_sector_2" style="width: 55%; height: 600px; float:left;">
         
         <!-- 전자결제 양식 작성 -->
         <div class="view_box border_none fx_item fx_sec1" id="view_left" data-outer-height="30" style="height:auto;">
             <div>선택된 양식이 없습니다.</div>
         </div>
     </div>
-    <div class="lwsp-scrollbar" style="position: absolute; top: 0px; right: 0px; overflow: hidden; display: none;">
-        <div class="lwsp-thumb" style="position: absolute; left: 0px; width: 100%;"></div>
-    </div>
     
 {% endblock content %}
 
 {% block script-body %}
-    <script>
-        var example_tbl = null
-        $(document).ready( function () {
-            example_tbl = $('#table_id').DataTable({
-                // 표시 건수기능 숨기기
-                lengthChange: false,
-                // 검색 기능 숨기기
-                searching: true,
-                // 정렬 기능 숨기기
-                ordering: true,
-                // 정보 표시 숨기기
-                info: false,
-                // 페이징 기능 숨기기
-                paging: false
-            });
-            
-            paper_filter();
-            
-            $('#custom_filter').keyup(function(){
-                example_tbl.search($(this).val()).draw();
-            });
-        });
-    </script>
     <script type="text/javascript" src="{% static 'approvals/js/content.js' %}"></script>
 {% endblock script-body %}
 

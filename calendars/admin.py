@@ -6,11 +6,6 @@ class FileInline(admin.TabularInline):
     model = models.File
 
 
-class FileInline(admin.TabularInline):
-
-    model = models.File
-
-
 @admin.register(models.Calendar)
 class CustomUserAdmin(admin.ModelAdmin):
 
