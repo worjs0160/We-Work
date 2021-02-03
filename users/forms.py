@@ -37,7 +37,6 @@ class SignUpForm(forms.ModelForm):
 
         fields = (
             "user_name",
-            "user_position",
             "birthdate",
             "phone_num",
             "user_addr",
