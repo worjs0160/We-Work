@@ -6,15 +6,15 @@
 
 {% block link-area %}
     <!-- 결재관리 css  -->
-    <link rel="stylesheet" type="text/css" href="{% static 'paper/DataTables/datatables.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'paper/css/popup_layer.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'paper/css/content.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'approvals/DataTables/datatables.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'approvals/css/popup_layer.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'approvals/css/content.css' %}">
 {% endblock link-area %}
 
 {% block script-head %}
     <!-- 결재관리 스크립트 -->
-    <script type="text/javascript" src="{% static 'paper/DataTables/datatables.js' %}"></script>
-    <script type="text/javascript" src="{% static 'paper/js/popup_layer.js' %}"></script>
+    <script type="text/javascript" src="{% static 'approvals/DataTables/datatables.js' %}"></script>
+    <script type="text/javascript" src="{% static 'approvals/js/popup_layer.js' %}"></script>
 
     <script>
         function paper_filter(){
@@ -86,7 +86,7 @@
     <!-- Pop-up layer End -->
 
     <div class="paper_main">
-        <div class="paper_sector_1" style="width: 30%; height: 600px; float:left;">
+        <div class="paper_sector_1" style="width: 45%; height: 600px; float:left;">
             <div class="paper_container" style="overflow-y: scroll;height: 600px;">
                 <div class="paper_scroll" style="overflow:hidden;">
                     <table id="table_id" class="display" style="width: 100%">
@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div class="paper_sector_2" style="width: 70%; height: 600px; float:left;">
+    <div class="paper_sector_2" style="width: 55%; height: 600px; float:left;">
         <div class="tab_box m_top0">
             <ul class="fixed w_160">
                 <li class="active m_left0"><a href="javascript:get_tab_form_list('all')" title="양식">양식</a></li><li><a href="javascript:get_tab_form_list('my', null, 42);" title="내 문서">내 문서</a></li><li><a href="javascript:get_tab_form_list('dept')" title="부서 문서">부서 문서</a></li>
@@ -264,6 +264,6 @@
             });
         });
     </script>
-    <script type="text/javascript" src="{% static 'paper/js/content.js' %}"></script>
+    <script type="text/javascript" src="{% static 'approvals/js/content.js' %}"></script>
 {% endblock script-body %}
 

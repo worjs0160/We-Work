@@ -39,7 +39,7 @@ CUSTOM_APPS = [
     "contacts",
     "mails",
     "messengers",
-    "papers",
+    "core",
 ]
 
 THIRD_PARTY_APPS = [
