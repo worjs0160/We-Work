@@ -61,7 +61,6 @@ class SignUpForm(forms.ModelForm):
         user_id = self.cleaned_data.get("user_id")
         user_pw = self.cleaned_data.get("user_pw")
         user_name = self.cleaned_data.get("user_name")
-        user_position = self.cleaned_data.get("user_position")
         phone_num = self.cleaned_data.get("phone_num")
         birthdate = self.cleaned_data.get("birthdate")
         user_addr = self.cleaned_data.get("user_addr")
@@ -70,7 +69,6 @@ class SignUpForm(forms.ModelForm):
         user.username = user_id
         user.set_password(user_pw)  # pw암호화
         user.user_name = user_name
-        user.user_position = user_position
         user.phone_num = phone_num
         user.birthdate = birthdate
         user.user_addr = user_addr

@@ -39,7 +39,7 @@ class SignUpView(FormView):
 
     template_name = "users/signup.html"
     form_class = forms.SignUpForm
-    success_url = reverse_lazy("core:start")
+    success_url = reverse_lazy("core:login")
 
     # form의 데이터 검증 후 맞으면 DB에 저장 실행
     def form_valid(self, form):
@@ -87,7 +87,7 @@ def update_password(request):
 
         if form.is_valid():
             user = form.save()
-            return redirect(reverse("core:start"))
+            return redirect(reverse("core:login"))
 
         return render(request, "users/update_password.html", {"form": form})
 
@@ -103,7 +103,7 @@ def find_password(request):
 
         if form.is_valid():
             user = form.save()
-            return redirect(reverse("core:start"))
+            return redirect(reverse("core:login"))
 
         return render(request, "users/find_password_2.html", {"form": form})
 
