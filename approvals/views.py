@@ -1,3 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render, reverse
 
-# Create your views here.
+
+def main(request):
+    """ 전자결재 메인페이지 View"""
+    return render(request, "approvals/main.html")
