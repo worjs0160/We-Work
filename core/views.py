@@ -10,7 +10,7 @@ from attendance.models import Attendance as attendance_models
 # 홈페이지 로딩
 @login_required
 def home(request):
-    boards = models.Board.objects.order_by("-updated")[:5]
+    boards = board_models.objects.order_by("-updated")[:5]
     return render(request, "dashboard.html", {"boards": boards})
 
 
