@@ -1,5 +1,3 @@
-
-
 $('.table_item').click(function(){
     
     var input = $(this)[0].innerText;
