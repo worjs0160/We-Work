@@ -13,7 +13,7 @@ class File(core_models.TimeStampedModel):
         "Calendar", related_name="attached_file", on_delete=models.CASCADE
     )
 
-    file = models.FileField(upload_to="calendar-files/%Y-%m-%d/", blank=True, null=True,verbose_name="파일")
+    file = models.FileField(upload_to="calendar-files/%Y-%m-%d/", blank=True, null=True, verbose_name="파일")
 
     def filename(self):
         return os.path.basename(self.file.name)
