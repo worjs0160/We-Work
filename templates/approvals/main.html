@@ -18,22 +18,19 @@
                     <table id="table_id" class="display" style="width: 100%">
                         <tbody style="cursor: pointer;">
                             <tr class="table_item">
-                                <td>기안서</td>
+                                <td id="draft">기안서</td>
                             </tr>
                             <tr class="table_item">
-                                <td>지출결의서</td>
+                                <td id= "voucher">지출결의서</td>
                             </tr>
                             <tr class="table_item">
-                                <td>결과보고서</td>
+                                <td id="result">결과보고서</td>
                             </tr>
                             <tr class="table_item">
-                                <td>회의보고서</td>
+                                <td id="meeting">회의보고서</td>
                             </tr>
                             <tr class="table_item">
-                                <td>주간업무보고</td>
-                            </tr>
-                            <tr class="table_item">
-                                <td>업무보고서</td>
+                                <td id="business">업무보고서</td>
                             </tr>
                         </tbody>
                 </table>
@@ -52,6 +49,6 @@
 {% endblock content %}
 
 {% block script-body %}
-    <script type="text/javascript" src="{% static 'approvals/js/content.js' %}"></script>
+<script type="text/javascript" src="{% static 'approvals/js/content.js' %}"></script>
 {% endblock script-body %}
 
