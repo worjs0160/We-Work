@@ -38,10 +38,10 @@ def createBoardView(request):
             board = form.save()
             board.author = request.user
             board.save()
-            file = request.FILES.get("attachments")
-
-            if file:
-                models.Attachment.objects.create(file=file, board=board)
+            file = request.FILES["attachments"]
+            filename = file_1.name
+            if file_1:
+                models.Attachment.objects.create(file=file, board=board, filename=filename)
             else:
                 models.Attachment.objects.create(board=board)
 

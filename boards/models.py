@@ -1,14 +1,21 @@
 import os
+from uuid import uuid4
+from datetime import datetime
 from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
-from django.core.validators import MinLengthValidator, MaxLengthValidator
 from core import models as core_models
 from users.models import User
 
-title_MinLenValidator = MinLengthValidator(2, "2자 이상 입력해주세요.(2자 ~ 80자 이내)")
-title_MaxLenValidator = MaxLengthValidator(80, "80자 이내로 입력해주세요.(2자 ~ 80자 이내)")
-contents_MinLenValidator = MinLengthValidator(10, "글이 너무 짧습니다. 10자 이상 입력해주세요.")
+
+
+def get_file_path(instance, filename):
+    """
+    uuid4를 활용한 암호화된 파일 경로를 설정
+    """
+    ymd_path = datetime.now().strftime('%Y/%m/%d')
+    uuid_name = uuid4().hex
+    return '/'.join(['board-files/', ymd_path, uuid_name])
 
 
 class Attachment(core_models.TimeStampedModel):
@@ -17,10 +24,11 @@ class Attachment(core_models.TimeStampedModel):
         "Board", related_name="attachments", on_delete=models.CASCADE
     )
 
-    file = models.FileField(upload_to="board-files/%Y-%m-%d/", blank=True, null=True)
-
-    def filename(self):
-        return os.path.basename(self.file.name)
+    file = models.FileField(upload_to=get_file_path, blank=True, null=True)
+    filename = models.CharField(max_length=80, null=True, verbose_name="첨부파일명")
+    
+    def __str__(self):
+        return self.filename
 
 
 class Comment(core_models.TimeStampedModel):
@@ -41,7 +49,7 @@ class Comment(core_models.TimeStampedModel):
         "Board", related_name="comments", on_delete=models.CASCADE, verbose_name="게시글"
     )
     contents = models.TextField(
-        validators=[contents_MinLenValidator], verbose_name="내용"
+        validators=[core_models.contents_MinLenValidator], verbose_name="내용"
     )
 
 
@@ -62,11 +70,11 @@ class Board(core_models.TimeStampedModel):
     )
     title = models.CharField(
         max_length=80,
-        validators=[title_MaxLenValidator, title_MinLenValidator],
+        validators=[core_models.title_MaxLenValidator, core_models.title_MinLenValidator],
         verbose_name="제목",
     )
     contents = models.TextField(
-        validators=[contents_MinLenValidator], verbose_name="내용"
+        validators=[core_models.contents_MinLenValidator], verbose_name="내용"
     )
 
     viewCnts = models.PositiveIntegerField(default=0, verbose_name="조회수")

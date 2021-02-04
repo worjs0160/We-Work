@@ -28,13 +28,13 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path("calendar/", include("calendars.urls", namespace="calendars")),
     path("ckeditor/", include("ckeditor_uploader.urls")),
+    path("approvals/", include("approvals.urls", namespace="approvals")),
+    path("admin/", admin.site.urls),
     url(
         r"^download/(?P<path>.*)$",
         core_views.download,
         {"document_root": settings.MEDIA_ROOT},
     ),
-    path("papers/", include("papers.urls", namespace="papers")),
-    path("admin/", admin.site.urls),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

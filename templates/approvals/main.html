@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block link-area %}
+    <!-- 결재관리 css  -->
+    <link rel="stylesheet" type="text/css" href="{% static 'approvals/css/content.css' %}">
+{% endblock link-area %}
+
+{% block script-head %}
+{% endblock script-head %}
+
+{% block content %}
+
+    <div class="paper_main">
+        <div class="paper_sector_1" style="width: 45%; height: 600px; float:left;">
+            <div class="paper_container" style="overflow-y: scroll;height: 600px;">
+                <div class="paper_scroll" style="overflow:hidden;">
+                    <table id="table_id" class="display" style="width: 100%">
+                        <tbody style="cursor: pointer;">
+                            <tr class="table_item">
+                                <td id="draft">기안서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td id= "voucher">지출결의서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td id="result">결과보고서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td id="meeting">회의보고서</td>
+                            </tr>
+                            <tr class="table_item">
+                                <td id="business">업무보고서</td>
+                            </tr>
+                        </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="paper_sector_2" style="width: 55%; height: 600px; float:left;">
+        
+        <!-- 전자결제 양식 작성 -->
+        <div class="view_box border_none fx_item fx_sec1" id="view_left" data-outer-height="30" style="height:auto;">
+                <div>선택된 양식이 없습니다.</div>
+        </div>
+    </div>
+    
+{% endblock content %}
+
+{% block script-body %}
+<script type="text/javascript" src="{% static 'approvals/js/content.js' %}"></script>
+{% endblock script-body %}
+

@@ -31,7 +31,7 @@
         <a href="{% url 'boards:board_list' %}" class="list-group-item list-group-item-action bg-light">공지사항</a>
         <a href="{% url 'calendars:calendar' %}" class="list-group-item list-group-item-action bg-light">캘린더</a>
         <a href="{% url 'attendance:attendance_home' %}" class="list-group-item list-group-item-action bg-light">근태관리</a>
-        <a href="{% url 'papers:paper-main' %}" class="list-group-item list-group-item-action bg-light">결재관리</a>
+        <a href="{% url 'approvals:main' %}" class="list-group-item list-group-item-action bg-light">결재관리</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Profile</a>
         <a href="#" class="list-group-item list-group-item-action bg-light">Status</a>
       </div>
@@ -43,7 +43,7 @@
     <div id="page-content-wrapper">
 
       <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-        <button class="btn btn-primary" id="menu-toggle">Toggle Menu</button>
+        <button class="btn btn-primary" id="menu-toggle"><i class="fas fa-bars"></i></button>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
           aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

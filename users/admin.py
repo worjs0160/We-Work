@@ -12,9 +12,9 @@ class CustomUserAdmin(UserAdmin):
         (None, {"fields": ["username", "password", "user_name"]}),
         (
             "유저정보",
-            {"fields": ["avatar", "user_department", "user_position", "user_bio"]},
+            {"fields": ["avatar", "user_bio"]},
         ),
-        ("개인정보", {"fields": ["phone_num", "birthdate", "post_num", "user_addr"]}),
+        ("개인정보", {"fields": ["phone_num", "birthdate", "post_num", "user_addr", "position", "department"]}),
         ("인증정보", {"fields": ["is_cert", "is_superuser"]}),
     ]
 
@@ -22,8 +22,6 @@ class CustomUserAdmin(UserAdmin):
         "username",
         "password",
         "user_name",
-        "user_department",
-        "user_position",
         "phone_num",
         "birthdate",
         "user_addr",
