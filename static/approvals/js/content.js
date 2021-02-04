@@ -168,11 +168,11 @@ $('.table_item').click(function(){
                         '<td colspan="5">'+ 
                             '<div id="all_">'+ 
                                 '<div class="calender_box">'+ 
-                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_s_date" readonly="readonly" data-plugin="datepicker" data-date="2021-01-31" data-format="yy-mm-dd" data-disabled="disabled" disabled=""><button type="button" class="ui-datepicker-trigger" disabled=""><i class="mdi mdi-calendar-month-outline mdi-20 mdi-500" style="position: relative; z-index: 99;"></i></button>'+ 
+                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_s_date" readonly="readonly" data-plugin="datepicker" data-date="2021-01-31" data-format="yy-mm-dd" data-disabled="disabled" disabled="">'+ 
                                     '</div>'+ 
                                 '<span>~</span>'+ 
                                 '<div class="calender_box">'+ 
-                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_e_date" readonly="readonly" data-plugin="datepicker" data-date="2021-01-31" data-format="yy-mm-dd" data-disabled="disabled" disabled=""><button type="button" class="ui-datepicker-trigger" disabled=""><i class="mdi mdi-calendar-month-outline mdi-20 mdi-500" style="position: relative; z-index: 99;"></i></button>'+ 
+                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_e_date" readonly="readonly" data-plugin="datepicker" data-date="2021-01-31" data-format="yy-mm-dd" data-disabled="disabled" disabled="">'+ 
                                     '</div>'+ 
                                 '<div class="inblock">'+ 
                                     '<span>, 총</span><input type="text" class="input_box half" name="[]" id="" value="" readonly="readonly"> 일'+ 
@@ -240,11 +240,11 @@ $('.table_item').click(function(){
                         '<td class="in_button calender" colspan="5">'+ 
                             '<div class="input_wrap write">'+ 
                                 '<div class="calender_box write">'+ 
-                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_s_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled=""><button type="button" class="ui-datepicker-trigger" disabled=""><i class="mdi mdi-calendar-month-outline mdi-20 mdi-500" style="position: relative; z-index: 99;"></i></button>'+ 
+                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_s_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled="">'+ 
                                     '</div>'+ 
                                     '<span class="calender_tilde write">~</span>'+ 
                                     '<div class="calender_box write">'+ 
-                                        '<input class="input_box hasDatepicker" type="text" name="[]" id="_e_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled=""><button type="button" class="ui-datepicker-trigger" disabled=""><i class="mdi mdi-calendar-month-outline mdi-20 mdi-500" style="position: relative; z-index: 99;"></i></button>'+ 
+                                        '<input class="input_box hasDatepicker" type="text" name="[]" id="_e_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled="">'+ 
                                         '</div>'+ 
                                         '<div class="total_day">'+ 
                                             ', 총 <input type="text" class="input_box half" name="[]" id="" readonly="readonly" value=""> 일'+ 
@@ -344,11 +344,11 @@ $('.table_item').click(function(){
                         '<td class="in_button calender" colspan="5">'+ 
                             '<div class="input_wrap write">'+ 
                                 '<div class="calender_box write">'+ 
-                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_s_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled=""><button type="button" class="ui-datepicker-trigger" disabled=""><i class="mdi mdi-calendar-month-outline mdi-20 mdi-500" style="position: relative; z-index: 99;"></i></button>'+ 
+                                    '<input class="input_box hasDatepicker" type="text" name="[]" id="_s_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled="">'+ 
                                     '</div>'+ 
                                     '<span class="calender_tilde write">~</span>'+ 
                                     '<div class="calender_box write">'+ 
-                                        '<input class="input_box hasDatepicker" type="text" name="[]" id="_e_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled=""><button type="button" class="ui-datepicker-trigger" disabled=""><i class="mdi mdi-calendar-month-outline mdi-20 mdi-500" style="position: relative; z-index: 99;"></i></button>'+ 
+                                        '<input class="input_box hasDatepicker" type="text" name="[]" id="_e_date" readonly="readonly" data-plugin="datepicker" data-date="2021.01.31" data-disabled="disabled" disabled="">'+ 
                                         '</div>'+ 
                                         '<div class="total_day">'+ 
                                             ', 총 <input type="text" class="input_box half" name="[]" id="" readonly="readonly" value=""> 일'+ 
