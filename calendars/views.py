@@ -74,7 +74,7 @@ class create_event(BSModalCreateView):
             calendar = form.save()
             calendar.user = self.request.user
             calendar.save()
-            file = self.request.FILES.get("attached_file")
+            file = self.request.FILES.get("file")
             if file:
                 File.objects.create(file=file, calendar=calendar)
             else:

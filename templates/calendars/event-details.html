@@ -21,7 +21,7 @@ Event Details
         <hr>
         {% if event.attached_file.get.file %} 
                 <div>첨부파일</div>
-                <a href="{{ event.attached_file.get.file.url }}" download="{{event.attached_file.get.file.adminupload.url}}"> {{event.attached_file.get.file.name}}</a> 
+                <a href="{{ event.attached_file.get.file.url }}" download="{{event.attached_file.get.file.adminupload.url}}"> {{event.attached_file.get.file.name|slice:"26:"}}</a> 
         {% endif %}
     </div>
 </div>
