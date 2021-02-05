@@ -7,7 +7,7 @@ class User(AbstractUser):
 
     """ Custom User Model """
 
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(blank=True, upload_to="user-files/avatar")
     user_name = models.CharField(max_length=15, verbose_name="이름")
     phone_num = models.CharField(max_length=15, verbose_name="전화번호")
     user_addr = models.CharField(max_length=15, verbose_name="주소")
