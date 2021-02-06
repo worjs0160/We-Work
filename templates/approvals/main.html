@@ -43,7 +43,11 @@
         <!-- 전자결제 양식 작성 -->
         <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        <!--<input type="hidden" id="doc" name="doctype" value=""/>-->
+        <input type="hidden" id="doctype" name="doctype" value=""/>
+        <div style="margin: 5% 0px 0px 5%;">
+            <button id="create" type="button" style="display:none;">글 작성</button>
+            <input type="submit" id=submit value="작성완료" style="display:none;"/>
+        </div>
         <div class="view_box border_none fx_item fx_sec1" id="view_left" data-outer-height="30" style="height:auto;">
             <div>선택된 양식이 없습니다.</div>
         </div>

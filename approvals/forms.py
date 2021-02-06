@@ -13,6 +13,24 @@ class DraftForm(forms.ModelForm):
             "contents": SummernoteWidget(),
         }
 
+    def __init__(self, *args, **kwargs):
+        super(DraftForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['viewer'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['contents'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+
 
 class MeetingForm(forms.ModelForm):
     class Meta:
@@ -27,9 +45,67 @@ class MeetingForm(forms.ModelForm):
             "result",
             "etc",
         )
-        widgets = {
-            "contents": SummernoteWidget(),
-        }
+        
+    def __init__(self, *args, **kwargs):
+        super(MeetingForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['viewer'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['start_date'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['end_date'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['place'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '2px',
+            'style': 'resize:none',
+        })
+        self.fields['departments'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['agenda'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        self.fields['result'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        self.fields['etc'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+
 
 
 class BusinessForm(forms.ModelForm):
@@ -42,10 +118,60 @@ class BusinessForm(forms.ModelForm):
             "to_do",
             "priority",
         )
-        widgets = {
-            "contents": SummernoteWidget(),
-        }
 
+    def __init__(self, *args, **kwargs):
+        super(BusinessForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['viewer'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['d_goal'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        self.fields['w_goal'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        self.fields['last_do'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        self.fields['to_do'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        self.fields['priority'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '80px',
+            'rows': '5px',
+            'style': 'resize:none',
+        })
+        
 
 class ResultForm(forms.ModelForm):
     class Meta:
@@ -54,6 +180,25 @@ class ResultForm(forms.ModelForm):
         widgets = {
             "contents": SummernoteWidget(),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(ResultForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['viewer'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['contents'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+
 
 
 class VoucherForm(forms.ModelForm):
@@ -66,3 +211,34 @@ class VoucherForm(forms.ModelForm):
         widgets = {
             "contents": SummernoteWidget(),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(VoucherForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['viewer'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['contents'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
+        self.fields['usedby_d'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+            'cols': '50px',
+            'rows': '1px',
+            'style': 'resize:none',
+        })
+        self.fields['usedby_u'].widget.attrs.update({
+            'class':'input',
+            'readonly':'true',
+            'disabled': 'true',
+        })
