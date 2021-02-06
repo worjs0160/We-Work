@@ -38,7 +38,7 @@ def createBoardView(request):
     # 게시글 생성 GET 메소드 처리
     if request.method == "GET":
         form = forms.BoardForm()
-    
+
         return render(request, create_template, {"form": form})
 
     # 게시글 form POST 처리
@@ -49,18 +49,12 @@ def createBoardView(request):
             board = form.save()
             board.author = request.user
             board.save()
-<<<<<<< HEAD
-            
-            file = request.FILES.get("attachments")
-    
-            if file:
-                filename = file.name
-=======
             file = request.FILES["attachments"]
             filename = file.name
             if file:
->>>>>>> 638ea2ebc7bb28bb99112d0969aa0c9fdfc444ae
-                models.Attachment.objects.create(file=file, board=board, filename=filename)
+                models.Attachment.objects.create(
+                    file=file, board=board, filename=filename
+                )
             else:
                 models.Attachment.objects.create(board=board)
 
@@ -69,8 +63,9 @@ def createBoardView(request):
             )
 
         else:
-            #입력된 폼이 유효하지 않은 경우
+            # 입력된 폼이 유효하지 않은 경우
             return render(request, create_template, {"form": form})
+
 
 @login_required
 def updateBoardView(request, pk):
@@ -146,10 +141,14 @@ def download(request, pk):
     file_path = urllib.parse.unquote(path)
     if os.path.exists(file_path):
         with open(file_path, "rb") as fh:
-            #urlib.parse.quote => utf-8 형식으로 filename 인코딩
-            quote_file_url = urllib.parse.quote(filename.encode('utf-8'))
+            # urlib.parse.quote => utf-8 형식으로 filename 인코딩
+            quote_file_url = urllib.parse.quote(filename.encode("utf-8"))
             # 파일의 확장자를 통해 mimetype을 결정해주는 guess_type
-            response = HttpResponse(fh.read(), content_type=mimetypes.guess_type(path)[0])
-            response['Content-Disposition'] = 'attachment;filename*=UTF-8\'\'%s' % quote_file_url
+            response = HttpResponse(
+                fh.read(), content_type=mimetypes.guess_type(path)[0]
+            )
+            response["Content-Disposition"] = (
+                "attachment;filename*=UTF-8''%s" % quote_file_url
+            )
             return response
     raise Http404()
