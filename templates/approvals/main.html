@@ -41,9 +41,13 @@
     <div class="paper_sector_2" style="width: 80%; height: 600px; float:left;">
         
         <!-- 전자결제 양식 작성 -->
+        <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!--<input type="hidden" id="doc" name="doctype" value=""/>-->
         <div class="view_box border_none fx_item fx_sec1" id="view_left" data-outer-height="30" style="height:auto;">
             <div>선택된 양식이 없습니다.</div>
         </div>
+        </form>
     </div>
     
 {% endblock content %}
