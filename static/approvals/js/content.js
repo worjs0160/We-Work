@@ -3,6 +3,7 @@ $(document).ready(function () {
     $('#draft').click(function () {
         /*기안서*/
         $('.view_box').children().remove();
+        $('#doc').val('draft');
         $('.view_box').load('doc_format/draft.html');
         return false;
     });
@@ -10,6 +11,7 @@ $(document).ready(function () {
     $('#voucher').click(function () {
         /*지출결의서*/
         $('.view_box').children().remove();
+        $('#doctype').val('voucher');
         $('.view_box').load('doc_format/voucher.html');
         return false;
     });
@@ -17,6 +19,7 @@ $(document).ready(function () {
     $('#result').click(function () {
         /*결과보고서*/
         $('.view_box').children().remove();
+        $('#doctype').val('result');
         $('.view_box').load('doc_format/result.html');
         return false;
     });
@@ -24,6 +27,7 @@ $(document).ready(function () {
     $('#meeting').click(function () {
         /*회의보고서*/
         $('.view_box').children().remove();
+        $('#doctype').val('meeting');
         $('.view_box').load('doc_format/meeting.html');
         return false;
     });
@@ -31,6 +35,7 @@ $(document).ready(function () {
     $('#business').click(function () {
         /*업무보고서*/
         $('.view_box').children().remove();
+        $('#doctype').val('meeting');
         $('.view_box').load('doc_format/business.html');
         return false;
     });
