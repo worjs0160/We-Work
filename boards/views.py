@@ -49,17 +49,9 @@ def createBoardView(request):
             board = form.save()
             board.author = request.user
             board.save()
-<<<<<<< HEAD
-            
-            file = request.FILES.get("attachments")
-    
-            if file:
-                filename = file.name
-=======
             file = request.FILES["attachments"]
             filename = file.name
             if file:
->>>>>>> 638ea2ebc7bb28bb99112d0969aa0c9fdfc444ae
                 models.Attachment.objects.create(file=file, board=board, filename=filename)
             else:
                 models.Attachment.objects.create(board=board)

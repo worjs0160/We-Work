@@ -6,12 +6,13 @@
             <tr>
                 <th>제목</th>
                 <td colspan="3">
-                    <span> 업무보고서 </span>
+                    {{form.title}}
                 </td>
             </tr>
             <tr>
                 <th>열람/공람자</th>
                 <td colspan="3" class="fix_height">
+                    {{form.viewer}}
                 </td>
             </tr>
         </tbody>
@@ -29,31 +30,31 @@
             <tr>
                 <th>금일 업무 목표</th>
                 <td colspan="5" class="in_button">
-                    <textarea class="form_textarea preview" name="" id="" readonly="readonly" disabled="disabled" style="height: 100px"></textarea>
+                    {{form.d_goal}}
                 </td>
             </tr>
             <tr>
                 <th>금주 업무 목표</th>
                 <td colspan="5" class="in_button">
-                    <textarea class="form_textarea preview" name="" id="" readonly="readonly" disabled="disabled" style="height: 100px"></textarea>
+                    {{form.w_goal}}
                 </td>
             </tr>
             <tr>
                 <th>전일 실시사항</th>
                 <td colspan="5" class="in_button">
-                    <textarea class="form_textarea preview" name="" id="" readonly="readonly" disabled="disabled" style="height: 100px"></textarea>
+                    {{form.last_do}}
                 </td>
             </tr>
             <tr>
                 <th>금일 예정사항</th>
                 <td colspan="5" class="in_button">
-                    <textarea class="form_textarea preview" name="" id="" readonly="readonly" disabled="disabled" style="height: 100px"></textarea>
+                    {{form.to_do}}
                 </td>
             </tr>
             <tr>
                 <th>업무별 우선순위</th>
                 <td colspan="5" class="in_button">
-                    <textarea class="form_textarea preview" name="" id="" readonly="readonly" disabled="disabled" style="height: 100px"></textarea>
+                    {{form.priority}}
                 </td>
             </tr>
         </tbody>

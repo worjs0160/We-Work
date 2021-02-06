@@ -7,17 +7,17 @@
                 <tr> 
                     <th>제목</th>  
                     <td colspan="3">
-                        <input class="input_box" type="text">
+                        {{form.title}}
                     </td> 
                 </tr> 
                 <tr> 
                     <th>열람/공람자</th> 
                     <td colspan="3" class="fix_height">
-                        <input class="input_box" type="text">
+                        {{form.viewer}}
                     </td> 
                 </tr> 
             </tbody> 
         </table>    
-    </div> 
-    <textarea>내용 작성(에디터)</textarea>
+    </div>
+    {{form.contents}}
 </div>

@@ -4,7 +4,7 @@ from . import models
 base_filds = ("author", "title", "contents", "viewer")
 
 
-class DratfForm(forms.Form):
+class DraftForm(forms.Form):
     class Meta:
         model = models.Draft
         fields = base_filds
