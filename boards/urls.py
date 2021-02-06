@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views as boards_views
+from django.conf import settings
 
 app_name = "boards"
 
@@ -11,4 +12,5 @@ urlpatterns = [
     path("<int:pk>/delete/", boards_views.deleteBoardView, name="delete"),
     path("<int:pk>/comment_create/", boards_views.createComment, name="comment_create"),
     path("<int:pk>/comment_delete/", boards_views.deleteComment, name="comment_delete"),
+    path("download/<int:pk>/", boards_views.download, name="download"),
 ]

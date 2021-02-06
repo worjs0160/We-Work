@@ -1,5 +1,9 @@
+import os
+import urllib
+import mimetypes
+from django.conf import settings
 from django.urls import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, reverse, redirect, get_object_or_404
 from . import forms
@@ -15,7 +19,7 @@ def readBoardList(request):
 @login_required
 def detailBoardView(request, pk):
 
-    board = models.Board.objects.get(postNo=pk)
+    board = models.Board.get_or_none(postNo=pk)
     return render(request, "boards/board_detail.html", {"board": board})
 
 
@@ -30,17 +34,26 @@ def deleteBoardView(request, pk):
 @login_required
 def createBoardView(request):
 
+    create_template = "boards/board_create.html"
+    # 게시글 생성 GET 메소드 처리
+    if request.method == "GET":
+        form = forms.BoardForm()
+    
+        return render(request, create_template, {"form": form})
+
     # 게시글 form POST 처리
-    if request.method == "POST":
+    else:
         form = forms.BoardForm(request.POST or None)
 
         if form.is_valid():
             board = form.save()
             board.author = request.user
             board.save()
-            file = request.FILES["attachments"]
-            filename = file_1.name
-            if file_1:
+            
+            file = request.FILES.get("attachments")
+    
+            if file:
+                filename = file.name
                 models.Attachment.objects.create(file=file, board=board, filename=filename)
             else:
                 models.Attachment.objects.create(board=board)
@@ -49,12 +62,9 @@ def createBoardView(request):
                 reverse_lazy("boards:detail", kwargs={"pk": board.pk})
             )
 
-    # 게시글 생성 GET 메소드 처리
-    else:
-        form = forms.BoardForm()
-    
-    return render(request, "boards/board_create.html", {"form": form})
-
+        else:
+            #입력된 폼이 유효하지 않은 경우
+            return render(request, create_template, {"form": form})
 
 @login_required
 def updateBoardView(request, pk):
@@ -99,9 +109,6 @@ def updateBoardView(request, pk):
         )
 
 
-"""-----------------댓글----------------"""
-
-
 @login_required
 def createComment(request, pk):
     """댓글 생성"""
@@ -124,3 +131,19 @@ def deleteComment(request, pk):
     return render(request, "boards/board_detail.html", {"board": board})
 
 
+# 다운로드
+@login_required
+def download(request, pk):
+    attachment = get_object_or_404(models.Attachment, pk=pk)
+    path = attachment.file.url[1:]
+    filename = attachment.filename
+    file_path = urllib.parse.unquote(path)
+    if os.path.exists(file_path):
+        with open(file_path, "rb") as fh:
+            #urlib.parse.quote => utf-8 형식으로 filename 인코딩
+            quote_file_url = urllib.parse.quote(filename.encode('utf-8'))
+            # 파일의 확장자를 통해 mimetype을 결정해주는 guess_type
+            response = HttpResponse(fh.read(), content_type=mimetypes.guess_type(path)[0])
+            response['Content-Disposition'] = 'attachment;filename*=UTF-8\'\'%s' % quote_file_url
+            return response
+    raise Http404()
