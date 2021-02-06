@@ -4,8 +4,15 @@
     <h2><b>회원정보</b></h2>
     <table>
         <tr>
-            <th width='20%'>사진</th>
-            <td>{{ user.avatar }}</td>
+            <th width='20%'>프로필 사진</th>
+            <td>
+                <div class="h-20 w-20">
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" height=100px>
+                    {% else %}
+                    {% endif %}
+                </div>
+            </td>
         </tr>
         <tr>
             <th width='20%'>아이디</th>

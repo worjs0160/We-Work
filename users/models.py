@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from core import models as core_models
 
+
 class User(AbstractUser):
 
     """ Custom User Model """
 
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(blank=True, upload_to="user-files/avatar")
     user_name = models.CharField(max_length=15, verbose_name="이름")
     phone_num = models.CharField(max_length=15, verbose_name="전화번호")
     user_addr = models.CharField(max_length=15, verbose_name="주소")
@@ -16,8 +17,20 @@ class User(AbstractUser):
     user_bio = models.TextField(blank=True, verbose_name="유저정보")
     is_cert = models.BooleanField(default=False, verbose_name="유저인증")
 
-    position = models.OneToOneField("core.Position",related_name="user", on_delete=models.DO_NOTHING, null=True)
-    department = models.OneToOneField("core.Department",related_name="user", on_delete=models.DO_NOTHING, null=True)
-    
+    position = models.OneToOneField(
+        "core.Position",
+        related_name="user",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+    department = models.OneToOneField(
+        "core.Department",
+        related_name="user",
+        on_delete=models.DO_NOTHING,
+        blank=True,
+        null=True,
+    )
+
     def __str__(self):
         return f"{self.user_name}({self.username})"
