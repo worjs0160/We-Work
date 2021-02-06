@@ -2,22 +2,22 @@ from django import forms
 from . import models
 from django_summernote.widgets import SummernoteWidget
 
-base_filds = ("author", "title", "contents", "viewer")
+base_fields = ("title", "contents", "viewer")
 
 
-class DraftForm(forms.Form):
+class DraftForm(forms.ModelForm):
     class Meta:
         model = models.Draft
-        fields = base_filds
+        fields = base_fields
         widgets = {
             "contents": SummernoteWidget(),
         }
 
 
-class MeetingForm(forms.Form):
+class MeetingForm(forms.ModelForm):
     class Meta:
         model = models.Meeting
-        fields = base_filds + (
+        fields = base_fields + (
             "start_date",
             "end_date",
             "departments",
@@ -32,10 +32,10 @@ class MeetingForm(forms.Form):
         }
 
 
-class BusinessForm(forms.Form):
+class BusinessForm(forms.ModelForm):
     class Meta:
         model = models.Business
-        fields = base_filds + (
+        fields = base_fields + (
             "d_goal",
             "w_goal",
             "last_do",
@@ -47,19 +47,19 @@ class BusinessForm(forms.Form):
         }
 
 
-class ResultForm(forms.Form):
+class ResultForm(forms.ModelForm):
     class Meta:
         model = models.Result
-        fields = base_filds
+        fields = base_fields
         widgets = {
             "contents": SummernoteWidget(),
         }
 
 
-class VoucherForm(forms.Form):
+class VoucherForm(forms.ModelForm):
     class Meta:
         model = models.Voucher
-        fields = base_filds + (
+        fields = base_fields + (
             "usedby_d",
             "usedby_u",
         )
