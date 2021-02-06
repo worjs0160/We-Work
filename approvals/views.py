@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render, reverse
 from . import forms
 
+
 def main(request):
     """ 전자결재 메인페이지 View """
     return render(request, "approvals/main.html")
@@ -26,4 +27,4 @@ def doc_format(request, doc):
     elif doc == "business.html":
         form = forms.BusinessForm()
 
-    return render(request, "approvals/doc_format/"+doc, {"form": form})
+    return render(request, "approvals/doc_format/" + doc, {"form": form})
