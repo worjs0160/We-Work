@@ -13,6 +13,10 @@ class DraftForm(forms.ModelForm):
             "contents": SummernoteWidget(),
         }
 
+    def save(self, *args, **kwargs):
+        approval = super().save(commit=False)
+        return approval
+
 
 class MeetingForm(forms.ModelForm):
     class Meta:

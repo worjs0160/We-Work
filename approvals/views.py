@@ -33,8 +33,7 @@ def doc_format(request, doc):
 def createDocView(request):
 
     doctype = request.POST.get("doctype")
-    create_template = "approvals/doc_format/" + doctype + ".html"
-    print(doctype)
+    create_template = "approvals/main.html"
 
     if request.POST == "POST":
 
@@ -58,7 +57,9 @@ def createDocView(request):
 
         else:
             # 입력된 폼이 유효하지 않은 경우
-            return render(request, create_template, {"form": form})
+            print("폼이 유효하지 않음")
+            # return render(request, create_template, {"form": form})
+            pass
 
     else:
-        return render(request, create_template, {"form": form})
+        return render(request, create_template)
