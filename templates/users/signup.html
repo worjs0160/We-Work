@@ -2,12 +2,12 @@
     Sign Up
 {% endblock page_title %}
 
-<form method="POST" action="{% url 'users:signup' %}">
+<form method="POST" action="{% url 'users:signup' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{form.as_p}}
     <button>회원가입</button>
 </form>
 
-<a href="{% url 'core:start' %}">
+<a href="{% url 'core:login' %}">
     <button>돌아가기</button>
 </a>

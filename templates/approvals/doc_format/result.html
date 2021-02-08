@@ -1,23 +1,32 @@
 <!-- 결과보고서 양식 -->
 <div class="m_right5 m_left5"> 
     <div class="view_title_box" style="word-break:break-all;">결과보고서</div> 
-        <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0"> 
-            <colgroup><col width="120px"><col width="*"></colgroup> 
-            <tbody> 
-                <tr> 
-                    <th>제목</th>  
-                    <td colspan="3">
-                    <!--<input class="input_box" type="text" name="[]" id="_single" readonly="readonly" disabled="disabled"> --> 
-                    </td> 
-                </tr> 
-                <tr> 
-                    <th>열람/공람자</th> 
-                    <td colspan="3" class="fix_height">
-                    <!--<input class="input_box" type="text" name="[]" id="_single" readonly="readonly" disabled="disabled"> -->
-                    </td> 
-                </tr> 
-            </tbody> 
-        </table>    
-    </div> 
-    <textarea>내용 작성(에디터)</textarea>
+    <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0"> 
+        <colgroup><col width="120px"><col width="*"></colgroup> 
+        <tbody> 
+            <tr> 
+                <th>제목</th>  
+                <td colspan="3">
+                    {{form.title}}
+                </td> 
+            </tr> 
+            <tr> 
+                <th>열람/공람자</th> 
+                <td colspan="3" class="fix_height">
+                    {{form.viewer}}
+                </td> 
+            </tr> 
+        </tbody> 
+    </table>
+    <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0">
+        <tbody>
+            <tr>
+                <th colspan="9" style="text-align: center">내용</th>
+            </tr>
+            <tr>
+                <td colspan="9">{{form.contents}}</td>
+            </tr>
+
+        </tbody>
+    </table>
 </div>

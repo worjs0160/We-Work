@@ -5,6 +5,7 @@ from django.conf import settings
 from django.db import models
 from django.shortcuts import reverse
 from core import models as core_models
+from core.managers import CustomManager
 from users.models import User
 
 
@@ -79,12 +80,13 @@ class Board(core_models.TimeStampedModel):
 
     viewCnts = models.PositiveIntegerField(default=0, verbose_name="조회수")
 
+    objects = CustomManager()
+
     def __str__(self):
         return f"{self.title}({self.postNo})"
 
     def delete(self, *args, **kwargs):
         a = self.attachments.get(board=self)
-        print(a.file)
         if a.file:
             os.remove(os.path.join(settings.MEDIA_ROOT, a.file.name))
         super().delete(*args, **kwargs)

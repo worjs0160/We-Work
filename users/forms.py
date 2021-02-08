@@ -41,6 +41,7 @@ class SignUpForm(forms.ModelForm):
             "phone_num",
             "user_addr",
             "post_num",
+            "avatar",
         )
 
     def clean_re_user_pw(self):
@@ -65,6 +66,7 @@ class SignUpForm(forms.ModelForm):
         birthdate = self.cleaned_data.get("birthdate")
         user_addr = self.cleaned_data.get("user_addr")
         post_num = self.cleaned_data.get("post_num")
+        avatar = self.cleaned_data.get("avatar")
 
         user.username = user_id
         user.set_password(user_pw)  # pw암호화
@@ -74,6 +76,7 @@ class SignUpForm(forms.ModelForm):
         user.birthdate = birthdate
         user.user_addr = user_addr
         user.post_num = post_num
+        user.avatar = avatar
         user.save()  # DB에 유저 저장
 
 
@@ -94,3 +97,15 @@ class FindPasswordForm(forms.Form):
 
         except models.User.DoesNotExist:
             self.add_error("user_id", forms.ValidationError("User does not exist"))
+
+
+class UpdateProfileForm(forms.ModelForm):
+    class Meta:
+        model = models.User
+        fields = [
+            "phone_num",
+            "user_addr",
+            "post_num",
+            "user_bio",
+            "avatar",
+        ]

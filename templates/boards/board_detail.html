@@ -16,7 +16,7 @@
             <hr>
             <ul>
                 <li>
-                    <a href="{{ board.attachments.get.file.url }}" download="{{board.attachments.get.file.adminupload.url}}"> {{board.attachments.get.filename}}</a> 
+                    <a href="{% url 'boards:download' board.attachments.get.pk %}" > {{board.attachments.get.filename}}</a>                        
                 </li>
             </ul>
         </div>

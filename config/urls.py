@@ -30,11 +30,6 @@ urlpatterns = [
     path("ckeditor/", include("ckeditor_uploader.urls")),
     path("approvals/", include("approvals.urls", namespace="approvals")),
     path("admin/", admin.site.urls),
-    url(
-        r"^download/(?P<path>.*)$",
-        core_views.download,
-        {"document_root": settings.MEDIA_ROOT},
-    ),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
