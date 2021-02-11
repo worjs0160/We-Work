@@ -31,6 +31,10 @@ def doc_format(request, doc):
     return render(request, "approvals/doc_format/" + doc, {"form": form})
 
 
+def new_doc(request):
+    return render(request, "approvals/partials/new_doc.html")
+
+
 @login_required
 def createDocView(request):
 
