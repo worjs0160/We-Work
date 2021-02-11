@@ -26,8 +26,8 @@ class Calendar(core_models.TimeStampedModel):
     user = models.ForeignKey(
         "users.User", related_name="calendars", on_delete=models.CASCADE
     )
-    start_time = models.DateField(verbose_name="시작일")
-    end_time = models.DateField(verbose_name="종료일")
+    start_time = models.DateTimeField(verbose_name="시작일")
+    end_time = models.DateTimeField(verbose_name="종료일")
     title = models.CharField(max_length=50, verbose_name="제 목")
     place = models.CharField(max_length=50, verbose_name="장 소")
     schedule = models.TextField(verbose_name="일정 내용")
