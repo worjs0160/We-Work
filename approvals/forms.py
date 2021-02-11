@@ -37,6 +37,11 @@ class DraftForm(forms.ModelForm):
             }
         )
 
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
+
 
 class MeetingForm(forms.ModelForm):
     class Meta:
@@ -130,6 +135,11 @@ class MeetingForm(forms.ModelForm):
             }
         )
 
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
+
 
 class BusinessForm(forms.ModelForm):
     class Meta:
@@ -209,6 +219,11 @@ class BusinessForm(forms.ModelForm):
             }
         )
 
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
+
 
 class ResultForm(forms.ModelForm):
     class Meta:
@@ -241,6 +256,11 @@ class ResultForm(forms.ModelForm):
                 "disabled": "true",
             }
         )
+
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
 
 
 class VoucherForm(forms.ModelForm):
@@ -294,3 +314,8 @@ class VoucherForm(forms.ModelForm):
                 "disabled": "true",
             }
         )
+
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
