@@ -1,49 +1,3 @@
-.tab_box ul.fixed.w_160 li a {
-    width: 160px;
-}
-.tab_box ul {
-    padding: 0px;
-    margin: 0px;
-    border-bottom: 1px solid #dbdee1;
-    list-style: none;
-}
-.tab_box ul li {
-    display: inline-block;
-    height: 42px;
-    line-height: 42px;
-    border-top: 1px solid #dbdee1;
-    border-right: 1px solid #dbdee1;
-    background: #f6f6f6;
-    text-align: center;
-}
-.tab_box ul li a {
-    padding: 0 15px;
-    color: #7e7e7e;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-}
-.tab_box ul li.active a {
-    color: #1A1A1B;
-    height: 43px;
-    position: relative;
-    font-weight: 500;
-    background: #fff;
-}
-.tab_box ul li.active {
-    height: 41px;
-    line-height: 41px;
-    border-top: 2px solid #313d47;
-}
-.tab_box ul li:first-child {
-    margin-left: 15px;
-    border-left: 1px solid #dbdee1;
-}
-.m_left0 {
-    margin-left: 0px !important;
-}
-
 /*
 * 양식 바디
 */
@@ -54,10 +8,7 @@
     font-weight: 500;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.lwsp-container .basic_table.type_e {
-    width: 98%;
-    margin: 0 auto;
-}
+
 .basic_table.type_e {
     background: #fff;
     border-right: 1px solid #D8D9DA;
@@ -109,19 +60,13 @@
     height: 100%;
     /* overflow: hidden; */
 }
-.calender_box.write {
-    width: calc(50% - 120px);
-    height: 32px;
-    float: left;
-    position: relative;
-}
 .input_box:not(.popup) {
     background: white;
 }
 .input_box:disabled {
     color: transparent;
 }
-body, input[type="text"], select, textarea, button, span {
+input[type="text"], select, textarea, button, span {
     font-family: 'Noto Sans KR',sans-serif;
     font-size: 14px;
     font-weight: normal;
@@ -146,10 +91,6 @@ body, input[type="text"], select, textarea, button, span {
     border-left: 1px solid #D8D9DA;
     height: 50px;
     box-sizing: border-box;
-}
-.basic_table .in_button {
-    padding: 14px 0 14px 16px !important;
-    line-height: 24px;
 }
 .form_textarea.preview {
     width: 100%;
@@ -176,36 +117,11 @@ body, input[type="text"], select, textarea, button, span {
     width: 498px;
     float: right;
 }
-.basic_table .in_button {
-    padding: 14px 0 14px 16px !important;
-    line-height: 24px;
-}
 
 .basic_table th, .basic_table td {
     color: #1A1B1B;
 }
-.calender_box.write {
-    width: calc(50% - 120px);
-    height: 32px;
-    float: left;
-    position: relative;
-}
-.calender_box {
-    width: 35%;
-    height: 32px;
-    float: left;
-    position: relative;
-}
-.calender_tilde.write {
-    float: left;
-    line-height: 32px;
-}
 
-.calender_tilde {
-    float: left;
-    line-height: 32px;
-    margin: 0 2px;
-}
 .between_wrap.form {
     background: #fff;
     border-left: 1px solid #dddee1;
@@ -220,26 +136,4 @@ body, input[type="text"], select, textarea, button, span {
 }
 .f_left {
     float: left;
-}
-.btn.basic {
-    padding: 0 10px;
-    border: 1px solid #D8D9DA;
-    border-radius: 2px;
-    background: #fff;
-    vertical-align: top;
-    font-family: 'Noto Sans KR',sans-serif;
-    color: #1A1B1B;
-    font-weight: 500;
-}
-
-.btn {
-    display: inline-block;
-    cursor: pointer !important;
-    font-size: 14px;
-    outline: none;
-}
-.btn.basic span {
-    line-height: 28px;
-    font-size: 14px;
-    color: #1A1A1B;
 }

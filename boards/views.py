@@ -19,7 +19,7 @@ def readBoardList(request):
 @login_required
 def detailBoardView(request, pk):
 
-    board = models.Board.get_or_none(postNo=pk)
+    board = models.Board.objects.get_or_none(postNo=pk)
     return render(request, "boards/board_detail.html", {"board": board})
 
 
@@ -49,9 +49,10 @@ def createBoardView(request):
             board = form.save()
             board.author = request.user
             board.save()
-            file = request.FILES["attachments"]
-            filename = file.name
+
+            file = request.FILES.get("attachments")
             if file:
+                filename = file.name
                 models.Attachment.objects.create(
                     file=file, board=board, filename=filename
                 )
