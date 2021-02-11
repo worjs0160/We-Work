@@ -95,9 +95,55 @@ def ListMyDocView(request):
     return render(request, "approvals/my_doc_list.html", context)
 
 
+@login_required
+def ListViewDocView(request):
+
+    a_draft = models.Draft.objects.filter(viewer__in=[request.user])
+    a_meeting = models.Meeting.objects.filter(viewer__in=[request.user])
+    a_business = models.Business.objects.filter(viewer__in=[request.user])
+    a_result = models.Result.objects.filter(viewer__in=[request.user])
+    a_voucher = models.Voucher.objects.filter(viewer__in=[request.user])
+
+    context = {
+        "a_drafts": a_draft,
+        "a_meetings": a_meeting,
+        "a_business": a_business,
+        "a_results": a_result,
+        "a_vouchers": a_voucher,
+    }
+
+    return render(request, "approvals/my_doc_list.html", context)
+
+
+@login_required
+def ListApprovalDocView(request):
+
+    a_draft = models.Draft.objects.filter(author=request.user)
+    a_meeting = models.Meeting.objects.filter(author=request.user)
+    a_business = models.Business.objects.filter(author=request.user)
+    a_result = models.Result.objects.filter(author=request.user)
+    a_voucher = models.Voucher.objects.filter(author=request.user)
+
+    context = {
+        "a_drafts": a_draft,
+        "a_meetings": a_meeting,
+        "a_business": a_business,
+        "a_results": a_result,
+        "a_vouchers": a_voucher,
+    }
+
+    return render(request, "approvals/my_doc_list.html", context)
+
+
 def DetailView(request, doc_pk, doc_type, doc_path):
     print(doc_pk)
     print(doc_type)
     print(doc_path)
+
+    content = {
+        "doc_pk": doc_pk,
+        "doc_type": doc_type,
+        "doc_path": doc_path,
+    }
 
     return render(request, "approvals/doc_detail.html")

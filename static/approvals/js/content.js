@@ -17,6 +17,27 @@ $(document).ready(function () {
         return false;
     });
 
+    $('#my_doc').click(function () {
+        /*내 문서 들어가기*/
+        $(".approval-body").children().remove();
+        $(".approval-body").load('my_doc_list');
+        return false;
+    });
+
+    $('#view_doc').click(function () {
+        /*열람 가능 문서 들어가기*/
+        $(".approval-body").children().remove();
+        $(".approval-body").load('view_doc_list');
+        return false;
+    });
+
+    $('#approval_doc').click(function () {
+        /*결재함 들어가기*/
+        $(".approval-body").children().remove();
+        $(".approval-body").load('approval_doc_list');
+        return false;
+    });
+
     $('#create').click(function () {
         /*글쓰기*/
         $('.input').attr({
@@ -27,4 +48,5 @@ $(document).ready(function () {
         $('#create').attr("style", "display:none");
         return false;
     });
+
 });
