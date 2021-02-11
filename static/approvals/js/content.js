@@ -53,7 +53,7 @@ $(document).ready(function () {
     $('#business').click(function () {
         /*업무보고서*/
         $('.view_box').children().remove();
-        $('#doctype').val('meeting');
+        $('#doctype').val('business');
         $('#create').attr("style", "display:inline");
         $('#submit').attr("style", "display:none");
         $('.view_box').load('doc_format/business.html');

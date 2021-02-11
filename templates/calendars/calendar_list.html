@@ -2,12 +2,16 @@
 
 {% block content %}
     <div class="clearfix">
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %} ">월간</a>
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_week' %}">주간</a>
+    </div>
+    <div class="clearfix">
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %}?{{ next_month }} "> 다 음 >> </a>
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %}?{{ prev_month }}"> << 이 전 </a>
         <button id="create-event" class="btn btn-info right mr-2" type = "button"> 일정 추가 </button>
     </div>
 
-    <div style="color: rgb(24, 36, 204);">
+    <div style="color: black;">
         {{calendar}}
     </div>
 {% endblock %}

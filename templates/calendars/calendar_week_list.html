@@ -1,0 +1,17 @@
+{% extends 'calendars/base.html' %}
+
+{% block content %}
+    <div class="clearfix">
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar' %} ">월간</a>
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_week' %}">주간</a>
+    </div>
+    <div class="clearfix">
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_week' %}?{{ next_week }} "> 다 음 w>> </a>
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_week' %}?{{ prev_week }}"> << 이 전 w</a>
+        <button id="create-event" class="btn btn-info right mr-2" type = "button"> 일정 추가 w</button>
+    </div>
+
+    <div style="color: rgb(24, 36, 204);">
+        {{calendar}}
+    </div>
+{% endblock %}

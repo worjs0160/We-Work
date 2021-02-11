@@ -15,21 +15,32 @@ class DraftForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(DraftForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['viewer'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['contents'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
+        self.fields["title"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["contents"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
 
 
 class MeetingForm(forms.ModelForm):
@@ -45,67 +56,89 @@ class MeetingForm(forms.ModelForm):
             "result",
             "etc",
         )
-        
+
     def __init__(self, *args, **kwargs):
         super(MeetingForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['viewer'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['start_date'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['end_date'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['place'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '2px',
-            'style': 'resize:none',
-        })
-        self.fields['departments'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['agenda'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        self.fields['result'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        self.fields['etc'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
+        self.fields["title"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["start_date"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["end_date"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["place"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "2px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["departments"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["agenda"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["result"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["etc"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
 
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
 
 
 class BusinessForm(forms.ModelForm):
@@ -121,57 +154,76 @@ class BusinessForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(BusinessForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['viewer'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['d_goal'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        self.fields['w_goal'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        self.fields['last_do'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        self.fields['to_do'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        self.fields['priority'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '80px',
-            'rows': '5px',
-            'style': 'resize:none',
-        })
-        
+        self.fields["title"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["d_goal"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["w_goal"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["last_do"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["to_do"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["priority"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "80px",
+                "rows": "5px",
+                "style": "resize:none",
+            }
+        )
+
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
+
 
 class ResultForm(forms.ModelForm):
     class Meta:
@@ -183,22 +235,32 @@ class ResultForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ResultForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['viewer'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['contents'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
+        self.fields["title"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["contents"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
 
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
 
 
 class VoucherForm(forms.ModelForm):
@@ -214,31 +276,46 @@ class VoucherForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(VoucherForm, self).__init__(*args, **kwargs)
-        self.fields['title'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['viewer'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['contents'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
-        self.fields['usedby_d'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-            'cols': '50px',
-            'rows': '1px',
-            'style': 'resize:none',
-        })
-        self.fields['usedby_u'].widget.attrs.update({
-            'class':'input',
-            'readonly':'true',
-            'disabled': 'true',
-        })
+        self.fields["title"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["contents"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["usedby_d"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+                "cols": "50px",
+                "rows": "1px",
+                "style": "resize:none",
+            }
+        )
+        self.fields["usedby_u"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+
+    def save(self, *args, **kwargs):
+        print("폼 저장 작업 시작")
+        approval = super().save(commit=False)
+        return approval
