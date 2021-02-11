@@ -91,9 +91,9 @@ def ListMyDocView(request):
     return render(request, "approvals/my_doc_list.html", context)
 
 
-def DetailView(request):
-    def get(self):
-        doc_id = self.request.GET.get("pk")
-        print(doc_id)
+def DetailView(request, doc_pk, doc_type, doc_path):
+    print(doc_pk)
+    print(doc_type)
+    print(doc_path)
 
     return render(request, "approvals/doc_detail.html")

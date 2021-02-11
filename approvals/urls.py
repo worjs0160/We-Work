@@ -8,5 +8,9 @@ urlpatterns = [
     path("main/doc_format/<str:doc>", views.doc_format),
     path("create/", views.createDocView, name="create"),
     path("list/", views.ListMyDocView, name="list"),
-    path("detail/<int:pk>", views.DetailView, name="detail"),
+    path(
+        "detail/<int:doc_pk><str:doc_type><str:doc_path>/",
+        views.DetailView,
+        name="detail",
+    ),
 ]

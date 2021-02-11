@@ -14,7 +14,7 @@
 
     <div class="card-body mt-3 border">
         <h5>기안서</h5>
-        <table width ="700">
+        <table width ="800">
             <th>제목</th>
             <th>작성자</th>
             <th>열람자</th>
@@ -24,7 +24,7 @@
                 {% for draft in a_drafts %}
                     <tr>
                         <td>
-                            <a href="{% url 'approvals:detail' draft.pk %}">
+                            <a href="{% url 'approvals:detail' draft.pk 'draft' 'read' %}">
                                 {{draft.title}}
                             </a>
                         </td>
@@ -35,7 +35,7 @@
                             {% endfor %}
                         </td>
                         <td>{{draft.status}}</td>
-                        <td>{{draft.created|date:"Y-m-d f"}}</td>
+                        <td>{{draft.created|date:"Y-m-d A f"}}</td>
                     </tr>
                 {% endfor %}
             {% else %}
@@ -46,7 +46,7 @@
 
     <div class="card-body mt-3 border">
         <h5>지출결의서</h5>
-        <table width ="700">
+        <table width ="800">
             <th>제목</th>
             <th>작성자</th>
             <th>열람자</th>
@@ -65,7 +65,7 @@
                             {% endfor %}
                         </td>
                         <td>{{voucher.status}}</td>
-                        <td>{{voucher.created|date:"Y-m-d f"}}</td>
+                        <td>{{voucher.created|date:"Y-m-d A f"}}</td>
                     </tr>
                 {% endfor %}
             {% else %}
@@ -78,7 +78,7 @@
 
     <div class="card-body mt-3 border">
         <h5>결과보고서</h5>
-        <table width ="700">
+        <table width ="800">
             <th>제목</th>
             <th>작성자</th>
             <th>열람자</th>
@@ -97,7 +97,7 @@
                             {% endfor %}
                         </td>
                         <td>{{result.status}}</td>
-                        <td>{{result.created|date:"Y-m-d f"}}</td>
+                        <td>{{result.created|date:"Y-m-d A f"}}</td>
                     </tr>
                 {% endfor %}
             {% else %}
@@ -110,7 +110,7 @@
 
     <div class="card-body mt-3 border">
         <h5>회의보고서</h5>
-        <table width ="700">
+        <table width ="800">
             <th>제목</th>
             <th>작성자</th>
             <th>열람자</th>
@@ -125,7 +125,7 @@
                         <td>{{meeting.author}}</td>
                         <td>{{meeting.viewer}}</td>
                         <td>{{meeting.status}}</td>
-                        <td>{{meeting.created|date:"Y-m-d f"}}</td>
+                        <td>{{meeting.created|date:"Y-m-d A f"}}</td>
                     </tr>
                 {% endfor %}
             {% else %}
@@ -138,7 +138,7 @@
 
     <div class="card-body mt-3 border">
         <h5>업무 보고서</h5>
-        <table width ="700">
+        <table width ="800">
             <th>제목</th>
             <th>작성자</th>
             <th>열람자</th>
@@ -157,7 +157,7 @@
                             {% endfor %}
                         </td>
                         <td>{{business.status}}</td>
-                        <td>{{business.created|date:"Y-m-d f"}}</td>
+                        <td>{{business.created|date:"Y-m-d A f"}}</td>
                     </tr>
                 {% endfor %}
             {% else %}
