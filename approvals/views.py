@@ -136,14 +136,27 @@ def ListApprovalDocView(request):
 
 
 def DetailView(request, doc_pk, doc_type, doc_path):
-    print(doc_pk)
-    print(doc_type)
-    print(doc_path)
 
-    content = {
+    if doc_type == "draft":
+        doc_data = models.Draft.objects.get(pk=doc_pk)
+    elif doc_type == "business":
+        doc_data = models.Business.objects.get(pk=doc_pk)
+    elif doc_type == "meeting":
+        doc_data = models.Meeting.objects.get(pk=doc_pk)
+    elif doc_type == "voucher":
+        doc_data = models.Voucher.objects.get(pk=doc_pk)
+    elif doc_type == "result":
+        doc_data = models.Result.objects.get(pk=doc_pk)
+    else:
+        return render(request, "approvals:main")
+
+    context = {
         "doc_pk": doc_pk,
+        "doc_data": doc_data,
         "doc_type": doc_type,
         "doc_path": doc_path,
     }
 
-    return render(request, "approvals/doc_detail.html")
+    success_path = "approvals/doc_out/" + doc_type + ".html"
+
+    return render(request, success_path, context)
