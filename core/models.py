@@ -20,7 +20,12 @@ class TimeStampedModel(models.Model):
 
 class Department(models.Model):
 
-    d_name = models.CharField(max_length=80)
+    class Meta:
+        verbose_name = "부서"
+        verbose_name_plural = "부서"
+
+    d_id = models.PositiveIntegerField(primary_key=True, verbose_name="부서ID")
+    d_name = models.CharField(max_length=80, verbose_name="부서명")
 
     def __str__(self):
         return self.d_name
@@ -28,7 +33,12 @@ class Department(models.Model):
     
 class Position(models.Model):
 
-    p_name = models.CharField(max_length=80)
+    class Meta:
+        verbose_name = "직급"
+        verbose_name_plural = "직급"
+
+    p_id = models.PositiveIntegerField(primary_key=True, verbose_name="직급ID")
+    p_name = models.CharField(max_length=80, verbose_name="직급명")
     
     def __str__(self):
         return self.d_name

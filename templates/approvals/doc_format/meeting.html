@@ -1,0 +1,85 @@
+<div class="m_right5 m_left5">  
+        <div class="view_title_box" style="word-break:break-all;">회의보고서</div> 
+        <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0"> 
+            <colgroup><col width="120px"><col width="*"></colgroup> 
+            <tbody> 
+                <tr> 
+                    <th>회의명</th>  
+                    <td colspan="3">
+                        {{form.title}}
+                    </td> 
+                </tr> 
+                <tr> 
+                    <th>열람/공람자</th>
+                    <td colspan="3" class="fix_height"> 
+                        {{form.viewer}}
+                    </td> 
+                </tr> 
+            </tbody> 
+        </table>    
+        <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0"> 
+            <colgroup> 
+                <col width="120px"> 
+                <col width="*"> 
+                <col width="120px"> 
+                <col width="*"> 
+                <col width="120px"> 
+                <col width="*"> 
+            </colgroup>
+
+            <tbody>
+                <tr>
+                    <th>회의 장소</th> 
+                    <td colspan="5"> 
+                        {{form.place}}
+                    </td> 
+                </tr>
+                <tr>
+                    <th>회의 일시</th> 
+                    <td colspan="5"> 
+                        <div> 
+                            <div>
+                                {{form.start_date}}
+                            </div> 
+                            <span>~</span> 
+                            <div>
+                                {{form.end_date}}
+                            </div>
+                        </div>
+                    </td> 
+                </tr> 
+                <tr> 
+                    <th>참석 부서</th> 
+                    <td colspan="5">
+                        {{form.departments}}
+                    </td> 
+                </tr>
+                <tr>
+                    <th>참석자</th> 
+                    <td colspan="5" class="in_button"> 
+                        {{form.attendee}}
+                    </td> 
+                </tr> 
+                <tr> 
+                    <th>주요 안건</th> 
+                    <td colspan="5" class="in_button"> 
+                        {{form.agenda}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>의결사항</th>
+                    <td colspan="5" class="in_button">
+                        {{form.result}}
+                    </td>
+                </tr>
+                <tr>
+                    <th>기타사항</th>
+                    <td colspan="5" class="in_button">
+                        {{form.etc}}
+                    </td> 
+                </tr> 
+            </tbody>
+        </table> 
+        
+    </div>
+</div>

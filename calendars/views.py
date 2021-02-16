@@ -1,9 +1,9 @@
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.views import generic
 from django.utils.safestring import mark_safe
-from datetime import timedelta
+from django.utils import timezone, dateformat
 import calendar
 from django.urls import reverse_lazy
 from bootstrap_modal_forms.generic import (
@@ -13,7 +13,7 @@ from bootstrap_modal_forms.generic import (
 )
 from django.contrib.auth import get_user_model
 from .models import Calendar, File
-from .utils import Calendar_u
+from .utils import Calendar_u, Calendar_Week
 from .forms import EventForm
 
 UserModel = get_user_model()
@@ -39,6 +39,33 @@ def next_month(d):
     next_month = last + timedelta(days=1)
     month = "month=" + str(next_month.year) + "-" + str(next_month.month)
     return month
+
+# 주간으로 보기 - start
+
+
+def get_week_date(req_day):
+    if req_day:
+        year, month, day = (int(x) for x in req_day.split("-"))
+        return date(year, month, day)
+    return datetime.today()
+
+
+def prev_week(d):
+    first = d
+    prev_week = first - timedelta(days=7)
+    week = "week=" + str(prev_week.year) + "-" + \
+        str(prev_week.month) + "-" + str(prev_week.day)
+    return week
+
+
+def next_week(d):
+    first = d
+    next_week = first + timedelta(days=7)
+    week = "week=" + str(next_week.year) + "-" + \
+        str(next_week.month) + "-" + str(next_week.day)
+    return week
+
+# 주간으로 보기 - end
 
 
 def get_context_data(self, **kwargs):
@@ -67,22 +94,21 @@ class create_event(BSModalCreateView):
     form_class = EventForm
     success_message = "Sucess: Event was created"
     success_url = reverse_lazy("calendars:calendar")
-
+    
     def form_valid(self, form):
         """If the form is valid, redirect to the supplied URL."""
         if self.request.is_ajax():
             calendar = form.save()
             calendar.user = self.request.user
             calendar.save()
-
-            file = self.request.FILES.get("attached_file")
+            file = self.request.FILES.get("file")
             if file:
                 File.objects.create(file=file, calendar=calendar)
             else:
                 File.objects.create(calendar=calendar)
 
         return HttpResponseRedirect(reverse_lazy("calendars:calendar"))
-
+    
 
 class EventEdit(BSModalUpdateView):
     model = Calendar
@@ -103,3 +129,26 @@ class EventDeleteView(BSModalDeleteView):
     template_name = "calendars/event_delete.html"
     success_message = "Success: Event was deleted."
     success_url = reverse_lazy("calendars:calendar")
+
+
+class CalendarWeekView(generic.ListView):
+
+    model = Calendar
+    template_name = "calendars/calendar_week_list.html"
+    # today = dateformat.format(timezone.now(), "Y-m-d")  # 현재 시간 기록
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        #  현재 날짜 받아오기
+        d = get_week_date(self.request.GET.get("week", None))
+
+        # 달력을 출력할 날짜 포맷팅 기능 세팅
+        cal = Calendar_Week(d.year, d.month, d.day)
+        html_cal = cal.formatmonth(self.request.user, withyear=True)
+        # print(d, "ddddddddddddddddddddddddddddaaaaaaaaaaaaaaaaaa")
+        context["calendar"] = mark_safe(html_cal)
+        context["prev_week"] = prev_week(d)
+        context["next_week"] = next_week(d)
+
+        return context

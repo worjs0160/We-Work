@@ -1,4 +1,5 @@
-from django.views.generic import FormView, DetailView, View
+from django.views import View
+from django.views.generic import FormView, DetailView
 from django.views.generic.edit import UpdateView
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
@@ -63,17 +64,11 @@ class UserInfoView(DetailView):
 class UpdateProfile(UpdateView):
     model = models.User
     template_name = "users/update_profile.html"
-    fields = [
-        "phone_num",
-        "user_addr",
-        "post_num",
-        "user_bio",
-        "avatar",
-    ]
+    form_class = forms.UpdateProfileForm
+
     success_url = reverse_lazy("core:home")
 
     # form에서 로드할 객체(현재 로그인 중인) 불러오는 함수
-    # form에 수정할 유저정보 넘김
     def get_object(self, queryset=None):
         return self.request.user
 
