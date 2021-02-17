@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(window).on('load', function () {
     $('#doc_select').change(function () {
         alert("asd");
         var doc_type = $(this).val();
@@ -35,6 +35,13 @@ $(document).ready(function () {
         /*결재함 들어가기*/
         $(".approval-body").children().remove();
         $(".approval-body").load('approval_doc_list');
+        return false;
+    });
+
+    $('#detail').click(function () {
+        /*문서 열람페이지 들어가기*/
+        $(".approval-body").children().remove();
+        $(".approval-body").load('detail');
         return false;
     });
 
