@@ -40,16 +40,16 @@
             </div>
             
             <div class="card-body">
-              <canvas id="myPieChart" width="100%" height="50"></canvas>
+              <canvas id="work_type" width="100%" height="50"></canvas>
               <script>
                 // 그릴 캔버스의 컨텍스트 가져오기
-                var ctx = document.getElementById("myPieChart");
+                var ctx = document.getElementById("work_type");
                 /*
                 - Chart를 생성하면서, 
                 - ctx를 첫번째 argument로 넘겨주고, 
                 - 두번째 argument로 그림을 그릴때 필요한 요소들을 모두 넘겨줍니다. 
                 */
-                var myPieChart = new Chart(ctx, {
+                var work_type = new Chart(ctx, {
                   type: 'doughnut',
                   data: {
                     labels: ["Blue", "Red", "Yellow", "Green"],
@@ -61,7 +61,7 @@
                 });
               </script>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted">Updated at {{updated_time}}</div>
           </div>
         </div>
 
@@ -73,10 +73,10 @@
             </div>
 
             <div class="card-body">
-              <canvas id="myBarChart" width="100%" height="50"></canvas>
+              <canvas id="work_time" width="100%" height="50"></canvas>
               <script>
                 // Bar Chart Example
-                var ctx = document.getElementById("myBarChart");
+                var ctx = document.getElementById("work_time");
                 var myLineChart = new Chart(ctx, {
                   type: 'bar',
                   data: {
@@ -85,7 +85,7 @@
                       label: "근무시간",
                       backgroundColor: "rgba(2,117,216,1)",
                       borderColor: "rgba(2,117,216,1)",
-                      data: [5, 14, 7, 6, 4, 24, 20],
+                      data: {{time_work}},
                     }],
                   },
                   options: {
@@ -119,7 +119,7 @@
                 });
               </script>
             </div>
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+            <div class="card-footer small text-muted">Updated at {{updated_time}}</div>
           </div>
         </div>
       </div>

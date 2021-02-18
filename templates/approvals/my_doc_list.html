@@ -1,168 +1,161 @@
-{% block content %}
-    <h3 class="mt-3">문서 목록</h3>
-
-    <div class="card-body mt-3 border">
-        <h5>기안서</h5>
-        <table width ="800">
-            <th>제목</th>
-            <th>작성자</th>
-            <th>열람자</th>
-            <th>상태</th>
-            <th>작성일</th>
-            {% if a_drafts %}
-                {% for draft in a_drafts %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'approvals:detail' draft.pk 'draft' 'read' %}">
-                                {{draft.title}}
-                            </a>
-                        </td>
-                        <td>{{draft.author}}</td>
-                        <td>
-                            {% for viewer in draft.viewer.all %}
-                                {{viewer}}
-                            {% endfor %}
-                        </td>
-                        <td>{{draft.status}}</td>
-                        <td>{{draft.created|date:"Y-m-d A f"}}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <tr>문서가 존재하지 않습니다.</tr>
-            {% endif %}
-        </table>
-    </div>
-
-    <div class="card-body mt-3 border">
-        <h5>지출결의서</h5>
-        <table width ="800">
-            <th>제목</th>
-            <th>작성자</th>
-            <th>열람자</th>
-            <th>상태</th>
-            <th>작성일</th>
-            {% if a_vouchers %}
-                {% for voucher in a_vouchers %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'approvals:detail' voucher.pk 'voucher' 'read' %}">
-                                {{voucher.title}}
-                            </a>
-                        </td>
-                        <td>{{voucher.author}}</td>
-                        <td>
-                            {% for viewer in voucher.viewer.all %}
-                                {{viewer}}
-                            {% endfor %}
-                        </td>
-                        <td>{{voucher.status}}</td>
-                        <td>{{voucher.created|date:"Y-m-d A f"}}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
+<h3 class="mt-3">문서 목록</h3>
+<div class="card-body mt-3 border">
+    <h5>기안서</h5>
+    <table width ="800">
+        <th>제목</th>
+        <th>작성자</th>
+        <th>열람자</th>
+        <th>상태</th>
+        <th>작성일</th>
+        {% if a_drafts %}
+            {% for draft in a_drafts %}
                 <tr>
-                    <td>문서가 존재하지 않습니다.</td>
+                    <td>
+                        <a href="{% url 'approvals:detail' draft.pk 'draft' 'read' %}">
+                            {{draft.title}}
+                        </a>
+                    </td>
+                    <td>{{draft.author}}</td>
+                    <td>
+                        {% for viewer in draft.viewer.all %}
+                            {{viewer}}
+                        {% endfor %}
+                    </td>
+                    <td>{{draft.status}}</td>
+                    <td>{{draft.created|date:"Y-m-d A f"}}</td>
                 </tr>
-            {% endif %}
-        </table>
-    </div>
-
-    <div class="card-body mt-3 border">
-        <h5>결과보고서</h5>
-        <table width ="800">
-            <th>제목</th>
-            <th>작성자</th>
-            <th>열람자</th>
-            <th>상태</th>
-            <th>작성일</th>
-            {% if a_results %}
-                {% for result in a_results %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'approvals:detail' result.pk 'result' 'read' %}">
-                                {{result.title}}
-                            </a>
-                        </td>
-                        <td>{{result.author}}</td>
-                        <td>
-                            {% for viewer in result.viewer.all %}
-                                {{viewer}}
-                            {% endfor %}
-                        </td>
-                        <td>{{result.status}}</td>
-                        <td>{{result.created|date:"Y-m-d A f"}}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
+            {% endfor %}
+        {% else %}
+            <tr>문서가 존재하지 않습니다.</tr>
+        {% endif %}
+    </table>
+</div>
+<div class="card-body mt-3 border">
+    <h5>지출결의서</h5>
+    <table width ="800">
+        <th>제목</th>
+        <th>작성자</th>
+        <th>열람자</th>
+        <th>상태</th>
+        <th>작성일</th>
+        {% if a_vouchers %}
+            {% for voucher in a_vouchers %}
                 <tr>
-                    <td>문서가 존재하지 않습니다.</td>
+                    <td>
+                        <a href="{% url 'approvals:detail' voucher.pk 'voucher' 'read' %}">
+                            {{voucher.title}}
+                        </a>
+                    </td>
+                    <td>{{voucher.author}}</td>
+                    <td>
+                        {% for viewer in voucher.viewer.all %}
+                            {{viewer}}
+                        {% endfor %}
+                    </td>
+                    <td>{{voucher.status}}</td>
+                    <td>{{voucher.created|date:"Y-m-d A f"}}</td>
                 </tr>
-            {% endif %}
-        </table>
-    </div>
-
-    <div class="card-body mt-3 border">
-        <h5>회의보고서</h5>
-        <table width ="800">
-            <th>제목</th>
-            <th>작성자</th>
-            <th>열람자</th>
-            <th>상태</th>
-            <th>작성일</th>
-            {% if a_meetings %}
-                {% for meeting in a_meetings %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'approvals:detail' meeting.pk 'meeting' 'read' %}">
-                                {{meeting.title}}
-                            </a>
-                        </td>
-                        <td>{{meeting.author}}</td>
-                        <td>{{meeting.viewer}}</td>
-                        <td>{{meeting.status}}</td>
-                        <td>{{meeting.created|date:"Y-m-d A f"}}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>문서가 존재하지 않습니다.</td>
+            </tr>
+        {% endif %}
+    </table>
+</div>
+<div class="card-body mt-3 border">
+    <h5>결과보고서</h5>
+    <table width ="800">
+        <th>제목</th>
+        <th>작성자</th>
+        <th>열람자</th>
+        <th>상태</th>
+        <th>작성일</th>
+        {% if a_results %}
+            {% for result in a_results %}
                 <tr>
-                    <td>문서가 존재하지 않습니다.</td>
+                    <td>
+                        <a href="{% url 'approvals:detail' result.pk 'result' 'read' %}">
+                            {{result.title}}
+                        </a>
+                    </td>
+                    <td>{{result.author}}</td>
+                    <td>
+                        {% for viewer in result.viewer.all %}
+                            {{viewer}}
+                        {% endfor %}
+                    </td>
+                    <td>{{result.status}}</td>
+                    <td>{{result.created|date:"Y-m-d A f"}}</td>
                 </tr>
-            {% endif %}
-        </table>
-    </div>
-
-    <div class="card-body mt-3 border">
-        <h5>업무 보고서</h5>
-        <table width ="800">
-            <th>제목</th>
-            <th>작성자</th>
-            <th>열람자</th>
-            <th>상태</th>
-            <th>작성일</th>
-            {% if a_business %}
-                {% for business in a_business %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'approvals:detail' business.pk 'business' 'read' %}">
-                                {{business.title}}
-                            </a>
-                        </td>
-                        <td>{{business.author}}</td>
-                        <td>
-                            {% for viewer in business.viewer.all %}
-                                {{viewer}}
-                            {% endfor %}
-                        </td>
-                        <td>{{business.status}}</td>
-                        <td>{{business.created|date:"Y-m-d A f"}}</td>
-                    </tr>
-                {% endfor %}
-            {% else %}
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>문서가 존재하지 않습니다.</td>
+            </tr>
+        {% endif %}
+    </table>
+</div>
+<div class="card-body mt-3 border">
+    <h5>회의보고서</h5>
+    <table width ="800">
+        <th>제목</th>
+        <th>작성자</th>
+        <th>열람자</th>
+        <th>상태</th>
+        <th>작성일</th>
+        {% if a_meetings %}
+            {% for meeting in a_meetings %}
                 <tr>
-                    <td>문서가 존재하지 않습니다.</td>
+                    <td>
+                        <a href="{% url 'approvals:detail' meeting.pk 'meeting' 'read' %}">
+                            {{meeting.title}}
+                        </a>
+                    </td>
+                    <td>{{meeting.author}}</td>
+                    <td>{{meeting.viewer}}</td>
+                    <td>{{meeting.status}}</td>
+                    <td>{{meeting.created|date:"Y-m-d A f"}}</td>
                 </tr>
-            {% endif %}
-        </table>
-    </div>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>문서가 존재하지 않습니다.</td>
+            </tr>
+        {% endif %}
+    </table>
+</div>
+<div class="card-body mt-3 border">
+    <h5>업무 보고서</h5>
+    <table width ="800">
+        <th>제목</th>
+        <th>작성자</th>
+        <th>열람자</th>
+        <th>상태</th>
+        <th>작성일</th>
+        {% if a_business %}
+            {% for business in a_business %}
+                <tr>
+                    <td>
+                        <a href="{% url 'approvals:detail' business.pk 'business' 'read' %}">
+                            {{business.title}}
+                        </a>
+                    </td>
+                    <td>{{business.author}}</td>
+                    <td>
+                        {% for viewer in business.viewer.all %}
+                            {{viewer}}
+                        {% endfor %}
+                    </td>
+                    <td>{{business.status}}</td>
+                    <td>{{business.created|date:"Y-m-d A f"}}</td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>문서가 존재하지 않습니다.</td>
+            </tr>
+        {% endif %}
+    </table>
+</div>
 
-{% endblock content %}
