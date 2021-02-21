@@ -12,25 +12,28 @@ class Calendar_u(HTMLCalendar):
 
     # formats a day as a td
     # filter events by day
-    def formatday(self, user, day, events):
+    def formatday(self, user, day, month, events):
         events_per_day = events.filter(start_time__day=day).filter(user=user)
+        
         d = ""
-
         for event in events_per_day:
             d += f"<li style='background-color:#54f62ba6; padding-left: 5px; font-weight: 700;'> {event.get_html_url} </li>"
 
         if day != 0 and day != datetime.today().day :
             return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
 
-        elif day == datetime.today().day:
-            return f"<td style='background-color:#fcf8e3;'><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
+        else:
+            if month == datetime.today().month and day == datetime.today().day:
+                return f"<td style='background-color:#fcf8e3;'><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
+            elif month != datetime.today().month and day == datetime.today().day:
+                return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
         return "<td></td>"
 
     # formats a week as a tr
-    def formatweek(self, user, theweek, events):
+    def formatweek(self, user, theweek, month, events):
         week = ""
         for d, weekday in theweek:
-            week += self.formatday(user, d, events)
+            week += self.formatday(user, d, month, events)
         return f"<tr> {week} </tr>"
 
     # formats a month as a table
@@ -44,7 +47,7 @@ class Calendar_u(HTMLCalendar):
         cal += f"{self.formatmonthname(self.year, self.month, withyear=withyear)}\n"
         cal += f"{self.formatweekheader()}\n"
         for week in self.monthdays2calendar(self.year, self.month):
-            cal += f"{self.formatweek(user, week, events)}\n"
+            cal += f"{self.formatweek(user, week, self.month, events)}\n"
         return cal
 
 class Calendar_Week(HTMLCalendar):
@@ -99,9 +102,9 @@ class Calendar_Week(HTMLCalendar):
                 if weekday == 4:
                     week += f'<th class="fri">Fri / {d}</th>'
                 if weekday == 5:
-                    week += f'<th class="sat">Sat / {d}</th>'
+                    week += f'<th class="sat" style="color:blue">Sat / {d}</th>'
                 if weekday == 6:
-                    week += f'<th class="sun">Sun / {d}</th></tr>\n'
+                    week += f'<th class="sun" style="color:red">Sun / {d}</th></tr>\n'
         theweek.pop(0)
         return f"<tr> {week} </tr>"
 
@@ -201,9 +204,9 @@ class Calendar_Day(HTMLCalendar):
                 if weekday == 4:
                     day += f'<th class="fri">Fri / {d}</th></tr>\n'
                 if weekday == 5:
-                    day += f'<th class="sat">Sat / {d}</th></tr>\n'
+                    day += f'<th class="sat" style="color:blue">Sat / {d}</th></tr>\n'
                 if weekday == 6:
-                    day += f'<th class="sun">Sun / {d}</th></tr>\n'
+                    day += f'<th class="sun" style="color:red">Sun / {d}</th></tr>\n'
         theweek.pop(0)
         return f"<tr> {day} </tr>"
 

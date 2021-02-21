@@ -9,10 +9,10 @@
     <div class="clearfix">
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_day' %}?{{ next_day }} "> 다 음 >> </a>
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_day' %}?{{ prev_day }}"> << 이 전</a>
-        <button id="create-event" class="btn btn-info right mr-2" type = "button"> 일정 추가 </button>
+        <button id="day_create-event" class="btn btn-info right mr-2" type = "button"> 일정 추가 </button>
     </div>
 
-    <div style="color: rgb(24, 36, 204);">
+    <div style="color: black">
         {{calendar}}
     </div>
 {% endblock %}

@@ -104,7 +104,6 @@ class CalendarView(generic.ListView):
 
     model = Calendar
     template_name = "calendars/calendar_month_list.html"
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get("month", None))
@@ -116,7 +115,7 @@ class CalendarView(generic.ListView):
         return context
 
 
-class create_event(BSModalCreateView):
+class create_month_event(BSModalCreateView):
     template_name = "calendars/event.html"
     form_class = EventForm
     success_message = "Sucess: Event was created"
@@ -180,6 +179,26 @@ class CalendarWeekView(generic.ListView):
 
         return context
 
+class create_week_event(BSModalCreateView):
+    template_name = "calendars/event.html"
+    form_class = EventForm
+    success_message = "Sucess: Event was created"
+    success_url = reverse_lazy("calendars:calendar_week")
+    
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        if self.request.is_ajax():
+            calendar = form.save()
+            calendar.user = self.request.user
+            calendar.save()
+            file = self.request.FILES.get("file")
+            if file:
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                File.objects.create(calendar=calendar)
+
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar_week"))
+
 
 class CalendarDayView(generic.ListView):
 
@@ -189,10 +208,8 @@ class CalendarDayView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        #  현재 날짜 받아오기
         d = get_day_date(self.request.GET.get("day", None))
 
-        # 달력을 출력할 날짜 포맷팅 기능 세팅
         cal = Calendar_Day(d.year, d.month, d.day)
         html_cal = cal.formatmonth(self.request.user, withyear=True)
         context["calendar"] = mark_safe(html_cal)
@@ -200,3 +217,23 @@ class CalendarDayView(generic.ListView):
         context["next_day"] = next_day(d)
 
         return context
+
+class create_day_event(BSModalCreateView):
+    template_name = "calendars/event.html"
+    form_class = EventForm
+    success_message = "Sucess: Event was created"
+    success_url = reverse_lazy("calendars:calendar_day")
+    
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        if self.request.is_ajax():
+            calendar = form.save()
+            calendar.user = self.request.user
+            calendar.save()
+            file = self.request.FILES.get("file")
+            if file:
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                File.objects.create(calendar=calendar)
+
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar_day"))
