@@ -118,11 +118,11 @@ def ListViewDocView(request):
 @login_required
 def ListApprovalDocView(request):
 
-    a_draft = models.Draft.objects.filter(author=request.user)
-    a_meeting = models.Meeting.objects.filter(author=request.user)
-    a_business = models.Business.objects.filter(author=request.user)
-    a_result = models.Result.objects.filter(author=request.user)
-    a_voucher = models.Voucher.objects.filter(author=request.user)
+    a_draft = models.Draft.objects.filter(approver__in=[request.user])
+    a_meeting = models.Meeting.objects.filter(approver__in=[request.user])
+    a_business = models.Business.objects.filter(approver__in=[request.user])
+    a_result = models.Result.objects.filter(approver__in=[request.user])
+    a_voucher = models.Voucher.objects.filter(approver__in=[request.user])
 
     context = {
         "a_drafts": a_draft,
