@@ -13,24 +13,30 @@ class Calendar_u(HTMLCalendar):
     # formats a day as a td
     # filter events by day
     def formatday(self, user, day, events):
-        events_per_day = events.filter(start_time__day=day).filter(user=user)
+        # events_per_day = events.filter(start_time__day=day).filter(user=user)
+        
+        finish_day = events.filter(start_time__day__lt=(day+1)).filter(end_time__day__gt=(day-1)).filter(user=user)
+        print(day, finish_day)
+        
         d = ""
 
-        for event in events_per_day:
-            d += f"<li style='background-color:#54f62ba6; font-weight: 700;'> {event.get_html_url} </li>"
+        for event in finish_day:
+            d += f"<li style='background-color:#54f62ba6; font-weight: 700; padding-left: 10px;margin-bottom: 10px;'> {event.get_html_url} </li>"
 
         if day != 0 and day != datetime.today().day:
             return f"<td ><span class='date'>{day}</span><ul style='list-style: none; padding-left: 0px; padding-right: 0px;'> {d} </ul></td>"
 
         elif day == datetime.today().day:
-            return f"<td style='background-color:#fcf8e3;><span class='date'>{day}</span><ul style='list-style: none; padding-left: 0px;'> {d} </ul></td>"
+            return f"<td style='background-color:#fcf8e3;'><span class='date'>{day}</span><ul style='list-style: none; padding-left: 0px;'> {d} </ul></td>"
 
         return "<td></td>"
 
     # formats a week as a tr
     def formatweek(self, user, theweek, events):
         week = ""
+        # print(theweek, '일주일 데이터 확인~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!')
         for d, weekday in theweek:
+            # print(d, events, '일주일 데이터 확인~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!')
             week += self.formatday(user, d, events)
         return f"<tr> {week} </tr>"
 
