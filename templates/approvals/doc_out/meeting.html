@@ -1,0 +1,99 @@
+{% extends 'approvals/main.html' %}
+
+
+{% block content %}
+    <div class="m_right5 m_left5">  
+            <div class="view_title_box" style="word-break:break-all;">회의보고서</div> 
+            <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0"> 
+                <colgroup><col width="120px"><col width="*"></colgroup> 
+                <tbody> 
+                    <tr> 
+                        <th>회의명</th>  
+                        <td colspan="3">
+                            {{doc_data.title}}
+                        </td> 
+                    </tr> 
+                    <tr> 
+                        <th>열람/공람자</th>
+                        <td colspan="3" class="fix_height"> 
+                            {% for viewer in doc_data.viewer.all %}
+                                {{viewer}}
+                            {% endfor %}
+                        </td> 
+                    </tr>
+                    <tr>
+                        <th>결재자</th>
+                        <td colspan="3" class="fix_height">
+                            {% for a in doc_data.approver.all %}
+                                {{a}}
+                            {% endfor %}
+                        </td>
+                    </tr> 
+                </tbody> 
+            </table>    
+            <table class="basic_table type_e m_bottom15 a4_size" cellpadding="0" cellspacing="0"> 
+                <colgroup> 
+                    <col width="120px"> 
+                    <col width="*"> 
+                    <col width="120px"> 
+                    <col width="*"> 
+                    <col width="120px"> 
+                    <col width="*"> 
+                </colgroup>
+
+                <tbody>
+                    <tr>
+                        <th>회의 장소</th> 
+                        <td colspan="5"> 
+                            {{doc_data.place}}
+                        </td> 
+                    </tr>
+                    <tr>
+                        <th>회의 일시</th> 
+                        <td colspan="5"> 
+                            <div> 
+                                <div>
+                                    {{doc_data.start_date}}
+                                </div> 
+                                <span>~</span> 
+                                <div>
+                                    {{doc_data.end_date}}
+                                </div>
+                            </div>
+                        </td> 
+                    </tr> 
+                    <tr> 
+                        <th>참석 부서</th> 
+                        <td colspan="5">
+                            {{doc_data.departments}}
+                        </td> 
+                    </tr>
+                    <tr>
+                        <th>참석자</th> 
+                        <td colspan="5" class="in_button"> 
+                            {{doc_data.attendee}}
+                        </td> 
+                    </tr> 
+                    <tr> 
+                        <th>주요 안건</th> 
+                        <td colspan="5" class="in_button"> 
+                            {{doc_data.agenda}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>의결사항</th>
+                        <td colspan="5" class="in_button">
+                            {{doc_data.result}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>기타사항</th>
+                        <td colspan="5" class="in_button">
+                            {{doc_data.etc}}
+                        </td> 
+                    </tr> 
+                </tbody>
+            </table> 
+        </div>
+    </div>
+{% endblock content %}

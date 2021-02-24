@@ -7,9 +7,9 @@
         <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_day' %}">일간</a>
     </div>
     <div class="clearfix">
-        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_week' %}?{{ next_week }} "> 다 음 >> </a>
-        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_week' %}?{{ prev_week }}"> << 이 전</a>
-        <button id="week_create-event" class="btn btn-info right mr-2" type = "button"> 일정 추가 </button>
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_day' %}?{{ next_day }} "> 다 음 >> </a>
+        <a class="btn btn-info right mr-2" href="{% url 'calendars:calendar_day' %}?{{ prev_day }}"> << 이 전</a>
+        <button id="day_create-event" class="btn btn-info right mr-2" type = "button"> 일정 추가 </button>
     </div>
 
     <div style="color: black">

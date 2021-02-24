@@ -2,7 +2,7 @@ from django import forms
 from . import models
 from django_summernote.widgets import SummernoteWidget
 
-base_fields = ("title", "contents", "viewer")
+base_fields = ("title", "contents", "viewer", "approver")
 
 
 class DraftForm(forms.ModelForm):
@@ -23,6 +23,13 @@ class DraftForm(forms.ModelForm):
             }
         )
         self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["approver"].widget.attrs.update(
             {
                 "class": "input",
                 "readonly": "true",
@@ -67,6 +74,13 @@ class MeetingForm(forms.ModelForm):
             }
         )
         self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["approver"].widget.attrs.update(
             {
                 "class": "input",
                 "readonly": "true",
@@ -168,6 +182,13 @@ class BusinessForm(forms.ModelForm):
                 "disabled": "true",
             }
         )
+        self.fields["approver"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
         self.fields["d_goal"].widget.attrs.update(
             {
                 "class": "input",
@@ -249,6 +270,13 @@ class ResultForm(forms.ModelForm):
                 "disabled": "true",
             }
         )
+        self.fields["approver"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
         self.fields["contents"].widget.attrs.update(
             {
                 "class": "input",
@@ -284,6 +312,13 @@ class VoucherForm(forms.ModelForm):
             }
         )
         self.fields["viewer"].widget.attrs.update(
+            {
+                "class": "input",
+                "readonly": "true",
+                "disabled": "true",
+            }
+        )
+        self.fields["approver"].widget.attrs.update(
             {
                 "class": "input",
                 "readonly": "true",

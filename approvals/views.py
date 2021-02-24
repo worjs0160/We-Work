@@ -95,9 +95,71 @@ def ListMyDocView(request):
     return render(request, "approvals/my_doc_list.html", context)
 
 
-def DetailView(request):
-    def get(self):
-        doc_id = self.request.GET.get("pk")
-        print(doc_id)
+@login_required
+def ListViewDocView(request):
+
+    a_draft = models.Draft.objects.filter(viewer__in=[request.user])
+    a_meeting = models.Meeting.objects.filter(viewer__in=[request.user])
+    a_business = models.Business.objects.filter(viewer__in=[request.user])
+    a_result = models.Result.objects.filter(viewer__in=[request.user])
+    a_voucher = models.Voucher.objects.filter(viewer__in=[request.user])
+
+    context = {
+        "a_drafts": a_draft,
+        "a_meetings": a_meeting,
+        "a_business": a_business,
+        "a_results": a_result,
+        "a_vouchers": a_voucher,
+    }
+
+    return render(request, "approvals/my_doc_list.html", context)
+
+
+@login_required
+def ListApprovalDocView(request):
+
+    a_draft = models.Draft.objects.filter(approver__in=[request.user])
+    a_meeting = models.Meeting.objects.filter(approver__in=[request.user])
+    a_business = models.Business.objects.filter(approver__in=[request.user])
+    a_result = models.Result.objects.filter(approver__in=[request.user])
+    a_voucher = models.Voucher.objects.filter(approver__in=[request.user])
+
+    context = {
+        "a_drafts": a_draft,
+        "a_meetings": a_meeting,
+        "a_business": a_business,
+        "a_results": a_result,
+        "a_vouchers": a_voucher,
+    }
+
+    return render(request, "approvals/my_doc_list.html", context)
+
+
+@login_required
+def DetailView(request, doc_pk, doc_type, doc_path):
+
+    if doc_type == "draft":
+        doc_data = models.Draft.objects.get(pk=doc_pk)
+    elif doc_type == "business":
+        doc_data = models.Business.objects.get(pk=doc_pk)
+    elif doc_type == "meeting":
+        doc_data = models.Meeting.objects.get(pk=doc_pk)
+    elif doc_type == "voucher":
+        doc_data = models.Voucher.objects.get(pk=doc_pk)
+    elif doc_type == "result":
+        doc_data = models.Result.objects.get(pk=doc_pk)
+    else:
+        return render(request, "approvals:main")
+
+    context = {
+        "doc_pk": doc_pk,
+        "doc_data": doc_data,
+        # "form": doc_data,
+        "doc_type": doc_type,
+        "doc_path": doc_path,
+    }
+
+    # success_path = "approvals/doc_format/" + doc_type + ".html"
+    success_path = "approvals/doc_out/" + doc_type + ".html"
 
     return render(request, "approvals/doc_detail.html")

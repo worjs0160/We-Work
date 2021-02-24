@@ -13,11 +13,12 @@ from bootstrap_modal_forms.generic import (
 )
 from django.contrib.auth import get_user_model
 from .models import Calendar, File
-from .utils import Calendar_u, Calendar_Week
+from .utils import Calendar_u, Calendar_Week, Calendar_Day
 from .forms import EventForm
 
 UserModel = get_user_model()
 
+# 월간으로 보기 - start
 
 def get_date(req_day):
     if req_day:
@@ -40,8 +41,9 @@ def next_month(d):
     month = "month=" + str(next_month.year) + "-" + str(next_month.month)
     return month
 
-# 주간으로 보기 - start
+# 월간으로 보기 - end
 
+# 주간으로 보기 - start
 
 def get_week_date(req_day):
     if req_day:
@@ -67,6 +69,31 @@ def next_week(d):
 
 # 주간으로 보기 - end
 
+# 일간으로 보기 - start
+
+def get_day_date(req_day):
+    if req_day:
+        year, month, day = (int(x) for x in req_day.split("-"))
+        return date(year, month, day)
+    return datetime.today()
+
+
+def prev_day(d):
+    first = d
+    prev_day = first - timedelta(days=1)
+    day = "day=" + str(prev_day.year) + "-" + \
+        str(prev_day.month) + "-" + str(prev_day.day)
+    return day
+
+
+def next_day(d):
+    first = d
+    next_day = first + timedelta(days=1)
+    day = "day=" + str(next_day.year) + "-" + \
+        str(next_day.month) + "-" + str(next_day.day)
+    return day
+
+# 일간으로 보기 - end
 
 def get_context_data(self, **kwargs):
     context = super().get_context_data(**kwargs)
@@ -76,8 +103,7 @@ def get_context_data(self, **kwargs):
 class CalendarView(generic.ListView):
 
     model = Calendar
-    template_name = "calendar_list.html"
-
+    template_name = "calendars/calendar_month_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         d = get_date(self.request.GET.get("month", None))
@@ -89,11 +115,11 @@ class CalendarView(generic.ListView):
         return context
 
 
-class create_event(BSModalCreateView):
+class create_month_event(BSModalCreateView):
     template_name = "calendars/event.html"
     form_class = EventForm
     success_message = "Sucess: Event was created"
-    success_url = reverse_lazy("calendars:calendar")
+    success_url = reverse_lazy("calendars:calendar_month")
     
     def form_valid(self, form):
         """If the form is valid, redirect to the supplied URL."""
@@ -107,7 +133,7 @@ class create_event(BSModalCreateView):
             else:
                 File.objects.create(calendar=calendar)
 
-        return HttpResponseRedirect(reverse_lazy("calendars:calendar"))
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar_month"))
     
 
 class EventEdit(BSModalUpdateView):
@@ -115,7 +141,7 @@ class EventEdit(BSModalUpdateView):
     template_name = "calendars/event_edit.html"
     form_class = EventForm
     success_message = "Success: Event was updated."
-    success_url = reverse_lazy("calendars:calendar")
+    success_url = reverse_lazy("calendars:calendar_month")
 
 
 def event_details(request, event_id):
@@ -128,7 +154,7 @@ class EventDeleteView(BSModalDeleteView):
     model = Calendar
     template_name = "calendars/event_delete.html"
     success_message = "Success: Event was deleted."
-    success_url = reverse_lazy("calendars:calendar")
+    success_url = reverse_lazy("calendars:calendar_month")
 
 
 class CalendarWeekView(generic.ListView):
@@ -152,3 +178,62 @@ class CalendarWeekView(generic.ListView):
         context["next_week"] = next_week(d)
 
         return context
+
+class create_week_event(BSModalCreateView):
+    template_name = "calendars/event.html"
+    form_class = EventForm
+    success_message = "Sucess: Event was created"
+    success_url = reverse_lazy("calendars:calendar_week")
+    
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        if self.request.is_ajax():
+            calendar = form.save()
+            calendar.user = self.request.user
+            calendar.save()
+            file = self.request.FILES.get("file")
+            if file:
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                File.objects.create(calendar=calendar)
+
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar_week"))
+
+
+class CalendarDayView(generic.ListView):
+
+    model = Calendar
+    template_name = "calendars/calendar_day_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        d = get_day_date(self.request.GET.get("day", None))
+
+        cal = Calendar_Day(d.year, d.month, d.day)
+        html_cal = cal.formatmonth(self.request.user, withyear=True)
+        context["calendar"] = mark_safe(html_cal)
+        context["prev_day"] = prev_day(d)
+        context["next_day"] = next_day(d)
+
+        return context
+
+class create_day_event(BSModalCreateView):
+    template_name = "calendars/event.html"
+    form_class = EventForm
+    success_message = "Sucess: Event was created"
+    success_url = reverse_lazy("calendars:calendar_day")
+    
+    def form_valid(self, form):
+        """If the form is valid, redirect to the supplied URL."""
+        if self.request.is_ajax():
+            calendar = form.save()
+            calendar.user = self.request.user
+            calendar.save()
+            file = self.request.FILES.get("file")
+            if file:
+                File.objects.create(file=file, calendar=calendar)
+            else:
+                File.objects.create(calendar=calendar)
+
+        return HttpResponseRedirect(reverse_lazy("calendars:calendar_day"))

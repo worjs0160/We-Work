@@ -7,7 +7,7 @@ Event Details
 {% block content %}
 <div class="container">
     <div class="clearfix">
-        <a class="btn btn-primary left" href="{% url 'calendars:calendar' %}"> 돌아가기 </a>
+        <a class="btn btn-primary left" href="{% url 'calendars:calendar_month' %}"> 돌아가기 </a>
         <button type="button" id="event-delete" class="btn btn-info right mr-2" data-form-url="{% url 'calendars:delete_event' event.pk %}"> 삭 제 </button>
         <button type="button" id="event-edit" class="btn btn-info right mr-2" data-form-url="{% url 'calendars:event_edit' event.pk %}"> 수 정 </button>
     </div>

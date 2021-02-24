@@ -45,6 +45,13 @@ class DocBase(TimeStampedModel):
         verbose_name="열람자",
     )
 
+    approver = models.ManyToManyField(
+        "users.User",
+        related_name="%(class)s".lower() + "_approver",
+        blank=True,
+        verbose_name="결재자",
+    )
+
     status = models.CharField(
         choices=STA_CHOICES, max_length=10, default=STA_REQ, verbose_name="결재상황"
     )
@@ -126,4 +133,38 @@ class Voucher(DocBase):
     usedby_d = models.TextField(max_length=20, null=True)
     usedby_u = models.ForeignKey(
         "users.User", related_name="Voucher", null=True, on_delete=models.DO_NOTHING
+    )
+
+
+class approval_info(models.Model):
+    """
+    결재 정보, 문서에 연결하여 사용, 결재자마다 생성
+    """
+
+    class Meta:
+        verbose_name = "결재정보"
+        verbose_name_plural = "결재정보"
+
+    STA_REQ = "request"
+    STA_APP = "approved"
+    STA_RET = "return"
+
+    STA_CHOICES = (
+        (STA_REQ, "결재전"),
+        (STA_APP, "결재승인"),
+        (STA_RET, "결재반려"),
+    )
+
+    status = models.CharField(
+        choices=STA_CHOICES, max_length=10, default=STA_REQ, verbose_name="결재상황"
+    )
+
+    approval_date = models.DateTimeField(null=True, default="", verbose_name="결재날짜")
+
+    # approval_doc = models.ForeignKey("", on_delete=models.CASCADE)
+
+    approver = models.ForeignKey(
+        "users.User",
+        related_name="%(class)s".lower() + "_approver",
+        on_delete=models.DO_NOTHING,
     )
