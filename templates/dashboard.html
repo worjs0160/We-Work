@@ -54,7 +54,7 @@
                   data: {
                     labels: ["근무시간", "이번주 근무 가능시간(52시간)"],
                     datasets: [{
-                      data: [{{sum_work_time}}, 52-{{sum_work_time}}],
+                      data: [{{sum_work_time}}, (52-{{sum_work_time}}).toFixed(2)],
                       backgroundColor: ['#007bff', '#dc3545'],
                     }],
                   },

@@ -161,7 +161,7 @@ class approval_info(models.Model):
 
     approval_date = models.DateTimeField(null=True, default="", verbose_name="결재날짜")
 
-    # approval_doc = models.ForeignKey("DocBase", on_delete=models.CASCADE)
+    # approval_doc = models.ForeignKey("", on_delete=models.CASCADE)
 
     approver = models.ForeignKey(
         "users.User",
