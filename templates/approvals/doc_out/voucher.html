@@ -20,6 +20,14 @@
                             {{viewer}}
                         {% endfor %}
                     </td> 
+                </tr>
+                <tr>
+                    <th>결재자</th>
+                    <td colspan="3" class="fix_height">
+                        {% for a in doc_data.approver.all %}
+                            {{a}}
+                        {% endfor %}
+                    </td>
                 </tr> 
             </tbody> 
         </table>    
