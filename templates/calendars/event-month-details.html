@@ -1,0 +1,28 @@
+{% extends 'calendars/base.html' %}
+
+{% block title %}
+Event Details
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="clearfix">
+        <a class="btn btn-primary left" href="{% url 'calendars:calendar_month' %}"> 돌아가기 </a>
+        <button type="button" id="event-month-delete" class="btn btn-info right mr-2" data-form-url="{% url 'calendars:delete_month_event' event.pk %}"> 삭 제 </button>
+        <button type="button" id="event-month-edit" class="btn btn-info right mr-2" data-form-url="{% url 'calendars:event_month_edit' event.pk %}"> 수 정 </button>
+    </div>
+
+    <div class="clearfix">
+        <h3>제 목: {{ event.title }}</h3>
+        <p>일 시: <span style="color: gray;">{{ event.start_time }}</span> ~ <span style="color: gray;">{{ event.end_time}}</span></p>
+        <hr>
+        <p>{{ event.schedule }}</p>
+        <br>
+        <hr>
+        {% if event.attached_file.get.file %} 
+                <div>첨부파일</div>
+                <a href="{{ event.attached_file.get.file.url }}" download="{{event.attached_file.get.file.adminupload.url}}"> {{event.attached_file.get.file.name|slice:"26:"}}</a> 
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

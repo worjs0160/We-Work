@@ -29,34 +29,62 @@
   <script type="text/javascript">
     $(function () {
       // 월간에서 생성버튼 연결
-      $("#month_create-event").modalForm({
+      $("#create-month-event").modalForm({
           formURL: "{% url 'calendars:month_event_new' %}"
         });
     });
 
     $(function () {
       // 주간에서 생성버튼 연결
-      $("#week_create-event").modalForm({
+      $("#create-week-event").modalForm({
           formURL: "{% url 'calendars:week_event_new' %}"
         });
     });
 
     $(function () {
       // 일간에서 생성버튼 연결
-      $("#day_create-event").modalForm({
+      $("#create-day-event").modalForm({
           formURL: "{% url 'calendars:day_event_new' %}"
         });
     });
 
     $(function () {
-    $("#event-delete").each(function () {
+    $("#event-month-delete").each(function () {
       $(this).modalForm({
           formURL: $(this).data('form-url')});
         });
     });
 
     $(function () {
-    $("#event-edit").each(function () {
+    $("#event-week-delete").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')});
+        });
+    });
+
+    $(function () {
+    $("#event-day-delete").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')});
+        });
+    });
+
+    $(function () {
+    $("#event-month-edit").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')});
+        });
+    });
+
+    $(function () {
+    $("#event-week-edit").each(function () {
+      $(this).modalForm({
+          formURL: $(this).data('form-url')});
+        });
+    });
+
+    $(function () {
+    $("#event-day-edit").each(function () {
       $(this).modalForm({
           formURL: $(this).data('form-url')});
         });

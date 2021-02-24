@@ -4,20 +4,18 @@ from itertools import chain
 from .models import Calendar
 
 
-class Calendar_u(HTMLCalendar):
+class Calendar_Month(HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
         self.month = month
-        super(Calendar_u, self).__init__()
+        super(Calendar_Month, self).__init__()
 
-    # formats a day as a td
-    # filter events by day
     def formatday(self, user, day, month, events):
         events_per_day = events.filter(start_time__day=day).filter(user=user)
         
         d = ""
         for event in events_per_day:
-            d += f"<li style='background-color:#54f62ba6; padding-left: 5px; font-weight: 700;'> {event.get_html_url} </li>"
+            d += f"<li style='background-color:#54f62ba6; padding-left: 5px; font-weight: 700;'> {event.get_month_html_url} </li>"
 
         if day != 0 and day != datetime.today().day :
             return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
@@ -29,15 +27,12 @@ class Calendar_u(HTMLCalendar):
                 return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
         return "<td></td>"
 
-    # formats a week as a tr
     def formatweek(self, user, theweek, month, events):
         week = ""
         for d, weekday in theweek:
             week += self.formatday(user, d, month, events)
         return f"<tr> {week} </tr>"
 
-    # formats a month as a table
-    # filter events by year and month
     def formatmonth(self, user, withyear=True):
         events = Calendar.objects.filter(
             start_time__year=self.year, start_time__month=self.month
@@ -58,18 +53,6 @@ class Calendar_Week(HTMLCalendar):
 
         super(Calendar_Week, self).__init__()
 
-    # def formatday(self, user, day, events):
-    #     print(events, day, user,"formatday -----------------------------")
-    #     events_per_day = events.filter(start_time__day=day).filter(user=user)
-    #     d = ""
-
-    #     for event in events_per_day:
-    #         d += f"<li> {event.get_html_url} </li>"
-
-    #     if day != 0:
-    #         return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
-    #     return "<td></td>"
-
     def time_data(self, user, day, hour, events):
 
         events_per_day = events.filter(start_time__day=day).filter(
@@ -78,7 +61,7 @@ class Calendar_Week(HTMLCalendar):
         d = ""
 
         for event in events_per_day:
-            d += f"<li> {event.get_html_url} </li>"
+            d += f"<li> {event.get_week_html_url} </li>"
 
         if day != 0:
             return f"<td><ul> {d} </ul></td>"
@@ -180,7 +163,7 @@ class Calendar_Day(HTMLCalendar):
         d = ""
 
         for event in events_per_day:
-            d += f"<li> {event.get_html_url} </li>"
+            d += f"<li> {event.get_day_html_url} </li>"
 
         if day != 0:
             return f"<td><ul> {d} </ul></td>"
