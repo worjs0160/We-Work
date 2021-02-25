@@ -118,11 +118,11 @@ def ListViewDocView(request):
 @login_required
 def ListApprovalDocView(request):
 
-    a_draft = models.Draft.objects.filter(author=request.user)
-    a_meeting = models.Meeting.objects.filter(author=request.user)
-    a_business = models.Business.objects.filter(author=request.user)
-    a_result = models.Result.objects.filter(author=request.user)
-    a_voucher = models.Voucher.objects.filter(author=request.user)
+    a_draft = models.Draft.objects.filter(approver__in=[request.user])
+    a_meeting = models.Meeting.objects.filter(approver__in=[request.user])
+    a_business = models.Business.objects.filter(approver__in=[request.user])
+    a_result = models.Result.objects.filter(approver__in=[request.user])
+    a_voucher = models.Voucher.objects.filter(approver__in=[request.user])
 
     context = {
         "a_drafts": a_draft,
@@ -135,6 +135,7 @@ def ListApprovalDocView(request):
     return render(request, "approvals/my_doc_list.html", context)
 
 
+@login_required
 def DetailView(request, doc_pk, doc_type, doc_path):
 
     if doc_type == "draft":
@@ -153,10 +154,12 @@ def DetailView(request, doc_pk, doc_type, doc_path):
     context = {
         "doc_pk": doc_pk,
         "doc_data": doc_data,
+        # "form": doc_data,
         "doc_type": doc_type,
         "doc_path": doc_path,
     }
 
+    # success_path = "approvals/doc_format/" + doc_type + ".html"
     success_path = "approvals/doc_out/" + doc_type + ".html"
 
     return render(request, success_path, context)
