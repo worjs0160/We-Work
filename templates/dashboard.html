@@ -36,7 +36,7 @@
           <div class="card mb-4">
             <div class="card-header">
               <i class="fas fa-chart-pie mr-1"></i>
-              근무유형
+              근무가능 시간
             </div>
             
             <div class="card-body">
@@ -52,10 +52,10 @@
                 var work_type = new Chart(ctx, {
                   type: 'doughnut',
                   data: {
-                    labels: ["Blue", "Red", "Yellow", "Green"],
+                    labels: ["근무시간", "이번주 근무 가능시간(52시간)"],
                     datasets: [{
-                      data: [12.21, 15.58, 11.25, 8.32],
-                      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+                      data: [{{sum_work_time}}, (52-{{sum_work_time}}).toFixed(2)],
+                      backgroundColor: ['#007bff', '#dc3545'],
                     }],
                   },
                 });

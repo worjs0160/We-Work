@@ -11,14 +11,18 @@ class Calendar_Month(HTMLCalendar):
         super(Calendar_Month, self).__init__()
 
     def formatday(self, user, day, month, events):
-        events_per_day = events.filter(start_time__day=day).filter(user=user)
-        
+        events_per_day = events.filter(start_time__day__lt=(
+            day+1)).filter(end_time__day__gt=(day-1)).filter(user=user)
+
         d = ""
         for event in events_per_day:
-            d += f"<li style='background-color:#54f62ba6; padding-left: 5px; font-weight: 700;'> {event.get_month_html_url} </li>"
+            d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;'> {event.get_month_html_url} </li>"
 
-        if day != 0 and day != datetime.today().day :
-            return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
+        if day != 0 and day != datetime.today().day:
+            return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: 0px; padding-right: 0px;'> {d} </ul></td>"
+
+        elif day == datetime.today().day:
+            return f"<td style='background-color:#fcf8e3;'><span class='date'>{day}</span><ul style='list-style: none; padding-left: 0px;'> {d} </ul></td>"
 
         else:
             if month == datetime.today().month and day == datetime.today().day:
@@ -30,6 +34,7 @@ class Calendar_Month(HTMLCalendar):
     def formatweek(self, user, theweek, month, events):
         week = ""
         for d, weekday in theweek:
+
             week += self.formatday(user, d, month, events)
         return f"<tr> {week} </tr>"
 
@@ -44,6 +49,7 @@ class Calendar_Month(HTMLCalendar):
         for week in self.monthdays2calendar(self.year, self.month):
             cal += f"{self.formatweek(user, week, self.month, events)}\n"
         return cal
+
 
 class Calendar_Week(HTMLCalendar):
     def __init__(self, year=None, month=None, day=None):
@@ -212,13 +218,13 @@ class Calendar_Day(HTMLCalendar):
                         day += self.time_data(user, d, idx, events)
                     if weekday == 3:
                         day += self.time_data(user, d, idx, events)
-                    if weekday == 4:    
+                    if weekday == 4:
                         day += self.time_data(user, d, idx, events)
                     if weekday == 5:
                         day += self.time_data(user, d, idx, events)
                     if weekday == 6:
                         day += self.time_data(user, d, idx, events)
-                    
+
         theweek.pop(0)
         return f"<tr> {day} </tr>"
 
@@ -232,7 +238,7 @@ class Calendar_Day(HTMLCalendar):
 
         theday = []
         for a, recombination in week:
-            theday.append([(a,recombination)])
+            theday.append([(a, recombination)])
 
         for idx, week in enumerate(theday):
             for day in week:
