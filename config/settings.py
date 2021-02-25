@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 CUSTOM_APPS = [
-    "channels",
     "users",
     "approvals",
     "attendance",
