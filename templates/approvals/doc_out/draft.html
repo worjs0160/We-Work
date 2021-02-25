@@ -1,6 +1,4 @@
 {% extends 'approvals/main.html' %}
-{% load static %}
-
 
 {% block content %}
     <div class="m_right5 m_left5">
@@ -23,6 +21,14 @@
                         <td colspan="3" class="fix_height">
                             {% for viewer in doc_data.viewer.all %}
                                 {{viewer}}
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>결재자</th>
+                        <td colspan="3" class="fix_height">
+                            {% for a in doc_data.approver.all %}
+                                {{a}}
                             {% endfor %}
                         </td>
                     </tr>
