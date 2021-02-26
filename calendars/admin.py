@@ -20,4 +20,5 @@ class CustomUserAdmin(admin.ModelAdmin):
         "title",
         "place",
         "schedule",
+        "all_day",
     )

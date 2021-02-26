@@ -31,6 +31,7 @@ class Calendar(core_models.TimeStampedModel):
     title = models.CharField(max_length=50, verbose_name="제 목")
     place = models.CharField(max_length=50, verbose_name="장 소")
     schedule = models.TextField(verbose_name="일정 내용")
+    all_day = models.BooleanField(default=False, verbose_name="하루 종일")
 
     def __str__(self):
         return self.title

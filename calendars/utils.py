@@ -18,7 +18,16 @@ class Calendar_u(HTMLCalendar):
 
         d = ""
         for event in events_per_day:
-            d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;'> {event.get_html_url} </li>"
+            # print(type(event), event.start_time.day,day)
+            
+            if event.all_day == True:
+                if event.start_time.day == day:
+                    d += f"<li style='background-color:#ffc500; padding-left: 10px; font-weight: 700;margin-bottom: 10px;' class='long_text'> {event.get_html_url} </li>"
+            else:
+                if event.start_time.day == day:
+                    d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;' class='long_text'> {event.get_html_url} </li>"
+                else:
+                    d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;height: 19px;'><a></a></li>"
 
         if day != 0 and day != datetime.today().day:
             return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: 0px; padding-right: 0px;'> {d} </ul></td>"
@@ -77,17 +86,30 @@ class Calendar_Week(HTMLCalendar):
     #     return "<td></td>"
 
     def time_data(self, user, day, hour, events):
+        # print(events," 여기서 데이터 넘어와야함") 2개 잘 넘어옴 시간이 9~10 시까지만 표시중임
 
-        events_per_day = events.filter(start_time__day=day).filter(
-            start_time__hour=hour).filter(user=user)
+        if hour == 8:
+            events_per_day = events.filter(start_time__day=day).filter(user=user).filter(all_day=True)
+                
+            d = ""
 
-        d = ""
+            for event in events_per_day:
+                d += f"<li class='long_text'> {event.get_html_url} </li>"
 
-        for event in events_per_day:
-            d += f"<li> {event.get_html_url} </li>"
+            if day != 0:
+                return f"<td><ul> {d} </ul></td>"
+        else:
+            events_per_day = events.filter(start_time__day=day).filter(
+                start_time__hour=hour).filter(user=user).filter(all_day=False)
+                
+            d = ""
 
-        if day != 0:
-            return f"<td><ul> {d} </ul></td>"
+            for event in events_per_day:
+                d += f"<li class='long_text'> {event.get_html_url} </li>"
+
+            if day != 0:
+                return f"<td><ul> {d} </ul></td>"
+
         return "<td></td>"
 
     def formatweek(self, user, theweek, events):
@@ -117,28 +139,36 @@ class Calendar_Week(HTMLCalendar):
     def format_time(self, user, theweek, events):
         week = ""
         theweek.insert(0, (0, 1))
-        for idx in range(9, 22):
+        for idx in range(8, 22):
             for d, weekday in theweek:
-                if d == 0:
-                    if idx == 9:
-                        week += f'<tr><td class="time">09:00~10:00</td>'
+                # 임시적으로 8이면 하루종일로 체크하게 로직 나중에는 특수한 값으로 변경 등 조치
+                if idx == 8:
+                    if d == 0:
+                        week += f'<tr><td class="time">하루종일</td>'
                     else:
-                        week += f'<tr><td class="time">{idx}:00~{idx+1}:00</td>'
+                        week += self.time_data(user, d, idx, events)
                 else:
-                    if weekday == 0:
-                        week += self.time_data(user, d, idx, events)
-                    if weekday == 1:
-                        week += self.time_data(user, d, idx, events)
-                    if weekday == 2:
-                        week += self.time_data(user, d, idx, events)
-                    if weekday == 3:
-                        week += self.time_data(user, d, idx, events)
-                    if weekday == 4:
-                        week += self.time_data(user, d, idx, events)
-                    if weekday == 5:
-                        week += self.time_data(user, d, idx, events)
-                    if weekday == 6:
-                        week += self.time_data(user, d, idx, events)
+                    # print(theweek, '여기 확인')
+                    if d == 0:
+                        if idx == 9:
+                            week += f'<tr><td class="time">09:00~10:00</td>'
+                        else:
+                            week += f'<tr><td class="time">{idx}:00~{idx+1}:00</td>'
+                    else:
+                        if weekday == 0:
+                            week += self.time_data(user, d, idx, events)
+                        if weekday == 1:
+                            week += self.time_data(user, d, idx, events)
+                        if weekday == 2:
+                            week += self.time_data(user, d, idx, events)
+                        if weekday == 3:
+                            week += self.time_data(user, d, idx, events)
+                        if weekday == 4:
+                            week += self.time_data(user, d, idx, events)
+                        if weekday == 5:
+                            week += self.time_data(user, d, idx, events)
+                        if weekday == 6:
+                            week += self.time_data(user, d, idx, events)
         theweek.pop(0)
         return f"<tr> {week} </tr>"
 
@@ -186,7 +216,7 @@ class Calendar_Day(HTMLCalendar):
         d = ""
 
         for event in events_per_day:
-            d += f"<li> {event.get_html_url} </li>"
+            d += f"<li class='long_text'> {event.get_html_url} </li>"
 
         if day != 0:
             return f"<td><ul> {d} </ul></td>"

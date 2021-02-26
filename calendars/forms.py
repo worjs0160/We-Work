@@ -23,6 +23,7 @@ class EventForm(BSModalModelForm):
             "start_time",
             "end_time",
             "file",
+            "all_day",
         ]
         
     # 종료일이 시작일보다 과거이면 오류출력.
