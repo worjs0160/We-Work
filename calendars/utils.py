@@ -4,14 +4,12 @@ from itertools import chain
 from .models import Calendar
 
 
-class Calendar_u(HTMLCalendar):
+class Calendar_Month(HTMLCalendar):
     def __init__(self, year=None, month=None):
         self.year = year
         self.month = month
-        super(Calendar_u, self).__init__()
+        super(Calendar_Month, self).__init__()
 
-    # formats a day as a td
-    # filter events by day
     def formatday(self, user, day, month, events):
         events_per_day = events.filter(start_time__day__lt=(
             day+1)).filter(end_time__day__gt=(day-1)).filter(user=user)
@@ -19,13 +17,13 @@ class Calendar_u(HTMLCalendar):
         d = ""
         for event in events_per_day:
             # print(type(event), event.start_time.day,day)
-            
+
             if event.all_day == True:
                 if event.start_time.day == day:
-                    d += f"<li style='background-color:#ffc500; padding-left: 10px; font-weight: 700;margin-bottom: 10px;' class='long_text'> {event.get_html_url} </li>"
+                    d += f"<li style='background-color:#ffc500; padding-left: 10px; font-weight: 700;margin-bottom: 10px;' class='long_text'> {event.get_month_html_url} </li>"
             else:
                 if event.start_time.day == day:
-                    d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;' class='long_text'> {event.get_html_url} </li>"
+                    d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;' class='long_text'> {event.get_month_html_url} </li>"
                 else:
                     d += f"<li style='background-color:#54f62ba6; padding-left: 10px; font-weight: 700;margin-bottom: 10px;height: 19px;'><a></a></li>"
 
@@ -42,7 +40,6 @@ class Calendar_u(HTMLCalendar):
                 return f"<td ><span class='date'>{day}</span><ul style='list-style: none; margin-left: -25px; padding-right: 0px;'> {d} </ul></td>"
         return "<td></td>"
 
-    # formats a week as a tr
     def formatweek(self, user, theweek, month, events):
         week = ""
         for d, weekday in theweek:
@@ -50,8 +47,6 @@ class Calendar_u(HTMLCalendar):
             week += self.formatday(user, d, month, events)
         return f"<tr> {week} </tr>"
 
-    # formats a month as a table
-    # filter events by year and month
     def formatmonth(self, user, withyear=True):
         events = Calendar.objects.filter(
             start_time__year=self.year, start_time__month=self.month
@@ -73,24 +68,13 @@ class Calendar_Week(HTMLCalendar):
 
         super(Calendar_Week, self).__init__()
 
-    # def formatday(self, user, day, events):
-    #     print(events, day, user,"formatday -----------------------------")
-    #     events_per_day = events.filter(start_time__day=day).filter(user=user)
-    #     d = ""
-
-    #     for event in events_per_day:
-    #         d += f"<li> {event.get_html_url} </li>"
-
-    #     if day != 0:
-    #         return f"<td><span class='date'>{day}</span><ul> {d} </ul></td>"
-    #     return "<td></td>"
-
     def time_data(self, user, day, hour, events):
         # print(events," 여기서 데이터 넘어와야함") 2개 잘 넘어옴 시간이 9~10 시까지만 표시중임
 
         if hour == 8:
-            events_per_day = events.filter(start_time__day=day).filter(user=user).filter(all_day=True)
-                
+            events_per_day = events.filter(start_time__day=day).filter(
+                user=user).filter(all_day=True)
+
             d = ""
 
             for event in events_per_day:
@@ -101,11 +85,11 @@ class Calendar_Week(HTMLCalendar):
         else:
             events_per_day = events.filter(start_time__day=day).filter(
                 start_time__hour=hour).filter(user=user).filter(all_day=False)
-                
+
             d = ""
 
             for event in events_per_day:
-                d += f"<li class='long_text'> {event.get_html_url} </li>"
+                d += f"<li class='long_text'> {event.get_week_html_url} </li>"
 
             if day != 0:
                 return f"<td><ul> {d} </ul></td>"
@@ -216,7 +200,7 @@ class Calendar_Day(HTMLCalendar):
         d = ""
 
         for event in events_per_day:
-            d += f"<li class='long_text'> {event.get_html_url} </li>"
+            d += f"<li class='long_text'> {event.get_day_html_url} </li>"
 
         if day != 0:
             return f"<td><ul> {d} </ul></td>"

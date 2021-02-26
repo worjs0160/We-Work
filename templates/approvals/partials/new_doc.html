@@ -1,35 +1,43 @@
-<div class="paper_sector_2" style=" width: 80%; height: 600px; float:left;">
+<div style="width: 80%">
     <!-- 전자결제 양식 작성 -->
-    <div style="margin: 5% 0px 0px 5%;">
-        <select id="doc_select">
+    <div id="select-box">
+        <select id="doc-select">
+            <option value="empty">-------</option>
             <option value="draft">기안서</option>
             <option value="voucher">지출결의서</option>
             <option value="result">결과보고서</option>
             <option value="meeting">회의보고서</option>
             <option value="business">업무보고서</option>
         </select>
-        <button id="create" type="button">글 작성</button>
+        <button id="create" type="button" style="display:none;">글 작성</button>
+        <button type="submit" id="submit" style="display:none;" form="doc-form">작성완료</button>
+        <button id="cancel" style="display:none;">취소</button>
     </div>
 
-    <form method="POST" enctype="multipart/form-data" action="{% url 'approvals:create' %}">
+    <form id="doc-form" method="POST" enctype="multipart/form-data" action="{% url 'approvals:create' %}">
         {% csrf_token %}
-        <input type="hidden" id="doctype" name="doctype" value="" />
-        <input type="submit" id=submit value="작성완료" style="display:none;" />
-        <div class="view_box border_none fx_item fx_sec1" id="view_left" data-outer-height="30"
-            style="height:auto;">
+        <input type="hidden" id="doctype" name="doctype" value=""/>
+        <div class="view_box border_none fx_item fx_sec1" id="doc_view" data-outer-height="30" style="height:auto;">
         </div>
     </form>
 </div>
 
+    
 {% block script-body %}
 <script>
 $(document).ready(function () {
-    $('#doc_select').change(function () {
+    $('#doc-select').change(function () {
         var doc_type = $(this).val();
         $('.view_box').children().remove();
+        $('#submit').attr("style", "display:none");
+        $('#cancel').attr("style", "display:none");
+
+        if (doc_type == "empty") {
+            $('#create').attr("style", "display:none");
+            return false;
+        }
         $('#doctype').val(doc_type);
         $('#create').attr("style", "display:inline");
-        $('#submit').attr("style", "display:none");
         $('.view_box').load('doc_format/' + doc_type + '.html');
         return false;
     });
@@ -41,9 +49,12 @@ $(document).ready(function () {
             "disabled": false,
         });
         $('#submit').attr("style", "display:inline");
+        $('#cancel').attr("style", "display:inline");
         $('#create').attr("style", "display:none");
+        $('#doc-select').attr("style", "display:none");
         return false;
     });
 });
 </script>
 {% endblock script-body %}
+

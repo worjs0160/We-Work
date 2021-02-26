@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Messenger Lobby</title>
+</head>
+<body>
+    {{sender.username}}'s Messenger Lobby<br/>
+    <input id="room-name-input" type="text" size="100"/><br/>
+    <input id="room-name-submit" type="button" value="Enter"/>
+
+    <script>
+        document.querySelector("#room-name-input").focus();
+        document.querySelector("#room-name-input").addEventListener("keyup",(e) => {
+            if(e.keyCode === 13){
+                document.querySelector("#room-name-submit").click();
+            }
+        });
+
+        document.querySelector("#room-name-submit").addEventListener("click",(e) => {
+            let roomName = document.querySelector("#room-name-input").value;
+            window.location.pathname = `/messengers/${roomName}/`;
+        });
+    </script>
+    <br/>
+    <div id="room-data">
+        {% for user in receiver %}
+            {% if user != sender %}
+                <a href="{% url 'messengers:go_room' sender.pk user.pk %}">
+                    {{user.username}}<br/>
+                </a>
+            {% else %}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</body>
+</html>

@@ -37,8 +37,18 @@ class Calendar(core_models.TimeStampedModel):
         return self.title
 
     @property
-    def get_html_url(self):
-        url = reverse("calendars:event-detail", args=(self.id,))
+    def get_month_html_url(self):
+        url = reverse("calendars:event-month-detail", args=(self.id,))
+        return f'<a href="{url}"> {self.title} </a>'
+
+    @property
+    def get_week_html_url(self):
+        url = reverse("calendars:event-week-detail", args=(self.id,))
+        return f'<a href="{url}"> {self.title} </a>'
+
+    @property
+    def get_day_html_url(self):
+        url = reverse("calendars:event-day-detail", args=(self.id,))
         return f'<a href="{url}"> {self.title} </a>'
 
     def get_id(self):

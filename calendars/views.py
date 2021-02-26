@@ -13,14 +13,14 @@ from bootstrap_modal_forms.generic import (
 )
 from django.contrib.auth import get_user_model
 from .models import Calendar, File
-from .utils import Calendar_u, Calendar_Week, Calendar_Day
+from .utils import Calendar_Month, Calendar_Week, Calendar_Day
 from .forms import EventForm
 
 UserModel = get_user_model()
 
 # 월간으로 보기 - start
 
-def get_date(req_day):
+def get_month_date(req_day):
     if req_day:
         year, month = (int(x) for x in req_day.split("-"))
         return date(year, month, day=1)
@@ -100,14 +100,14 @@ def get_context_data(self, **kwargs):
     return context
 
 
-class CalendarView(generic.ListView):
+class CalendarMonthView(generic.ListView):
 
     model = Calendar
     template_name = "calendars/calendar_month_list.html"
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        d = get_date(self.request.GET.get("month", None))
-        cal = Calendar_u(d.year, d.month)
+        d = get_month_date(self.request.GET.get("month", None))
+        cal = Calendar_Month(d.year, d.month)
         html_cal = cal.formatmonth(self.request.user, withyear=True)
         context["calendar"] = mark_safe(html_cal)
         context["prev_month"] = prev_month(d)
@@ -136,7 +136,7 @@ class create_month_event(BSModalCreateView):
         return HttpResponseRedirect(reverse_lazy("calendars:calendar_month"))
     
 
-class EventEdit(BSModalUpdateView):
+class MonthEventEdit(BSModalUpdateView):
     model = Calendar
     template_name = "calendars/event_edit.html"
     form_class = EventForm
@@ -144,13 +144,13 @@ class EventEdit(BSModalUpdateView):
     success_url = reverse_lazy("calendars:calendar_month")
 
 
-def event_details(request, event_id):
+def event_month_details(request, event_id):
     event = Calendar.objects.get(id=event_id)
     context = {"event": event}
-    return render(request, "calendars/event-details.html", context)
+    return render(request, "calendars/event-month-details.html", context)
 
 
-class EventDeleteView(BSModalDeleteView):
+class MonthEventDeleteView(BSModalDeleteView):
     model = Calendar
     template_name = "calendars/event_delete.html"
     success_message = "Success: Event was deleted."
@@ -199,6 +199,24 @@ class create_week_event(BSModalCreateView):
 
         return HttpResponseRedirect(reverse_lazy("calendars:calendar_week"))
 
+class WeekEventEdit(BSModalUpdateView):
+    model = Calendar
+    template_name = "calendars/event_edit.html"
+    form_class = EventForm
+    success_message = "Success: Event was updated."
+    success_url = reverse_lazy("calendars:calendar_week")
+
+def event_week_details(request, event_id):
+    event = Calendar.objects.get(id=event_id)
+    context = {"event": event}
+    return render(request, "calendars/event-week-details.html", context)
+
+class WeekEventDeleteView(BSModalDeleteView):
+    model = Calendar
+    template_name = "calendars/event_delete.html"
+    success_message = "Success: Event was deleted."
+    success_url = reverse_lazy("calendars:calendar_week")
+
 
 class CalendarDayView(generic.ListView):
 
@@ -237,3 +255,21 @@ class create_day_event(BSModalCreateView):
                 File.objects.create(calendar=calendar)
 
         return HttpResponseRedirect(reverse_lazy("calendars:calendar_day"))
+
+class DayEventEdit(BSModalUpdateView):
+    model = Calendar
+    template_name = "calendars/event_edit.html"
+    form_class = EventForm
+    success_message = "Success: Event was updated."
+    success_url = reverse_lazy("calendars:calendar_day")
+
+def event_day_details(request, event_id):
+    event = Calendar.objects.get(id=event_id)
+    context = {"event": event}
+    return render(request, "calendars/event-day-details.html", context)
+
+class DayEventDeleteView(BSModalDeleteView):
+    model = Calendar
+    template_name = "calendars/event_delete.html"
+    success_message = "Success: Event was deleted."
+    success_url = reverse_lazy("calendars:calendar_day")
